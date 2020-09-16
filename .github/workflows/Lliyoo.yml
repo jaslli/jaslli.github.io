@@ -55,4 +55,3 @@ jobs:
           git add .
           git commit -m "通过GitHub Actions的持续集成部署 :rocket:"
           git push --force --all https://${{ secrets.GH_TOKEN }}@${{ secrets.GH_REPO }}
-          git push --force --all https://${{ secrets.CODING_TOKEN }}@${{ secrets.CODING_REPO }}
