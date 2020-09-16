@@ -29,7 +29,6 @@ jobs:
         run: |
           export TZ='Asia/Shanghai'
           npm install hexo-cli -g
-          npm install gulp -g
 
       - name: 4. 缓存
         uses: actions/cache@v1
@@ -42,9 +41,9 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
           npm install
-      - name: 6. 生成页面并压缩
+      - name: 6. 生成页面
         run: |
-          hexo cl && hexo g 
+          hexo clean && hexo g 
       - name: 7. 部署页面
         run: |
           cd ./public
