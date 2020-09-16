@@ -104,5 +104,7 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
-  repo: git@github.com:jaslli/jaslli.github.io.git
+   - type: git
+     repo: 
+           github: git@github.com:jaslli/jaslli.github.io.git
+     branch: master
