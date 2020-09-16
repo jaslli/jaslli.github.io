@@ -1,0 +1,47 @@
+---
+title: Ngrok内网穿透
+date: 2020-7-3
+categories:
+  - 瞎折腾
+cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/top_img.jpg
+description: Ngrok内网穿透就是让外网也能访问内网IP。
+---
+
+## 什么是Ngrok
+
+ngrok 是一个反向代理，通过在公共的端点和本地运行的 Web 服务器之间建立一个安全的通道。ngrok 可捕获和分析所有通道上的流量，便于后期分析和重放。
+
+## 有什么用
+
+内网穿透意思是能让外网访问到你本地，就比如你在本地运行tomacat等，外网是无法访问到你本地的项目的，当然你部署到服务器上就可以，这篇文章只是为了简化你的操作，而且你应该不会什么测试都部署到服务器，所以就能使用ngrok实现内网穿透。
+
+## 注册
+
+先去官网注册一个用户，然后登陆。
+国内Ngrok的地址：https://www.ngrok.cc/
+
+## 购买隧道
+
+![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img1.png)
+
+这个是免费的，当然你想体验更流畅那就付费呗。
+
+![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img2.png)
+
+## 使用
+
+![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img3.png)
+
+![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img4.png)
+
+把你的隧道ID输入就好了
+![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img5.png)
+
+然后你就能用赠送的域名访问到你的内网了。
+
+![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img6.png)
+
+## 后话
+
+这只是个简单的穿透，不过也挺有用的，能让外网访问到你的本地项目，在一些时候能很方便。你不想用他的域名，应该是可以解析的，解析成你的就好。
+
