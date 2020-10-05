@@ -31,15 +31,24 @@ jobs:
       env:
         HEXO_DEPLOY_PRIVATE_KEY: ${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}
       run: |
-        mkdir -p ~/.ssh/
-        echo "$HEXO_DEPLOY_PRIVATE_KEY" > ~/.ssh/id_rsa 
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          echo "${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          cat <<EOT >> ~/.ssh/config
+          Host github.com
+          HostName github.com
+          IdentityFile ~/.ssh/id_rsa
+          EOT
         
     - name: Setup Git Infomation
+      env:
+          USE_SSH: true
+          GIT_USER: git
       run: | 
         git config --global user.name 'jaslli' 
         git config --global user.email '1141950370@qq.com'
+
     - name: Deploy Hexo 
       run: |
         hexo clean
