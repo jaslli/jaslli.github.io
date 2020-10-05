@@ -21,6 +21,6 @@ aside: false
 
 {% note primary no-icon %}
  name:	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yw
- link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	https://lli7744.com/
+ link: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	https://yww52.com/
  avatar: &nbsp;&nbsp;&nbsp;&nbsp;	https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/avatar.jpg
 {% endnote %}
