@@ -24,9 +24,9 @@ comments: false
 
 
 
-
  <p class=t1> 🌈关于我<p>
-{% radio cyan checked, 一个懒惰的大二学生 %}
+{% radio cyan checked, 一个懒惰的大三学生 %}
+
 
 {% radio cyan checked,目前正在学后端开发，希望学的好(合手)%}
 
