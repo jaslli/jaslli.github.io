@@ -44,7 +44,7 @@ jobs:
           npm install
       - name: 6. 生成页面
         run: |
-          hexo cl && hexo g 
+          hexo cl && hexo g
       - name: 7. 部署页面
         run: |
           cd ./public
