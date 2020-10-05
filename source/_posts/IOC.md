@@ -177,8 +177,3 @@ public class test01 {
 
 
 
-{% note%}
-
-这个set方法可以接收IOC容器提供的对象不同，从而使用不同的功能。
-
-{%endnote%}
