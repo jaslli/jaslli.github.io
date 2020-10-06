@@ -121,7 +121,7 @@ cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/2020/9/2020-9-22/top_
            <!--后缀-->
            <property name="suffix" value=".jsp"/>
    </bean>
-```
+   ```
    
    {% note info%}
 这里就是对控制器进行拼接，比如hello控制器，加上前缀与后缀就成为了/WEB-INF/jsp/hello.jsp，然后就会在web目录下找到该视图进行跳转。
