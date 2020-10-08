@@ -95,7 +95,7 @@ avatar:
   effect: false
 
 # the banner image of home page
-index_img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/top_img.jpg
+index_img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/top_img.jpg
 
 # if the banner of page not setting, it will show the top_img
 default_top_img: 
