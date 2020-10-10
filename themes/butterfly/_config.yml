@@ -372,7 +372,7 @@ footer:
   owner:
     enable: true
     since: 2019
-  custom_text:  Weclome my blog! </br><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/cdnlogo.png" align="absmiddle" height="30px" width="60px"/></a> 提供CDN加速
+  custom_text: <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/cdnlogo.png" align="absmiddle" height="30px" width="60px"/></a> 提供CDN加速
   copyright: true # Copyright of theme and framework
   ICP: # Chinese ICP License
     enable: true
@@ -646,7 +646,7 @@ busuanzi:
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
   enable: true
-  publish_date: 06/23/2019 00:00:00
+  publish_date: 10/31/2019 00:00:00
 
 # Aside widget - Newest Comments
 newest_comments:
