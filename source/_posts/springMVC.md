@@ -485,3 +485,65 @@ public class HelloController  {
 Model其实是一个接口实现类，一定程度上是继承了ModelMap，因为Model的实现也是要用到ModelMap的方法的，而ModelMap继承了LinkedHashMap，所以方法比Model多一些。
 
 {%endnote%}
+
+# Json的处理
+
+1. 添加jackson-databind的依赖
+
+   ```xml
+   <dependency>
+               <groupId>com.fasterxml.jackson.core</groupId>
+               <artifactId>jackson-databind</artifactId>
+               <version>2.11.0</version>
+   </dependency>
+   ```
+
+2. 实体测试类
+
+   ```java
+   public class User {
+       String name;
+       int id;
+       public User(String name, int id) {
+           this.name = name;
+           this.id = id;
+       }
+       public String getName() {
+           return name;
+       }
+       public int getId() {
+           return id;
+       }
+       @Override
+       public String toString() {
+           return "user{" +
+                   "name='" + name + '\'' +
+                   ", id=" + id +
+                   '}';
+       }
+   }
+   ```
+
+3. Controller类
+
+   ```java
+   @RestController//作用为跳过视图解析器，返回json字符串
+   public class HelloController  {
+       @RequestMapping("/hello")
+       public String json() throws JsonProcessingException {
+           ObjectMapper mapper = new ObjectMapper();
+           User user = new User("yww", 2);
+           String res = mapper.writeValueAsString(user);
+           return res;
+       }
+   }
+   ```
+
+<div class='tip warning'><p>注意的是新加依赖要刷新project setting里的lib目录，不然没添加会直接500报错<p></div>
+
+
+
+
+
+
+

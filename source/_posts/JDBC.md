@@ -39,9 +39,9 @@ cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2019/11/2019-11-06top
 
     ``` java
     //					装载驱动
-    Class.forName("com.mysql.cj.jdbc.Driver");
+    	Class.forName("com.mysql.cj.jdbc.Driver");
     //					连接MySQL数据库
-    connection con =DriverMannager("jdbc:mysql://localhost:port/databaseuseSSL=false&serverTimezone=UTC","user","password");
+    	connection con =DriverMannager("jdbc:mysql://localhost:port/database?useSSL=false&serverTimezone=UTC","user","password");
     ```
 
 {% note info%}
