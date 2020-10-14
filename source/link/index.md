@@ -10,7 +10,8 @@ aside: false
 ## 我的信息
 
 ```信息
- name:  Yw
- link:  https://yww52.com/
- avatar:    https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/avatar.jpg
+ name: Yw
+ link: https://yww52.com/
+ avatar: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/avatar.jpg
+ descr: 永远相信美好的事情即将发生
 ```
