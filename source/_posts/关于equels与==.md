@@ -4,7 +4,7 @@ categories:
   - Java
 date: 2020-06-01 14:39:11
 description: 在初学Java的时候，equels与==总是会感觉很混乱，这次特意来总结一下。
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/6/2020-6-1top_img.jpg
+cover: https://img.yww52.com/2020/6/2020-6-1top_img.jpg
 ---
 
 #### 前言

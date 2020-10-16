@@ -4,7 +4,7 @@ date: 2020-6-6
 categories:
   - Java
 description: JSP也算Javaweb的基础，还是有必要学的。
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/6/2020-6-6/top_img.jpg
+cover: https://img.yww52.com/2020/6/2020-6-6/top_img.jpg
 ---
 
 #### 前言
@@ -128,7 +128,7 @@ cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/6/2020-6-6/top_i
 
 早期的架构只有控制器和视图两层，即以下的结构
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-6/img1.png)
+![](https://img.yww52.com/2020/6/2020-6-6/img1.png)
 
 > 这种架构是在控制器中直接写对用户的操作，例如增删改查，但这样的话，Servlet中就会有很多代码，处理起来十分麻烦，所以便加多了一层Model层
 
@@ -138,7 +138,7 @@ Model其实包括了业务层Service，用户类JavaBean和Dao层
 
 ##### 在优化下，才出现了如今的MVC三层架构
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-6/img2.png)
+![](https://img.yww52.com/2020/6/2020-6-6/img2.png)
 
 
 

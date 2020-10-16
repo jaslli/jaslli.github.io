@@ -3,13 +3,13 @@ title: 第一个Servlet程序
 date: 2020-6-5
 categories:
 - Java
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/6/2020-6-5/top_img.jpg
+cover: https://img.yww52.com/2020/6/2020-6-5/top_img.jpg
 description: 简单使用servlet的小demo
 ---
 
 1. 创建一个Maven项目，不用选择模板先
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img1.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img1.png)
 
 2. 导入依赖
 
@@ -35,11 +35,11 @@ description: 简单使用servlet的小demo
 
 3. 创建一个子模块，选择图中的模板
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img2.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img2.png)
 
    > 接下来配置好maven和setting.xml和maven-repo的路径，大概如图所示
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img8.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img8.png)
 
 4. 创建好子模块后，更新web.xml
 
@@ -58,20 +58,20 @@ description: 简单使用servlet的小demo
 
    在main下创建好java包和resources包，并在右键Mark Director as标记两个包，Java包为Sources Root,resources包为Resources Root类型，成功如图下
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img3.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img3.png)
 
 6. 在Java包里编写servle程序，若没有添加servlet程序选项可以自行创建类，然后继承HttpServlet接口
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img4.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img4.png)
 
 7. 编写好后点击右上角的设置，配置好Tomcat服务器的设置
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img5.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img5.png)
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img6.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img6.png)
 
    > 添加之后配置好部署，添加子模块的war包，就可以启动Tomcat了
 
-   ![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-5/img7.png)
+   ![](https://img.yww52.com/2020/6/2020-6-5/img7.png)
 
    

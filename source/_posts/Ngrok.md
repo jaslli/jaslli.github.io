@@ -3,7 +3,7 @@ title: Ngrok内网穿透
 date: 2020-7-3
 categories:
   - 瞎折腾
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/top_img.jpg
+cover: https://img.yww52.com/2020/7/2020-7-3/top_img.jpg
 description: Ngrok内网穿透就是让外网也能访问内网IP。
 ---
 
@@ -22,24 +22,24 @@ ngrok 是一个反向代理，通过在公共的端点和本地运行的 Web 服
 
 ## 购买隧道
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img1.png)
+![](https://img.yww52.com/2020/7/2020-7-3/img1.png)
 
 这个是免费的，当然你想体验更流畅那就付费呗。
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img2.png)
+![](https://img.yww52.com/2020/7/2020-7-3/img2.png)
 
 ## 使用
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img3.png)
+![](https://img.yww52.com/2020/7/2020-7-3/img3.png)
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img4.png)
+![](https://img.yww52.com/2020/7/2020-7-3/img4.png)
 
 把你的隧道ID输入就好了
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img5.png)
+![](https://img.yww52.com/2020/7/2020-7-3/img5.png)
 
 然后你就能用赠送的域名访问到你的内网了。
 
-![](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/7/2020-7-3/img6.png)
+![](https://img.yww52.com/2020/7/2020-7-3/img6.png)
 
 ## 后话
 

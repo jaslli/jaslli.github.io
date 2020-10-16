@@ -4,7 +4,7 @@ date: 2020-9-22
 categories:
   - Java
 description: SpringMVC的执行原理
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/2020/9/2020-9-22/top_img.jpg
+cover: https://img.yww52.com/2020/9/2020-9-22/top_img.jpg
 ---
 
 # springmvc的组件
@@ -31,7 +31,7 @@ cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/2020/9/2020-9-22/top_
 
 #  工作流程
 
-![工作流程](https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/2020/9/2020-9-22/img1.png)
+![工作流程](https://img.yww52.com/2020/9/2020-9-22/img1.png)
 
 # 具体分析
 

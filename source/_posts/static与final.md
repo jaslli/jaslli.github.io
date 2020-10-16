@@ -4,7 +4,7 @@ categories:
   - Java
 date: 2019-10-31 19:25:01
 description: static和final还是会弄乱的，特地整理一下
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2019/10/2019-10-31top_img.jpg
+cover: https://img.yww52.com/2019/10/2019-10-31top_img.jpg
 ---
 
 ## static

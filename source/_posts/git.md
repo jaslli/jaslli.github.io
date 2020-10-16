@@ -4,7 +4,7 @@ categories:
   - 其他技术
 date: 2019-11-28 20:20:10
 description: git就不用多说了吧，学就对了
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2019/11/2019-11-28top_img.jpg
+cover: https://img.yww52.com/2019/11/2019-11-28top_img.jpg
 ---
 
 ## git的一些基本信息

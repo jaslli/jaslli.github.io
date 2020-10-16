@@ -91,17 +91,17 @@ favicon: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/icon.ico
 
 # Avatar (頭像)
 avatar:
-  img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/avatar.jpg
+  img: https://img.yww52.com/avatar.jpg
   effect: false
 
 # the banner image of home page
-index_img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/top_img.jpg
+index_img: https://img.yww52.com/top_img.jpg
 
 # if the banner of page not setting, it will show the top_img
 default_top_img: 
 
 # the banner image of archive page
-archive_img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/archives_top_img.jpg
+archive_img: https://img.yww52.com/archives_top_img.jpg
 
 # the banner image of tag page
 # note: tag page, not tags page (子標籤頁面的 top_img)
@@ -109,7 +109,7 @@ tag_img:
 
 # the banner image of category page
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/categories_top_img.jpg
+category_img: https://img.yww52.com/categories_top_img.jpg
 
 # If you are using hexo-douban, you can configure it (如果你有使用 hexo-douban,可配置這個)
 # douban:
@@ -128,7 +128,7 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-    - https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@vlatest/default_cover.jpg
+    - https://img.yww52.com/default_cover.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -372,7 +372,7 @@ footer:
   owner:
     enable: true
     since: 2019
-  custom_text: <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/cdnlogo.png" align="absmiddle" height="30px" width="60px"/></a> 提供CDN加速
+  custom_text: <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://img.yww52.com/cdnlogo.png" align="absmiddle" height="30px" width="60px"/></a> 提供CDN加速
   copyright: true # Copyright of theme and framework
   ICP: # Chinese ICP License
     enable: true
@@ -778,7 +778,7 @@ pangu:
 # https://github.com/verlok/lazyload
 lazyload:
   enable: true
-  post: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/loading.gif
+  post: https://img.yww52.com/loading.gif
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -810,7 +810,7 @@ inject:
   bottom:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/flink.min.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.1/other/tag.css">
-    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/main.css">
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.css">
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.js"></script>
     # - <script src="xxxx"></script>
 

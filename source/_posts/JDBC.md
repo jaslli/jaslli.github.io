@@ -4,7 +4,7 @@ categories:
   - Java
 date: 2019-11-06 22:01:10
 description: JDBC是Java对数据库的操作
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2019/11/2019-11-06top_img.jpg
+cover: https://img.yww52.com/2019/11/2019-11-06top_img.jpg
 ---
 ## MySQL的安装
 

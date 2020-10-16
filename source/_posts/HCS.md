@@ -4,7 +4,7 @@ categories:
   - 其他技术
 date: 2019-11-25
 description: HTML+CSS+JavaScript
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2019/11/2019-11-25top_img.jpg
+cover: https://img.yww52.com/2019/11/2019-11-25top_img.jpg
 ---
 
 ## HTML

@@ -4,7 +4,7 @@ date: 2020-6-23
 categories:
   - Java
 description: IOC是Spring的核心，想学好Spring就要了解IOC
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/6/2020-6-23top_img.jpg
+cover: https://img.yww52.com/2020/6/2020-6-23top_img.jpg
 ---
 
 

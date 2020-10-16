@@ -3,7 +3,7 @@ title:  Javase
 date: 2020-6-18
 categories:
 - Java
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/6/2020-6-18top_img.jpg
+cover: https://img.yww52.com/2020/6/2020-6-18top_img.jpg
 description: 这是整理Java的笔记
 ---
 

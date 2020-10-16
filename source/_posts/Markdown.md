@@ -4,7 +4,7 @@ date: 2020-5-15
 categories:
   - 其他技术
 description: Markdown是用来写作的，能看到这个一般都懂，我只是记录一下以后好翻
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/2020/5/2020-5-15top_img.jpg
+cover: https://img.yww52.com/2020/5/2020-5-15top_img.jpg
 ---
 
 ## 标题
