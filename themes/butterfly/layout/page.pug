@@ -23,6 +23,10 @@ block content
       if page.comments !== false && theme.comments && theme.comments.use
         - var commentsJsLoad = true
         !=partial('includes/third-party/comments/index', {}, {cache:theme.fragment_cache})
+  else if page.type === 'nosidebar'
+    article#page
+      h1= page.title
+      .article-container!= page.content
   else
     #page
       if theme.douban && theme.douban.meta
