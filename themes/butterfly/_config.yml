@@ -298,7 +298,7 @@ valine:
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
   lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
-  placeholder: 使用QQ邮箱即可自动获取头像 # valine comment input placeholder (like: Please leave your footprints)
+  placeholder: 在名称处输入QQ号自动获取QQ的信息哦 # valine comment input placeholder (like: Please leave your footprints)
   guest_info: nick,mail # valine comment header info (nick/mail/link)
   recordIP: true # Record reviewer IP
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
