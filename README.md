@@ -6,9 +6,9 @@
 
 :badminton:域名为<https://yww52.com>
 
-:leaves:图片由[jsDeliv](https://www.jsdelivr.com/)加速
+:leaves:外部引入链接由[jsDeliv](https://www.jsdelivr.com/)加速，图片由[又拍云](https://www.upyun.com/)加速
 
-> 我会努力写文的！！！
+
 
 
 
