@@ -105,11 +105,11 @@ archive_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
 
 # the banner image of tag page
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
+tag_img: 
 
 # the banner image of category page
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
+category_img: 
 
 # If you are using hexo-douban, you can configure it (如果你有使用 hexo-douban,可配置這個)
 # douban:
@@ -743,6 +743,9 @@ note:
 pjax:
   enable: true
   exclude:
+    - /archives/
+    - /categories/
+    - /link/
     # - xxxx
     # - xxxx
 
