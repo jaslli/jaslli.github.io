@@ -95,21 +95,21 @@ avatar:
   effect: false
 
 # the banner image of home page
-index_img: https://img.yww52.com/top_img.jpg
+index_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
 
 # if the banner of page not setting, it will show the top_img
 default_top_img: 
 
 # the banner image of archive page
-archive_img: https://img.yww52.com/archives_top_img.jpg
+archive_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
 
 # the banner image of tag page
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img:
+tag_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
 
 # the banner image of category page
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: https://img.yww52.com/categories_top_img.jpg
+category_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
 
 # If you are using hexo-douban, you can configure it (如果你有使用 hexo-douban,可配置這個)
 # douban:
