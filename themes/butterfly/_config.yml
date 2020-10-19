@@ -291,15 +291,18 @@ gitalk:
 # valine
 # https://valine.js.org
 valine:
-  master: 6a8eb636174b1425b0f0f36711f8d133 
-  friends: d062f6c881b7b502fb60f262abbabf7c 
+  master: 6a8eb636174b1425b0f0f36711f8d133
+  friends:
+  - d062f6c881b7b502fb60f262abbabf7c  #小号
+  - 429d94ae943510552277cd3bfdf193e2  #XJHui
+  - fcb88dccdfa8b4bafda50531ed00d125  #Kylin
   appId: D1fvRHFdzJkrS7IfbaxET2ii-gzGzoHsz # leancloud application app id
   appKey: 5RweNCelj4e5Dm949dwf56RR # leancloud application app key
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
   lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
   placeholder: 在名称处输入QQ号自动获取QQ的信息哦 # valine comment input placeholder (like: Please leave your footprints)
-  guest_info: nick,mail # valine comment header info (nick/mail/link)
+  guest_info: nick,mail,link # valine comment header info (nick/mail/link)
   recordIP: true # Record reviewer IP
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
   bg: # valine background
