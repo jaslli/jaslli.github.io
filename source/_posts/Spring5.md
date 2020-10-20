@@ -5,7 +5,6 @@ categories:
 - Java 
 description: Spring 是一个轻量级的控制反转（IOC）和面向切面（AOP）的框架
 cover: https://img.yww52.com/2020/6/2020-6-26top_img.jpg
-sticky: 1
 ---
 
 ## 简介
