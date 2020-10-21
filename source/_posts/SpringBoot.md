@@ -4,7 +4,7 @@ date: 2020-10-15
 categories:
   - Java
 description: 学习SpeingBoot的笔记
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/2020/7/2020-7-7/top_img.jpg
+cover: https://img.yww52.com/2020/10/2020-10-15top_img.jpg
 ---
 
 # SpringBoot
@@ -272,5 +272,203 @@ public @interface EnableAutoConfiguration {
    > 1. application.properties的格式是	key=value	
    > 子配置就用点，比如service下的port配置就表示为service.port=value
    > 2. application.yml的格式是	key: value	注意有空格，因为yml文件对空格很敏感，
-   >   具体语法可参照[YAML语法](https://yww52.com/2020/10/20/yml语法/)
+   >     具体语法可参照[YAML语法](https://yww52.com/2020/10/20/yml语法/),之后就用yaml的这种格式来写配置文件
 
+# 配置文件值的注入
+
+首先先写个需要注入值的类。
+
+```Java
+@Component
+@ConfigurationProperties(prefix = "user")
+public class User {
+    private String name;
+    private int age;
+    private Date birth;
+    private Boolean happy;
+    private Map<String,Object> family;
+    private List<Object> hobby;
+    private Dog dog;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public Boolean getHappy() {
+        return happy;
+    }
+
+    public void setHappy(Boolean happy) {
+        this.happy = happy;
+    }
+
+    public Map<String, Object> getFamily() {
+        return family;
+    }
+
+    public void setFamily(Map<String, Object> family) {
+        this.family = family;
+    }
+
+    public List<Object> getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(List<Object> hobby) {
+        this.hobby = hobby;
+    }
+
+    public Dog getDog() {
+        return dog;
+    }
+
+    public void setDog(Dog dog) {
+        this.dog = dog;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", birth=" + birth +
+                ", happy=" + happy +
+                ", hobby=" + hobby +
+                ", family=" + family +
+                ", dog=" + dog +
+                '}';
+    }
+}
+```
+
+```Java
+@Component
+public class Dog {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+<div class='tip'><p>
+    1. @Component表示这是spring的组件，会被注入到spring的容器中进行管理</br>
+    2. @ConfigurationProperties(prefix = "user")表示绑定配置文件中的user的配置，这样就可以进行值的注入了
+</p></div>
+
+然后导入一个配置文件处理器的依赖（不导入会爆红虽然没影响），可以去配置文件注入值了。
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-configuration-processor</artifactId>
+</dependency>
+```
+
+这样就可以成功的将值注入了，可以去测试类进行一下测试。
+
+```Java
+@SpringBootTest
+class DemoApplicationTests {
+	@Autowired
+	User user;	//其实不一定要与配置类中的名称一致，user01也能读取出值
+	@Test
+	void contextLoads() {
+		System.out.println(user);
+	}
+}
+```
+
+ 得到答案
+
+```
+User{name='Yw', age=20, birth=Wed Oct 21 00:00:00 CST 2020, happy=true, hobby=[play, game], family={father=yww1, mother=yww2}, dog=Dog{name='wwangwang', age=3}}
+```
+
+
+
+# 导入文件资源
+
+## @PropertySource
+
+在上述的示例当中，要是总是把注入的值都加进全局的配置文件中就会显得很乱，所以可以新建一个文件在通过@PropertySource标签导入进去也可以实现值的注入，这样application.properties中就可以不用写user的值了，值都写在user.properties即可。
+
+```Java
+@Component
+@ConfigurationProperties(prefix = "user")
+@PropertySource(value = {"classpath:user.properties"})
+public class User {
+```
+
+<div class='tip'><p>
+注意@PropertySource这个标签导入的是properties的文件，yml文件会出问题。
+</p></div>
+
+## @ImportResource
+
+这个标签是用来导入spring的配置文件到springBoot中的（即xml格式）
+
+```Java
+@ImportResource(locations = {"classpath:beans.xml"})
+```
+
+## @Bean
+
+这个标签的功能与@ImportResource类似，也是为了导入配置，给容器添加一个组件的。比如写一个配置类。
+
+```Java
+@Configuration	//表示这个类是一个配置类，就像是一个spring的配置文件
+public class Config {
+    @Bean	//将方法的返回值注入到容器之中，类似spring配置中
+    public Hello hello(){
+        return new Hello();
+    }
+}
+```
+
+<div class='tip'><p>
+    1. @Configuration 表示这个类是一个配置类，就像是一个spring的配置文件</br>
+	2. @Bean 将方法的返回值注入到容器之中，类似spring配置中<beans></beans>注入bean的操作，方法名就是这个bean的id。
+</p></div>

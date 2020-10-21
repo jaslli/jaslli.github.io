@@ -4,12 +4,12 @@ date: 2020-10-20
 categories:
   - 其他技术
 description: 简单学习一下yml的语法
-cover: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/2020/7/2020-7-7/top_img.jpg
+cover: https://img.yww52.com/2020/10/2020-10-20top_img.jpg
 ---
 
 # 基本语法
 
-```
+```yaml
 Key: value
 ```
 
@@ -27,4 +27,51 @@ server:
  server:
 port: 8081
 ```
+
+
+
+{%note warning%}
+
+YAML对大小写敏感，所以不要弄错大小写。
+
+{%endnote%}
+
+# 值
+
+1. 值为数字，字符串或者是布尔类型
+
+   ```yml
+   Key: value
+   ```
+
+   字符串默认是不用加引号的，也可以加上，单引号包括是换转义特殊字符的，而双引号不会，就比如经常写的\n换行等字符。
+
+2. 对象和Map
+
+   ```yml
+   User:
+    Name: student
+    ID: 02
+   ```
+
+   ```yaml
+   User: {Name: student,ID: 02}
+   ```
+
+3. 数组
+
+   ```yaml
+   User:
+    - user01
+    - user02
+    - user03
+   ```
+
+   ```yaml
+   User: [user01,user02,user03]
+   ```
+
+   
+
+
 
