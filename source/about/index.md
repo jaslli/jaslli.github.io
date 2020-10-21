@@ -10,19 +10,12 @@ comments: false
 <img class="img" src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/avatar.jpg" alt="" ></img>
 
 
-
-<style type="text/css">.img{ 
-    margin-top: 10px; 
-    width:150px; 
-    height:150px; 
-    border-radius:150px; 
-    title = "Yw"
+<style type="text/css">.img{
+    margin-top: 10px;
+    width:150px;
+    height:150px;
+    border-radius:150px;
 }</style>
-
-
-
-
-
 
  <p class=t1> 🌈关于我<p>
 {% radio cyan checked, 一个懒惰的大三学生 %}
@@ -42,7 +35,7 @@ comments: false
 
 {% radio green checked,要是某些地方有错，可以联系我%}
 </br>
-	
+
 <p class=t1> 🍭技能学习<p>
 {% checkbox green checked , JavaSE%}
 
@@ -72,7 +65,7 @@ comments: false
 
 > 还有的想到再加，希望毕业前全部勾满
 
-<style>.t1{ 
+<style>.t1{
    font-size:25px;
 }</style>
 

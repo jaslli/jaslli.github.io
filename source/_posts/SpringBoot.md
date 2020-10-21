@@ -472,3 +472,81 @@ public class Config {
     1. @Configuration 表示这个类是一个配置类，就像是一个spring的配置文件</br>
 	2. @Bean 将方法的返回值注入到容器之中，类似spring配置中<beans></beans>注入bean的操作，方法名就是这个bean的id。
 </p></div>
+
+# Profile
+
+## properties的多文档
+
+首先就是主要的配置文件`application.properties`，创建多文档的方式就是按照`application-[name].properties`的形式命名创建在resources目录下。就比如我创建了一个测试环境的配置，命名为`application-dev.properties`
+
+## yaml的多文档
+
+这个就很方便了，直接在`application.yml`中就可以创建多个文档配置了。只要通过`---`就能将配置文件分成不同的文档配置，通过`spring.profiles: [name]`这个配置就能为这个文档配置取个名字了。
+
+```yaml
+server:
+  port: 8085
+---
+server:
+  port: 8086
+spring:
+  profiles: dev
+---
+```
+
+## 激活指定的Profile
+
+### properties
+
+在主配置文件，即`application.properties`下增加这个配置，就可以激活相应名字的文档配置文件。
+
+```properties
+spring.profiles.active=dev
+```
+
+### yaml
+
+yaml形式也是通过这个配置spring.profiles.active=dev，就能激活相应名字的文档配置文件。
+
+```yaml
+server:
+  port: 8085
+spring:
+  profiles:
+    active: dev
+---
+server:
+  port: 8086
+spring:
+  profiles: dev
+```
+
+### 共同的激活方式
+
+1. 命令行
+   比如在打了jar包之后，在命令行运行jar包的时候增加配置就能激活指定配置文件生效。
+
+   ```cmd
+   java -jar ---.jar --spring.profiles.active=dev
+   ```
+
+2. 虚拟机参数
+   修改虚拟机参数也可以修改。
+
+   ```
+   -Dspring.profiles.active=dev
+   ```
+
+
+
+# 配置文件的优先级
+
+配置文件的优先级由高到低分别为：
+
+1. 项目路径下的config文件夹中的配置文件
+2. 项目路径下的配置文件
+3. 资源路径下的config文件夹中的配置文件
+4. 资源路径下的配置文件
+
+springboot会通过优先级来加载配置文件，要是有不止一个配置文件，springboot也是会全部加载这些配置文件。对于设置了相同的配置，优先级高的配置文件设置的就会覆盖掉优先级低的配置文件的设置。就比如每个配置文件都设置了不同的打开端口，就会以优先级高的配置文件的为准。其他不冲突的配置也是生效的。
+
