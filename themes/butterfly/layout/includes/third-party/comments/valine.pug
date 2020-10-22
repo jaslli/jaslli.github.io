@@ -22,11 +22,12 @@ script.
         emojiMaps: !{emojiMaps},
         enableQQ: #{theme.valine.enableQQ},
         path: window.location.pathname,
+        metaPlaceholder: !{JSON.stringify(theme.valine.metaPlaceholder || {})}
       });
       if ('#{theme.valine.requiredFields}') { valine.config.requiredFields= '#{theme.valine.requiredFields}'.split(',') }
     }
 
-    if (typeof Valine === 'function') initValine() 
+    if (typeof Valine === 'function') initValine()
     else $.getScript('!{url_for(theme.CDN.valine)}', initValine)
   }
 
@@ -38,5 +39,5 @@ script.
       loadValine()
     }
   }
-  
+
 
