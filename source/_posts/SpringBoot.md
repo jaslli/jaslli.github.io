@@ -550,3 +550,269 @@ spring:
 
 springboot会通过优先级来加载配置文件，要是有不止一个配置文件，springboot也是会全部加载这些配置文件。对于设置了相同的配置，优先级高的配置文件设置的就会覆盖掉优先级低的配置文件的设置。就比如每个配置文件都设置了不同的打开端口，就会以优先级高的配置文件的为准。其他不冲突的配置也是生效的。
 
+
+
+# JDBC
+
+1. 首先导入所需要的依赖。
+
+    ```xml
+    <dependencies>
+            //JDBC的场景启动器
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+            </dependency>
+            //WEB的场景启动器
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            //Mysql
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+            //单元测试
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.junit.vintage</groupId>
+                        <artifactId>junit-vintage-engine</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+    </dependencies>
+    ```
+
+2. 然后去配置文件配置链接数据库。（这里我就用yaml形式的配置文件配置）
+
+    ```yaml
+    spring:
+      datasource:
+        username: root
+        password: password
+        url: jdbc:mysql://localhost:3306/shop?userUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    ```
+
+3. 然后就可以写一个简单的CRUD了。
+
+    ```Java
+    package com.yww.controller;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.jdbc.core.JdbcTemplate;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PathVariable;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import java.util.List;
+    import java.util.Map;
+
+    @RestController
+    public class JdbcController {
+        @Autowired
+        JdbcTemplate jdbcTemplate;
+
+        @GetMapping("/select")
+        public List<Map<String,Object>> userList(){
+            String sql = "SELECT * FROM user";
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
+            return maps;
+        }
+
+        @GetMapping("/add")
+        public String addUser(){
+            String sql = "INSERT INTO USER VALUES(3,'王五')";
+            jdbcTemplate.update(sql);
+            return "添加完成";
+        }
+
+        @GetMapping("/update/{id}")
+        public String updateUser(@PathVariable("id") int id){
+            String sql = "UPDATE user SET id=4,name='赵六' WHERE id="+id;
+            jdbcTemplate.update(sql);
+            return "修改完成";
+        }
+
+        @GetMapping("/delete/{id}")
+        public String deleteUser(@PathVariable("id") int id){
+            String sql = "DELETE FROM user WHERE id=?";
+            jdbcTemplate.update(sql,id);
+            return "删除成功";
+        }
+    }
+    ```
+
+<div class='tip'><p>
+spring帮我们封装好了JDBC的操作，并做好了模板，就是上述的JdbcTemplate。</br>
+JdbcTemplate的几个常用方法。</br>
+1. execute()，用于执行任何SQL语句。</br>
+2. update()，用于执行新增，修改删除等语句。</br>
+3. batchUpdate()，用于执行批处理的语句。</br>
+4. query()，用于执行查询语句。</br>
+5. call()，用于执行存储过程和函数相关的语句。</br>
+</p></div>
+
+
+
+# Druid
+
+Druid是的一个阿里巴巴的开源项目，它是一个数据库连接池的实现。Druid能够提供强大的监控和扩展功能。
+
+1. 首先就是添加Druid数据源的依赖，以上面JDBC依赖的基础上加。
+
+    ```xml
+    <dependency>
+         <groupId>com.alibaba</groupId>
+         <artifactId>druid</artifactId>
+         <version>1.2.1</version>
+    </dependency>
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version>
+    </dependency>
+    ```
+
+2. 将springboot默认的数据源切换到Druid数据源，在springboot的配置文件里修改配置。我这里就是将这里的配置放在了一个datasource.yml文件。
+
+   ```yaml
+   spring:
+     datasource:
+       username: root
+       password: password
+       url: jdbc:mysql://localhost:3306/shop?userUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+       driver-class-name: com.mysql.cj.jdbc.Driver
+       type: com.alibaba.druid.pool.DruidDataSource	#就是添加了这句指定数据源
+       # Druid的配置
+       initialSize: 5
+       minIdle: 5
+       maxActive: 20
+       max-wait: 60000
+       timeBetweenEvictionRunsMillis: 60000
+       minEvictableIdleTimeMillis: 300000
+       validationQuery: SELECT 1 FROM DUAL
+       testWhileIdle: true
+       testOnBorrow: false
+       testOnReturn: false
+       poolPreparedStatements: true
+       #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+       filters: stat,wall,log4j
+       maxPoolPreparedStatementPerConnectionSize: 20
+       useGlobalDataSourceStat: true
+       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+   ```
+
+3. 手动绑定这些配置注入到容器当中。
+
+   ```Java
+   package com.yww.config;
+   
+   import com.alibaba.druid.pool.DruidDataSource;
+   import org.springframework.boot.context.properties.ConfigurationProperties;
+   import org.springframework.context.annotation.Bean;
+   import org.springframework.context.annotation.Configuration;
+   import javax.sql.DataSource;
+   
+   @Configuration
+   public class DruidConfig {
+       @Bean
+       @ConfigurationProperties(prefix = "spring.datasource")
+       public DataSource dataSource(){
+           return new DruidDataSource();
+       }
+   }
+   ```
+
+4. 配置Druid数据源监控。
+
+   ```Java
+   package com.yww.config;
+   
+   import com.alibaba.druid.pool.DruidDataSource;
+   import com.alibaba.druid.support.http.StatViewServlet;
+   import org.springframework.boot.context.properties.ConfigurationProperties;
+   import org.springframework.boot.web.servlet.ServletRegistrationBean;
+   import org.springframework.context.annotation.Bean;
+   import org.springframework.context.annotation.Configuration;
+   import javax.sql.DataSource;
+   import java.util.HashMap;
+   import java.util.Map;
+   
+   @Configuration
+   public class DruidConfig {
+       @Bean
+       @ConfigurationProperties(prefix = "spring.datasource")
+       public DataSource dataSource(){
+           return new DruidDataSource();
+       }
+       @Bean
+       public ServletRegistrationBean statViewServlet() {
+           ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+           Map<String, String> initParams = new HashMap<>();
+           initParams.put("loginUsername", "admin"); //后台管理界面的登录账号
+           initParams.put("loginPassword", "123456"); //后台管理界面的登录密码
+           bean.setInitParameters(initParams);
+           return bean;
+       }
+   }
+   ```
+
+   >配置好之后访问<http://localhost:8080/druid/login.html>就可以看到Druid为我们提供的用于监控的web界面。
+
+5. 配置filter过滤器
+
+   ```Java
+   package com.yww.config;
+   
+   import com.alibaba.druid.pool.DruidDataSource;
+   import com.alibaba.druid.support.http.StatViewServlet;
+   import org.springframework.boot.context.properties.ConfigurationProperties;
+   import org.springframework.boot.web.servlet.ServletRegistrationBean;
+   import org.springframework.context.annotation.Bean;
+   import org.springframework.context.annotation.Configuration;
+   import javax.sql.DataSource;
+   import java.util.HashMap;
+   import java.util.Map;
+   
+   @Configuration
+   public class DruidConfig {
+       //注入Druid的配置
+       @Bean
+       @ConfigurationProperties(prefix = "spring.datasource")
+       public DataSource dataSource(){
+           return new DruidDataSource();
+       }
+       //配置Druid的监控
+       @Bean
+       public ServletRegistrationBean statViewServlet() {
+           ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+           Map<String, String> initParams = new HashMap<>();
+           initParams.put("loginUsername", "admin"); //后台管理界面的登录账号
+           initParams.put("loginPassword", "123456"); //后台管理界面的登录密码
+           bean.setInitParameters(initParams);
+           return bean;
+       }
+       //配置filter过滤器
+       @Bean
+   	public FilterRegistrationBean webStatFilter() {
+       	FilterRegistrationBean bean = new FilterRegistrationBean();
+       	bean.setFilter(new WebStatFilter());
+       	Map<String, String> initParams = new HashMap<>();
+       	initParams.put("exclusions", "*.js,*.css,/druid/*,/jdbc/*");
+       	bean.setInitParameters(initParams);
+       	//"/*" 表示过滤所有请求
+       	bean.setUrlPatterns(Arrays.asList("/*"));
+       	return bean;
+   	}
+   }
+   ```
+
+   
+
