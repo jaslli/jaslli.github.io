@@ -7,12 +7,12 @@
 #   name || link || icon
 
 menu:
-  首页: / || fa fa-home
-  归档: /archives/ || fa fa-archive
+  首页: / || iconfont iconfaxian-copy
+  归档: /archives/ || iconfont iconbumenguidangtongji
   # 标签: /tags/ || fa fa-tags
-  分类: /categories/ || fa fa-folder-open
-  友链: /link/ || fa fa-link
-  关于: /about/ || fa fa-heart
+  分类: /categories/ || iconfont iconfenlei
+  友链: /link/ || iconfont iconlianjie
+  关于: /about/ || iconfont iconaixin
   # List||fa fa-list:
   #  - Music || /music/ || fa fa-music
   # - Movie || /movies/ || fa fa-film
@@ -40,9 +40,8 @@ copy:
 # social settings (社交圖標設置)
 # formal:
 #   icon: link || the description
-social:
-  # fab fa-github: https://github.com/xxxxx || Github
-  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+social: 1
+
 
 # search (搜索)
 # --------------------------------------
@@ -822,8 +821,9 @@ inject:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/flink.min.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@2.5/other/main.css">
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
+    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.js"></script>
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/main.js"></script>
-    # - <script src="xxxx"></script>
 
 # CDN
 # Don't modify the following settings unless you know how they work
