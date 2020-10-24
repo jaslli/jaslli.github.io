@@ -2,12 +2,12 @@
 title: Yw
 date: 2020-6-18
 type: "about"
-top_img: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/about_top_img.jpg
+top_img: https://img.yww52.com/about_top_img.jpg
 aside: false
 comments: false
 ---
 
-<img class="img" src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/avatar.jpg" alt="" ></img>
+<img class="img" src="https://img.yww52.com/avatar.jpg" alt="" ></img>
 
 
 <style type="text/css">.img{
@@ -36,34 +36,6 @@ comments: false
 {% radio green checked,要是某些地方有错，可以联系我%}
 </br>
 
-<p class=t1> 🍭技能学习<p>
-{% checkbox green checked , JavaSE%}
-
-{% checkbox green checked , JavaWeb%}
-
-{% checkbox green , 计算机基础%}
-
-{% checkbox green checked , 前端三件套%}
-
-{% checkbox green , Mysql%}
-
-{% checkbox green checked, Mybatis%}
-
-{% checkbox green , Linux%}
-
-{% checkbox green checked,spring%}
-
-{% checkbox green , springMVC%}
-
-{% checkbox green , springBoot%}
-
-{% checkbox green , springCloud%}
-
-{% checkbox green , vue%}
-
-{% checkbox green , Redis%}
-
-> 还有的想到再加，希望毕业前全部勾满
 
 <style>.t1{
    font-size:25px;
