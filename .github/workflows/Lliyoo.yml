@@ -15,6 +15,11 @@ jobs:
           npm run build
         env:
           CI: false
+      - name: pushbaidu
+        run: |
+          hexo cl && hexo g
+          ls
+          curl -H 'Content-Type:text/plain' --data-binary @hexo-baidupush.txt "${{secrets.TOKEN}}"
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
