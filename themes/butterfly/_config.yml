@@ -296,6 +296,7 @@ valine:
   - 429d94ae943510552277cd3bfdf193e2  #XJHui
   - fcb88dccdfa8b4bafda50531ed00d125  #Kylin
   - 7c962fe531532726d380d156d5f5b22c  #GarveyZhong
+  - 617f018ac45b08f999632bf84ce9dd03  #ConstOwn
   appId: D1fvRHFdzJkrS7IfbaxET2ii-gzGzoHsz # leancloud application app id
   appKey: 5RweNCelj4e5Dm949dwf56RR # leancloud application app key
   pageSize: 10 # comment list page size
@@ -306,7 +307,7 @@ valine:
   recordIP: true # Record reviewer IP
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
   bg: # valine background
-  emojiCDN: 
+  emojiCDN:
     -  https://valinecdn.bili33.top/
   enableQQ: true # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
   requiredFields: nick,mail # required fields (nick/mail)
