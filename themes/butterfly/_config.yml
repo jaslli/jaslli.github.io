@@ -40,7 +40,8 @@ copy:
 # social settings (社交圖標設置)
 # formal:
 #   icon: link || the description
-social: 1
+social:
+  1
 
 
 # search (搜索)
@@ -823,7 +824,7 @@ inject:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@2.5/other/main.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
-    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.js"></script>
+    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/main.js"></script>
 
 # CDN

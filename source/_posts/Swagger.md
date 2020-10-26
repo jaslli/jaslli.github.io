@@ -75,7 +75,7 @@ description: swagger是一款让你更好的书写API文档的框架。
                     "v1.0",							//版本号
                     "urn:tos",						//termsOfServiceUrl
                     contact,						//contact对象
-                    "Apacher 2.0",					//许可信息	
+                    "Apacher 2.0",					//许可信息
                     "http://www.apache.org/licenses/LINCENSE-2.0 ",		//许可信息的链接
                     new ArrayList());
         }
