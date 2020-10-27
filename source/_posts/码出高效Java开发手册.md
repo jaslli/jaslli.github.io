@@ -4,8 +4,7 @@ categories:
 	- 读后感
 date: 2020-10-19
 description: 码出高效Java开发手册对Java开发的人来说是本很值得看的书。
-cover: 
-sticky: 1
+cover:
 ---
 
 # oop理念
