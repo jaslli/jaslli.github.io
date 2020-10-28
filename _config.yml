@@ -34,6 +34,7 @@ skip_render:
 - CNAME
 - baidu_verify_code-KDuLeUcJbX.html
 - robots.txt
+- google53150df1411b9949.html
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
