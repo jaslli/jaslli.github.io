@@ -1,10 +1,10 @@
 ---
-title: Java开发手册读后感
+title: Java开发手册
 categories:
-	- 读后感
+  - 读书笔记
 date: 2020-10-19
 description: 码出高效Java开发手册对Java开发的人来说是本很值得看的书。
-cover:
+cover: https://img.yww52.com/2020/10/2020-10-19top_img.jpg
 ---
 
 # oop理念
