@@ -216,3 +216,59 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 	docker cp [容器ID]:[文件路径] [主机路径]
 ```
 
+# 部署Nginx
+
+1. 拉取Nginx的镜像
+
+   ```she
+   	docker pull nginx
+   ```
+
+2. 启动容器
+
+   ```shell
+   # 5000端口映射到容器内nginx的80端口，注意要放行5000端口,才能通过公网访问
+   	docker run -d --name nginxtest -p 5000:80 nginx
+   ```
+
+3. 打开公网ip的5000端口，或者服务器内部的localhost的5000端口就能看到页面了。
+
+# 部署Tomcat
+
+1. 拉取Tomcat的镜像
+
+   ```shell
+   	docker pull tomcat
+   ```
+
+2. 启动容器
+
+   ```shell
+   # 启动容器	
+   	docker run -d --name tomcattest -p 5000:8080 tomcat
+   # 一次性的测试容器
+   	docker run -it --rm tomcat
+   ```
+
+3. 打开公网ip的5000端口，或者服务器内部的localhost的5000端口就能看到页面了。因为下载的镜像是被处理过的，所以看不到index页面。
+
+4. 进入容器
+
+   ```shell
+   	docker exec -it tomcattest /bin/bash
+   # 进入到webapps发现没有任何的网站信息，发现是被存储到了webapps.dist里了，所以要想看到index，就需要拷贝过来
+   	cp -r ./webapps.dist/ROOT/ webapps
+   # 然后就能看见index页面了
+   ```
+
+   
+
+# 提交生成镜像
+
+```shell
+# 将自定义的容器提交成镜像
+	docker commit -m="message" -a="Author" [容器ID] [要生成镜像的名字]:[TAG]
+# 查看镜像就能看到自定义的镜像
+	docker images 
+```
+
