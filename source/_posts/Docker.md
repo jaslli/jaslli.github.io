@@ -272,3 +272,43 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 	docker images 
 ```
 
+
+
+# 使用数据卷
+
+## 自定义路径挂载
+
+```shell
+# 将容器内目录挂载到本地目录上
+	docker run  -v [主机目录]:[容器目录]
+# 例子
+	docker run -it -v /home/test:/home centos
+```
+
+## 匿名挂载
+
+```shell
+# 不指定本地目录的挂载
+	docker run -v [容器目录]
+# 例子
+	docker run -d -P --name nginxtest1 -v /etc/nginx nginx
+```
+
+## 具名挂载
+
+```shell
+# 指定卷名不指定本地目录挂载
+	docker run -v [卷名]:[容器目录]
+# 例子
+	docker run -d -P --name nginxtest2 -v nginx-test:/etc/nginx nginx
+```
+
+## 查看数据卷信息
+
+```shell
+# 查看当前数据卷的使用信息
+	docker volume ls 
+# 指定卷名查看数据卷的具体信息,可以看到本地的挂载目录
+	docker volume inspect [卷名]
+```
+
