@@ -312,3 +312,82 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 	docker volume inspect [卷名]
 ```
 
+
+
+# DockerFile
+
+```shell
+# 指定基础镜像
+	FROM
+# 指维护者的信息，姓名加邮箱
+	MAINTAINER
+# 运行的命令
+	RUN
+# COPY文件，添加内容，会自动解压
+	ADD
+# 设置当前工作目录
+	WORKDIR
+# 挂载主机目录，即设置卷
+	VOLUME
+# 暴露端口
+	EXPOSE
+# 指定容器启动
+	RUN
+# 指定容器启动运行的命令
+	CMD				#会代替之前的命令
+	ENTRYPOINT		#追加命令
+# 拷贝文件到镜像中
+	COPY
+# 设置环境变量
+	ENV
+# 构建镜像
+	docker build -f [dockerfile文件路径] -t [镜像名]:[TAG]
+```
+
+# 发布镜像
+
+## Dockerhub
+
+<https://www.docker.com/>
+
+```shell
+# 登陆dockerhub	
+	docker login -u [username] -p [password]
+# 发布镜像
+	docker push
+```
+
+# 阿里云镜像
+
+打开阿里云的容器镜像服务，创建命名空间和容器镜像，然后参考官方文档就能跟着发布了。
+
+
+
+# Docker网络
+
+## link
+
+```shell
+# 通过link可以简单的链接网络
+	docker run -d -P --link [需要连接的容器名] [镜像]
+# --link 其实就是为容器的host增加一条解析记录，所以在该容器就能ping通需要连接的容器名。
+# 这个只是增加解析，所以是不能反向ping通的
+```
+
+## 自定义网络
+
+``` shell
+# 之前创建容器的时候，默认是与docker0进行桥接模式,下面两个命令是一样的
+	docker run -d -P --net bridge [镜像]
+	docker run -d -P [镜像]
+# 在docker0的网络中，每个容器只能通过IP互相ping通，但是不能访问域名即容器名，可以通过--link单向打通
+```
+
+```shell
+# 自定义网络就修复了docker0的缺陷，容器能通过容器名来ping通
+# 创建自定义网络
+	docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 [自定义网络名]
+# 创建容器时指定所在网络
+	docker run -d -P --net [自定义网络名] [镜像]
+```
+
