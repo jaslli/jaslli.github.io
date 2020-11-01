@@ -385,9 +385,19 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 
 ```shell
 # 自定义网络就修复了docker0的缺陷，容器能通过容器名来ping通
-# 创建自定义网络
+# 创建自定义网络,具体ip看情况定
 	docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 [自定义网络名]
 # 创建容器时指定所在网络
 	docker run -d -P --net [自定义网络名] [镜像]
+```
+
+## 连通网络
+
+```shell
+# docker0网络下的容器通过容器名是不能Ping通另一个网络的容器的
+# 需要将容器直接连通另一个网络网卡
+	docker network connect [另一个网络] [容器]
+# 其实就是将容器加入到另一个网络
+# 给了一个容器两个ip地址
 ```
 
