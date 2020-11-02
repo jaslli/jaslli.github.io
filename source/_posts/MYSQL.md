@@ -3,8 +3,8 @@ title: MYSQL
 date: 2020-11-1
 categories:
 	- java
-cover: 
-descrtion: 
+cover: https://img.yww52.com/2020/11/2020-11-1top_img.jpg
+descrtion: MYSQL一些常用的语句。
 ---
 
 # 基本概念
@@ -321,4 +321,39 @@ CREATE TABLE IF NOT EXISTS `user`(
   不会查到depart表中有而user表中没有的数据。
 - FULL JOIN
   只要其中一个表中存在匹配，则返回行。
+
+## 排序
+
+```mysql
+# ASC升序,DESC降序
+	SELECT * FROM user ORDER BY id ASC
+	SELECT * FROM user ORDER BY id DESC
+```
+
+## 分页
+
+```mysql
+-- limit n,m
+-- n代表第一个值的坐标(从0开始)，m代表一页的数据多少
+-- 查询user表中第一到第五条数据
+	SELECT * FROM user LIMIT 0,5
+```
+
+## GROUP BY
+
+```mysql
+# 按一个或多个列对结果集进行分组
+	SELECT birthday,COUNT(*) FROM user GROUP BY birthday
+# 查出每个生日的用户人数多少
+```
+
+## HAVING
+
+```mysql
+# HAVING可以让筛选分组后的各组数据
+	SELECT birthday,COUNT(*) FROM user GROUP BY birthday HAVING SUM(COUNT(*)) > 100
+# 查出大于100个人的生日是同一天的生日
+```
+
+
 
