@@ -15,7 +15,7 @@ cover: https://img.yww52.com/2020/10/2020-10-27/top_img.jpg
 
 去到官方文档<https://docs.docker.com/get-docker/>，选择对应的操作系统安装就可以了。
 
-我的环境是CentOS 7.8
+**我的环境是CentOS 7.8**
 
 ```bash
 # 下载需要的安装包
@@ -26,8 +26,16 @@ cover: https://img.yww52.com/2020/10/2020-10-27/top_img.jpg
 	yum install docker-ce docker-ce-cli containerd.io
 # 启动docker
 	systemctl start docker
+# 建立docker组
+	sudo groupadd docker
+# 将当前用户加入docker组
+	sudo usermod -aG docker $USER
 # 查看版本
 	docker version
+# 查看docker的信息
+	docker info
+# 查看帮助命令
+	docker --help
 ```
 
 出现了docker版本的信息就代表安装成功了。
@@ -35,20 +43,11 @@ cover: https://img.yww52.com/2020/10/2020-10-27/top_img.jpg
 # HelloWrold
 
 ```bash
-#启动hello-world
+#创建hello-world容器
 	docker run hello-world
 ```
 
 ![](https://img.yww52.com/2020/10/2020-10-27/img1.png)
-
-> 其实刚安装docker是没有镜像的，这个命令找不到镜像，然后去官方网站拉取下来菜启动的。
-
-```bash
-# 查看docker的镜像
-	docker images
-```
-
-
 
 # 阿里云镜像加速
 
@@ -57,39 +56,17 @@ cover: https://img.yww52.com/2020/10/2020-10-27/top_img.jpg
 3. 点击镜像中心下的镜像加速器。
 4. 选择版本就输入命令就可以配置好阿里云的镜像加速了。
 
+![](https://img.yww52.com/2020/10/2020-10-27/img2.png)
 
+<div class='tip'>
+    <p>
+        这是阿里云的镜像加速，也可以找其他国内的源，不还源的话拉取镜像会很慢。
+    </p>
+</div>
 
-# Docker基本命令
+# 镜像
 
-## 信息命令
-
-```bash
-# 查看docker版本
-	docker version
-# 查看docker的信息
-	docker info
-# 查看帮助命令
-	docker --help
-```
-
-## 镜像命令
-### 查看镜像
-```shell
-# 查看镜像信息
-    docker images
-# 可选项
-    docker images -a, --all		# 显示所有的镜像
-    docker images -q, --quiet	# 只显示镜像的ID
-```
-
-### 搜索镜像
-
-```shell
-# 命令寻找镜像
-	docker search [name]
-```
-
-### 拉取镜像
+## 拉取镜像
 
 ```shell
 # 拉取镜像	
@@ -101,86 +78,143 @@ cover: https://img.yww52.com/2020/10/2020-10-27/top_img.jpg
 	docker pull mysql:5.7
 ```
 
-### 删除镜像
+## 查看镜像
+
+```shell
+# 查看顶层镜像信息
+    docker images
+	docker image ls
+# 可选项
+    docker images -a, --all		# 显示中间层的镜像
+    docker images -q, --quiet	# 只显示镜像的ID
+	docker images -f since=mongo:3.2, --filter		# 显示在mongo:3.2之后建立的镜像
+	docker images -f before=mongo:3.2, --filter		# 显示在mongo:3.2之前建立的镜像
+```
+
+## 查看镜像的历史
+
+```shell
+	docker history [容器名]:[TAG]
+```
+
+## 搜索镜像
+
+```shell
+# 命令寻找镜像
+	docker search [name]
+```
+
+
+## 删除镜像
 
 ```shell
 # 通过镜像ID删除镜像
-	docker rmi -f [ID]
+	docker rm [选项] [ID/名字]
 # 删除多个镜像
-	docker rmi -f [ID1] [ID2] ...
+	docker rm [选项] [ID1] [ID2] ...
 # 删除所有容器
-	docker rmi -f $(docker images -aq)
+	docker rm -f $(docker images -aq)
+# 删除所有镜像名为nginx
+	docker image rm $(docker image ls -q nginx)
+# 删除所有在mongo:3.2之前的镜像
+	docker image rm $(docker image ls -q -f before=mongo:3.2)
 ```
 
-## 容器命令
+## 提交生成镜像
 
-### 新建并启动容器
+```shell
+# 将自定义的容器提交成镜像
+	docker commit -m="message" -a="Author" [容器ID] [要生成镜像的名字]:[TAG]
+	docker commit --author "Author" --message "message" [容器ID] [要生成镜像的名字]:[TAG]
+# 查看镜像就能看到自定义的镜像
+	docker images 
+```
+
+<div class='warning'>
+    <p>
+        慎用docker commit。因为这样生成的黑箱镜像会对其他人的维护工作造成很大压力。生成镜像建议使用Dockerfile。
+    </p>
+</div>
+
+# 容器
+
+## 新建并启动容器
 
 ``` shell
 docker run [可选参数] image
 
 # 参数
 docker run --name image		# 给容器取名字
-docker run -d image			# 后台方式启动，需要一个前台进程，不然会自动停止
+docker run -d image			# 以守护态运行启动，需要一个前台进程，不然会自动停止
 docker run -p 容器端口 image			# 指定端口
 docker run -p 主机端口:容器端口 image
 docker run -p ip:主机端口:容器端口
 docker run -P image			# 随机指定端口
-docker run -it image 		# 使用交互方式运行，进入容器查看内容
+docker run -it image 		# t表示分配一个伪终端，i表示让容器标准输入打开
 ```
 
-### 退出容器
+## 退出容器
 
 ```shell
-# 通过命令来退出并关闭容器，返回本地
+# 通过命令来退出容器，在一些情况退出容器会使容器停止
 	exit
 # 容器不停止退出
 	CTRL + P + Q
 ```
 
-### 查看运行的容器
+## 查看运行的容器
 
 ``` shell
 # 查看运行的容器
 	docker ps 
+	docker container ls
 # 查看容器运行的历史
 	docker ps -a
 # 查看正在运行的容器的容器ID
 	docker ps -q 
 ```
 
-### 删除容器
+## 进入容器
+
+```shell
+# 进入容器开启新终端，从中使用exit不会使容器停止
+	docker exec -it [容器ID] 
+# 进入容器打开正在执行的终端，从中exit退出会使容器停止
+	docker attach [容器ID]
+```
+
+## 启动容器
+
+```shell
+# 启动容器
+	docker start [容器ID]
+	docker container start [容器ID]
+# 重启容器
+	docker container restart [容器ID]
+```
+
+## 停止容器
+
+```shell
+# 停止容器
+	docker container stop [容器ID]
+# 强制停止容器，即杀死容器
+	docker kill [容器ID]
+```
+
+## 删除容器
 
 ```shell
 # 删除指定ID的容器，不能删除正在运行的容器
-	docker rm [容器ID]
+	docker rm  [容器ID]
+	docker container rm [容器ID]
 # 强制删除治党ID的容器
 	docker rm -f [容器ID]
 # 删除所有容器
 	docker rm -f $(docker ps -aq)
 ```
 
-### 启动容器
-
-```shell
-# 启动容器
-	docker start [容器ID]
-# 重启容器
-	docker restart [容器ID]
-```
-
-### 停止容器
-
-```shell
-# 停止容器
-	docker stop [容器ID]
-# 强制停止容器，即杀死容器
-	docker kill [容器ID]
-```
-
-## 其他常用命令
-
-### 查看日志
+## 查看日志
 
 ```shell
 # 显示日志
@@ -191,47 +225,29 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 	docker logs -tf --tail [numbers] [容器ID]
 ```
 
-### 查看容器信息
+## 查看容器信息
 
 ```shell
+# 查看容器信息
+	docker container ls [容器ID]
 # 查看容器内部的进程信息
 	docker top [容器ID]
 # 查看容器全部的信息
 	docker inspect [容器ID]
 ```
 
-### 进入容器
-
-```shell
-# 进入容器开启新终端
-	docker exec -it [容器ID] 
-# 进入容器打开正在执行的终端
-	docker attach [容器ID]
-```
-
-### 拷贝容器内的文件到主机
+## 拷贝容器内的文件到主机
 
 ```shell
 # 将容器内的文件拷贝到主机的目录
 	docker cp [容器ID]:[文件路径] [主机路径]
 ```
 
-# 部署Nginx
+## 清理所有处于终止状态的容器
 
-1. 拉取Nginx的镜像
-
-   ```she
-   	docker pull nginx
-   ```
-
-2. 启动容器
-
-   ```shell
-   # 5000端口映射到容器内nginx的80端口，注意要放行5000端口,才能通过公网访问
-   	docker run -d --name nginxtest -p 5000:80 nginx
-   ```
-
-3. 打开公网ip的5000端口，或者服务器内部的localhost的5000端口就能看到页面了。
+```shell 
+docker container prune
+```
 
 # 部署Tomcat
 
@@ -261,20 +277,8 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
    # 然后就能看见index页面了
    ```
 
-   
 
-# 提交生成镜像
-
-```shell
-# 将自定义的容器提交成镜像
-	docker commit -m="message" -a="Author" [容器ID] [要生成镜像的名字]:[TAG]
-# 查看镜像就能看到自定义的镜像
-	docker images 
-```
-
-
-
-# 使用数据卷
+# 数据卷
 
 ## 自定义路径挂载
 
@@ -312,37 +316,148 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 	docker volume inspect [卷名]
 ```
 
+## 删除数据卷
 
+```shell
+docker volume rm [卷名]
+```
+
+## 删除无主的数据卷
+
+```shell
+docker volume prune
+```
 
 # DockerFile
 
+## 一个简单的Dockerfile
+
+1. 建一个新的文件夹，然后在里面建一个Dockerfile文件，内容为
+
+   ```dockerfile
+   FROM nginx
+   RUN echo '<h1>Hello, Docker!</h1>' > /usr/share/nginx/html/index.html
+   ```
+
+2. 然后生成镜像
+
+   ```shell
+   	docker build -t nginx:v2 .
+   ```
+
+3. 然后创建容器打开url，就能看到`Hello Docker!`了。
+
+## 构建镜像
+
 ```shell
-# 指定基础镜像
-	FROM
-# 指维护者的信息，姓名加邮箱
-	MAINTAINER
-# 运行的命令
-	RUN
-# COPY文件，添加内容，会自动解压
-	ADD
-# 设置当前工作目录
-	WORKDIR
-# 挂载主机目录，即设置卷
-	VOLUME
-# 暴露端口
-	EXPOSE
-# 指定容器启动
-	RUN
-# 指定容器启动运行的命令
-	CMD				#会代替之前的命令
-	ENTRYPOINT		#追加命令
-# 拷贝文件到镜像中
-	COPY
-# 设置环境变量
-	ENV
-# 构建镜像
-	docker build -f [dockerfile文件路径] -t [镜像名]:[TAG]
+	docker build [选项] [镜像名]:[TAG] <上下文路径/URL/->
+# 一般就为
+	docker build  [镜像名]:[TAG] .
 ```
+
+<div class='tip'>
+    <p>
+        注意这个最后这个点，这个是表示指定当前目录为上下文路径，后面有些指令就是从上下文路径开始指引，不一定是Dockerfile的路径，为了方便才让Dockerfile文件与上下文路径一致。
+    </p>
+</div>
+
+## 指令
+
+### FROM
+
+FROM用来指定基础的镜像，即用这个镜像来进行二次开发。
+
+这个指令是必须的，而且必须是第一条。
+
+> Docker中有一个特殊的镜像，那就是`scratch`，表示一个空白的镜像。
+
+### MAINTAINER
+
+这个指令用来表示作者的信息。
+
+```dockerfile
+MAINTAINER <username email>
+```
+
+### RUN
+
+用来执行命令。
+
+```dockerfile
+# shell格式
+RUN echo '<h1>Hello, Docker!</h1>' > /usr/share/nginx/html/index.html
+# exec格式
+RUN ["可执行文件", "参数1", "参数2"]
+```
+
+<div class='warning'>
+    <p>
+        当有多个命令的时候，尽量在一个RUN指令中完成，而不是使用多个RUN。因为一个指令就是建立一层，多层的结构就会显得十分的臃肿。
+    </p>
+</div>
+
+### COPY
+
+从构建上下文的目录中将一个文件复制到镜像内的目标路径当中。
+
+```dockerfile
+COPY  [文件路径] [镜像内目标路径]
+```
+
+如果源路径为文件夹，复制的时候不是直接复制该文件夹，而是将文件夹中的内容复制到目标路径。
+
+### ADD
+
+ADD也是复制，与COPY差不多，但是能干更多的事情，比如复制的文件是tar压缩文件，会帮你自动解压到目标路径。
+
+```dockerfile
+ADD  [文件路径] [镜像内目标路径]
+```
+
+> ADD有很多复杂的功能，所以只拷贝文件的时候尽量使用COPY，需要自动解压就用ADD。
+
+### WORKDIR
+
+用来设置工作目录。
+
+```dockerfile
+WORKDIR <工作目录>
+```
+
+工作目录是用来指定整个镜像的，因为每一层都是隔离的，所以不指定工作目录就会出现目录的混乱，即上一层使用了cd进入了新的目录，而下一层一不小心就当成是上一层的目录继续操作。
+
+### EXPOSE
+
+暴露端口，类似之前的`-p`参数，声明容器运行时容器提供服务端口。注意仅仅是声明，不会自动进行端口映射。
+
+### VOLUME
+
+```  dockerfile
+VOLUME ["<路径1>", "<路径2>"...]
+VOLUME <路径>
+```
+
+这里的目录挂载之后就会在运行的时候自动挂载为匿名卷。
+
+### ENV
+
+设置环境变量。
+
+### CMD
+
+```dockerfile
+# shell格式
+CMD <命令>
+# exec格式
+CMD ["可执行文件", "参数1", "参数2"...]
+# 例子
+CMD echo $HOME
+CMD ["sh","-c","echo $HOME"]
+```
+
+### ENTRYPOINT
+
+ENTRYPOINT与CMD差不多，只不过在容器run后面加命令就会自动添加到ENTRYPOINT的参数去。
 
 # 发布镜像
 
@@ -387,6 +502,7 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 # 自定义网络就修复了docker0的缺陷，容器能通过容器名来ping通
 # 创建自定义网络,具体ip看情况定
 	docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 [自定义网络名]
+	docker network create -d bridge [自定义网络名]
 # 创建容器时指定所在网络
 	docker run -d -P --net [自定义网络名] [镜像]
 ```
@@ -399,5 +515,30 @@ docker run -it image 		# 使用交互方式运行，进入容器查看内容
 	docker network connect [另一个网络] [容器]
 # 其实就是将容器加入到另一个网络
 # 给了一个容器两个ip地址
+```
+
+# Dockercompose
+
+## 下载安装
+
+```shell
+# 官方文档下载
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# 从github上下载会十分慢，建议换成国内源
+sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+# 下载完成后会在/usr/local/bin下面会有二进制文件docker-compose
+
+
+# 将可执行权限应用于二进制文件
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+## 卸载
+
+```shell
+# 使用curl安装的
+	sudo rm /usr/local/bin/docker-compose
+# 使用pip安装的
+	pip uninstall docker-compose
 ```
 
