@@ -820,7 +820,117 @@ services:
    	docker-compose up
    ```
 
-   
+
+# Docker swarm
+
+![](https://img.yww52.com/2020/10/2020-10-27/img6.png)
+
+## swarm集群
+
+### 初始化一个swarm集群
+
+```shell
+# 初始化一个swarm节点
+	docker swarm init 
+# 要让其他服务器加入，需要配置一个ip,你的Docker主机有多个网卡，就需要指定ip
+	docker swarm init --advertise--addr [ip]
+```
+
+### 加入节点
+
+```shell
+# 获取加入token
+	docker swarm join-token manager
+	docker swarm join-token worker
+# 获得一串带有token的命令，可以以manager或worker的节点加入swarm
+```
+
+### 查看节点信息
+
+```shell
+	docker node ls 
+```
+
+### 离开集群
+
+```shell
+	docker swarm leave
+```
+
+
+
+## Raft协议
+
+Raft协议，也是一种一致性的算法，具体的算法内容就自行查阅。
+
+要先知道的是managert节点分为三种状态，`Leader`,`Reachable`,`Unreachable`。
+
+现在以Docker集群来进行大概的情况讲解，假设现在swarm的集群有四个节点。
+
+### 一个manager节点
+
+因为只有manager节点能进行管理，所以在只有一个manager节点，三个worker节点的情况下，manager节点出现故障即状态为`Unreachable`，该集群就无法进行管理，只能等待manager节点的修复。
+
+### 两个manager节点
+
+在这种情况下，其中一个manager节点状态为`Unreachable`，另一个manager节点也会无法进行管理操作，所以两个manager节点是无法进行很好的管理的。
+
+当故障的manager节点修复好在加入集群，状态就会变成`Reachable`，而另外的那个就会变成`Leader`。
+
+### 三个manager节点
+
+这种就是最起码的集群管理。在这种情况下，第一个manager节点出故障了，其他两个是能进行管理操作的，而不是像之前一样无法管理，当挂了两个就不能管理了。所以一个标准的集群式至少需要三个manager节点的，至少有两个manager节点可用，这样才能保证集群的正常运行。
+
+
+
+## 服务
+
+```shell
+# 创建一个服务,命令类似run,创建的服务会随机分配给集群的节点
+	docker service create [iamge]
+			-p
+			--name
+# 指定服务的运行方式,replicated模式为只在worker节点运行，global为全部节点
+	docker service create --mode replicated [iamge]
+	docker service create --mode global [iamge]
+# 查看服务
+	docker service ls 
+	docker service ps [服务名]
+	docker service inspect [服务名]
+# 创建到num个服务的副本，然后随机分布给集群中的节点,也可以回滚
+	docker service update --replicas [num] [服务名]
+	docker service scale [服务名]=[num]
+# 删除服务
+	docker service rm [服务名]
+```
+
+<div class='tip'>
+    <p>
+        可以把集群看成是一个整体，因为服务的副本也是接的相同的端口，所以访问哪个节点的ip端口，都可以访问到这个服务。
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
