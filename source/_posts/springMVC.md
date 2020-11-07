@@ -3,7 +3,7 @@ title: SpringMVC
 date: 2020-7-7
 categories:
   - SSM
-description: SpringMVC
+description: SpringMVC是一个基于MVC架构的用来简化web应用程序开发的应用开发框架。
 cover: https://img.yww52.com/2020/7/2020-7-7/top_img.jpg
 ---
 

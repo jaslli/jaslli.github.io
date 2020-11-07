@@ -3,7 +3,7 @@ title: Mybatis
 date: 2020-6-8
 categories:
   - SSM
-description: Mybatis 是一款优秀的持久层框架，还是挺重要的，经常被整合
+description: Mybatis 是一款优秀的持久层框架，经常用它来整合项目，能很好的管理数据库的操作。
 cover: https://img.yww52.com/2020/6/2020-6-8/top_img.jpg
 ---
 

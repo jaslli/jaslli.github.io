@@ -3,7 +3,7 @@ title: JDBC
 categories:
   - Java
 date: 2019-11-06 22:01:10
-description: JDBC是Java对数据库的操作
+description: JDBC是用来规范客户端程序如何来访问数据库的应用程序接口。
 cover: https://img.yww52.com/2019/11/2019-11-06top_img.jpg
 ---
 ## MySQL的安装

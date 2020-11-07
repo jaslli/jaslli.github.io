@@ -1,9 +1,9 @@
 ---
 title: HCS
 categories:
-  - 其他技术
+  - 无类可分
 date: 2019-11-25
-description: HTML+CSS+JavaScript
+description: HTML+CSS+JavaScript，前端三件套。
 cover: https://img.yww52.com/2019/11/2019-11-25top_img.jpg
 ---
 

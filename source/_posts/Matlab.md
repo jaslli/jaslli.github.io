@@ -3,7 +3,7 @@ title: Matlab
 categories:
   - 无类可分
 date: 2019-12-09
-description: 数学软件，应付考试复习的操作
+description: 数学软件，一些简单的操作。
 ---
 
 #### 基本操作

@@ -3,7 +3,7 @@ title: Markdown
 date: 2020-5-15
 categories:
   - 无类可分
-description: Markdown是用来写作的，能看到这个一般都懂，我只是记录一下以后好翻
+description: Markdown是一种轻量级的标记语言，能很大程度提高你写作的体验，也能更好的渲染。
 cover: https://img.yww52.com/2020/5/2020-5-15top_img.jpg
 ---
 
