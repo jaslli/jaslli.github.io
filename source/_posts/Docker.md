@@ -1,8 +1,8 @@
 ---
 title: Docker
 date: 2020-10-27
-categories:	
-	- java
+categories:
+	- 虚拟化
 description:  Docker 是一个开源的应用容器引擎。
 cover: https://img.yww52.com/2020/10/2020-10-27/top_img.jpg
 ---

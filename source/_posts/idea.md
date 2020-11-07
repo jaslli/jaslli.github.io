@@ -2,7 +2,7 @@
 title: IntelliJ IDEA的优化
 date: 2020-7-11
 categories:
-  - 其他技术
+  - 无类可分
 description: IDEA配置好可以极大提升你的体验的。
 cover: https://img.yww52.com/2020/7/2020-7-11/top_img.jpg
 ---

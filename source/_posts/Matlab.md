@@ -1,7 +1,7 @@
 ---
 title: Matlab
 categories:
-  - 其他技术
+  - 无类可分
 date: 2019-12-09
 description: 数学软件，应付考试复习的操作
 ---

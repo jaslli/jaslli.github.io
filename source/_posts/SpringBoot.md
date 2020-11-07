@@ -2,7 +2,7 @@
 title: SpringBoot
 date: 2020-10-15
 categories:
-  - Java
+  - SpringBoot
 description: 学习SpeingBoot的笔记
 cover: https://img.yww52.com/2020/10/2020-10-15top_img.jpg
 ---

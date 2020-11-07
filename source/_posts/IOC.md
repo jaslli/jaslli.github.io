@@ -2,7 +2,7 @@
 title: IOC
 date: 2020-6-23
 categories:
-  - Java
+  - SSM
 description: IOC是Spring的核心，想学好Spring就要了解IOC
 cover: https://img.yww52.com/2020/6/2020-6-23top_img.jpg
 ---

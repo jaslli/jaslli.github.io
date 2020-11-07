@@ -2,7 +2,7 @@
 title: SpringMVC
 date: 2020-7-7
 categories:
-  - Java
+  - SSM
 description: SpringMVC
 cover: https://img.yww52.com/2020/7/2020-7-7/top_img.jpg
 ---

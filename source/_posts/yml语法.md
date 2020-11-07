@@ -2,7 +2,7 @@
 title: YAML基本语法
 date: 2020-10-20
 categories:
-  - 其他技术
+  - 无类可分
 description: 简单学习一下yml的语法
 cover: https://img.yww52.com/2020/10/2020-10-20top_img.jpg
 ---

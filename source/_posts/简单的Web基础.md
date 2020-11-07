@@ -2,7 +2,7 @@
 title: 简单的Web基础
 date: 2020/6/4
 categories:
-  - Java
+  - javaweb
 description: 刚学web就要先了解一些基础。
 cover: https://img.yww52.com/2020/6/2020-6-4/top_img.jpg
 ---

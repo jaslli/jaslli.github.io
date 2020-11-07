@@ -2,7 +2,7 @@
 title: AOP
 date: 2020-6-30
 categories:
-- Java
+   - SSM
 description: AOP是spring的另一个核心，是oop的延续。
 cover: https://img.yww52.com/2020/6/2020-6-30/top_img.jpg
 ---

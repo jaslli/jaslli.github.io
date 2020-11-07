@@ -2,7 +2,7 @@
 title: JSP
 date: 2020-6-6
 categories:
-  - Java
+  - javaweb
 description: JSP也算Javaweb的基础，还是有必要学的。
 cover: https://img.yww52.com/2020/6/2020-6-6/top_img.jpg
 ---

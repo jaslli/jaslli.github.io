@@ -2,8 +2,8 @@
 title: Mybatis
 date: 2020-6-8
 categories:
-  - Java
-description: MyBatis 是一款优秀的持久层框架，还是挺重要的，经常被整合
+  - SSM
+description: Mybatis 是一款优秀的持久层框架，还是挺重要的，经常被整合
 cover: https://img.yww52.com/2020/6/2020-6-8/top_img.jpg
 ---
 

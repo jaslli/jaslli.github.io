@@ -2,7 +2,7 @@
 title: MYSQL
 date: 2020-11-1
 categories:
-	- java
+	- 数据库
 cover: https://img.yww52.com/2020/11/2020-11-1top_img.jpg
 descrtion: MYSQL一些常用的语句。
 ---

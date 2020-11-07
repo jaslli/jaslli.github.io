@@ -2,9 +2,9 @@
 title: Swagger3
 date: 2020-11-3
 categories:
-	- java
+	- API文档
 cover: https://img.yww52.com/2020/11/2020-11-3top_img.jpg
-descrtion: 更加简洁的整合swagger。
+descrtion: 更加方便的整合swagger。
 ---
 
 # 前言

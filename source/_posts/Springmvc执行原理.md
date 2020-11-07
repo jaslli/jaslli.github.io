@@ -2,7 +2,7 @@
 title: SpringMVC执行原理
 date: 2020-9-22
 categories:
-  - Java
+  - SSM
 description: SpringMVC的执行原理
 cover: https://img.yww52.com/2020/9/2020-9-22/top_img.jpg
 ---
