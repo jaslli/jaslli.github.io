@@ -6,15 +6,17 @@
 ![npm download](https://img.shields.io/npm/dw/hexo-theme-butterfly?color=green)
 ![license](https://img.shields.io/github/license/jerryc127/hexo-theme-butterfly?color=FF5531)
 
-Demo: 👍 [Butterfly](https://demo.jerryc.me/)  ||   🤞 [JerryC](https://jerryc.me/)
+Demo: 👍 [Butterfly](https://butterfly.js.org/)  ||   🤞 [JerryC](https://jerryc.me/)
 
-Docs: 📖 [Butterfly Docs](https://demo.jerryc.me/posts/21cfbf15/)
+Docs: 📖 [Butterfly Docs](https://butterfly.js.org/posts/21cfbf15/)
 
 Based on [hexo-theme-melody](https://github.com/Molunerfinn/hexo-theme-melody) theme.
 
 ## Installation
 
 ### GIT
+
+> If you are in Mainland China, you can download in [Gitee](https://gitee.com/iamjerryw/hexo-theme-butterfly)
 
 Stable branch [recommend]:
 
@@ -92,5 +94,3 @@ npm i hexo-theme-butterfly
 ![](https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/theme-butterfly-readme-homepage-1.png)
 
 ![](https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/theme-butterfly-readme-homepage-2.png)
-
-![](https://cdn.jsdelivr.net/gh/jerryc127/CDN/img/theme-butterfly-readme-post.png)
