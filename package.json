@@ -9,11 +9,12 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "5.1.1"
+    "version": "5.2.0"
   },
   "dependencies": {
     "hexo": "^5.2.0",
     "hexo-deployer-git": "^2.1.0",
+    "hexo-filter-nofollow": "^2.0.2",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-baidu-sitemap": "^0.1.9",
     "hexo-generator-category": "^1.0.0",
