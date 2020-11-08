@@ -5,7 +5,7 @@ $(function () {
       width: '100%',
       overflow: 'hidden'
     })
-    $('#local-search').css('display', 'block')
+    $('#local-search .search-dialog').css('display', 'block')
     $('#local-search-input input').focus()
     $('#search-mask').fadeIn()
     if (!loadFlag) {
@@ -27,12 +27,12 @@ $(function () {
       width: '',
       overflow: ''
     })
-    $('#local-search').css({
+    $('#local-search .search-dialog').css({
       animation: 'search_close .5s'
     })
 
     setTimeout(function () {
-      $('#local-search').css({
+      $('#local-search .search-dialog').css({
         animation: '',
         display: 'none'
       })
@@ -47,8 +47,9 @@ $(function () {
   }
 
   searchClickFn()
-  window.addEventListener('pjax:success', function () {
-    $('#local-search').is(':visible') && closeSearch()
+
+  window.addEventListener('pjax:complete', function () {
+    $('#local-search .search-dialog').is(':visible') && closeSearch()
     searchClickFn()
   })
 
@@ -85,7 +86,7 @@ $(function () {
             }
             let dataTitle = data.title.trim().toLowerCase()
             const dataContent = data.content.trim().replace(/<[^>]+>/g, '').toLowerCase()
-            const dataUrl = data.url
+            const dataUrl = data.url.startsWith('/') ? data.url : GLOBAL_CONFIG.root + data.url
             let indexTitle = -1
             let indexContent = -1
             let firstOccur = -1
