@@ -1284,8 +1284,8 @@ canvas:not(#ribbon-canvas),
 [data-theme='light'] {
   --global-bg: #fff;
   --font-color: #4c4948;
-  --hr-border: #d2ebfd;
-  --hr-before-color: #bfe4fb;
+  --hr-border: #a4d8fa;
+  --hr-before-color: #80c8f8;
   --search-bg: #f6f8fa;
   --search-input-color: #4c4948;
   --search-result-title: #4c4948;
@@ -2379,6 +2379,9 @@ blockquote footer cite:before {
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap .fa-angle-right {
   margin: 0 0.2rem;
 }
+#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap time {
+  display: none;
+}
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a {
   color: #858585;
 }
@@ -3116,7 +3119,7 @@ blockquote footer cite:before {
 }
 #page-header.full_page #site-info {
   position: absolute;
-  top: 43%;
+  top: 60%;
   padding: 0 0.5rem;
   width: 100%;
 }
@@ -3297,6 +3300,9 @@ blockquote footer cite:before {
 #post-info #post-meta a:hover {
   color: #49b1f5;
   text-decoration: underline;
+}
+#post-info #post-meta time {
+  display: none;
 }
 #post > #post-info {
   margin-bottom: 1.5rem;
@@ -3635,7 +3641,7 @@ _:future,
   overflow-wrap: break-word;
 }
 #article-container a {
-  color: #99a9bf;
+  color: #49b1f5;
 }
 #article-container a:hover {
   text-decoration: underline;
@@ -4294,6 +4300,7 @@ _:future,
 #sidebar #sidebar-menus .menus_items .menus_item_child {
   margin: 0;
   list-style: none;
+  display: none;
 }
 #vcomment {
   font-size: 1.1em;
