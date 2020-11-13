@@ -26,9 +26,11 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 
 ![](https://img.yww52.com/2020/11/2020-11-11/img1.jpg)
 
-# 目录命令
+# 常用命令
 
-## ls
+## 目录命令
+
+### ls
 
 ```shell
 # 查看文件夹的信息
@@ -41,7 +43,7 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	ls -lh
 ```
 
-## cd
+### cd
 
 ```shell
 # 进入目录
@@ -54,7 +56,7 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	cd ..
 ```
 
-## mkdir和rmdir
+### mkdir和rmdir
 
 ```shell
 # 创建目录
@@ -67,9 +69,9 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	rmdir -p [目录路径]
 ```
 
-# 文件操作
+## 文件操作
 
-## touch
+### touch
 
 ```shell
 # touch创建文件
@@ -77,14 +79,14 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 # 若已有该文件则会修改文件时间
 ```
 
-## stat
+### stat
 
 ``` shell
 # 查看文件详细信息
 	stat
 ```
 
-## cat
+### cat
 
 ```shell
 # 查看文件内容
@@ -95,7 +97,7 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	cat -A [文件名]
 ```
 
-## more和less
+### more和less
 
 ```shell
 # 分屏显示文件内容
@@ -106,7 +108,7 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	less [文件名]
 ```
 
-## head和tail
+### head和tail
 
 ```shell
 # 显示文件开头n行
@@ -117,9 +119,9 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	tail -f [文件名]
 ```
 
-# 文件和目录的命令
+## 文件和目录的命令
 
-## rm
+### rm
 
 ```shell
 # 删除文件或者目录
@@ -130,7 +132,7 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	rm - r
 ```
 
-## cp
+### cp
 
 ```shell
 # 复制文件,不自定义名字就会默认原名
@@ -139,16 +141,16 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	cp -r 
 ```
 
-## mv
+### mv
 
 ```shell
 # 移动或重命名
 	mv [文件名] [移动后]
 ```
 
-# 权限
+## 权限
 
-## 基本权限
+### 基本权限
 
 通过命`ls -l`就能看到一些文件的基本权限，比如下图。
 
@@ -172,9 +174,9 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
    - `x`代表可执行
 6. 后面两个root代表的是文件所有者和群组
 
-## 修改权限的命令
+### 修改权限
 
-### chmod
+#### chmod
 
 ```shell
 # 增加文件所有者的一个文件的可写权限
@@ -187,7 +189,7 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	chmod u=rwx,g=rwx,o=rwx [文件名]
 ```
 
-### 数字权限
+#### 数字权限
 
  ```shell
 # 4代表可读，2代表可写，1代表可执行
@@ -199,19 +201,189 @@ cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 	chmod 777
  ```
 
-### chown
+#### chown
 
 ```shell
-# 修改文件的所有者
+## 修改文件的所有者
 	chown [用户] [文件名]
-# 修改文件的所有者和所有组
+## 修改文件的所有者和所有组
 	chown [用户]:[组] [文件名]
 ```
 
-### chgrp
+#### chgrp
 
 ```shell
-# 修改文件的所属组
+## 修改文件的所属组
 	chown [组] [文件名]
+```
+
+### 默认权限
+
+每次新建的文件都会有权限，这就是默认权限，umask。对文件来讲默认权限最大为666，对目录来讲是777。
+
+```shell
+## 查看当前umask的值
+	umask
+## 查看当前默认权限
+	umask -S
+```
+
+## 帮助命令
+
+### man
+
+```shell
+	man ls
+## 查看命令有几个级别
+	man -f 
+	what is 
+```
+
+### info
+
+```shell
+	info ls 
+```
+
+### help
+
+```shell
+## help只能获取shell内置命令的帮助,不常用
+	cd --help
+## 可以用type来判断是不是内置命令
+	type cd
+```
+
+## 搜索命令
+
+### whereis
+
+```shell
+## 用来搜索系统命令，源文件和帮助文档位置
+	whereis ls
+```
+
+### which
+
+```shell
+## 查找命令，若该命令有别名也会查找别名
+	which ls
+```
+
+### locate
+
+```shell
+## 通过文件名搜索,因为是通过数据库查找，所以新增的需要更新数据库
+	locate [文件名]
+```
+
+### find
+
+#### 按照文件名搜索
+
+```shell
+## 通过文件名搜索
+	find [搜索的路径] -name [文件名]
+## 不区分大小写的文件名
+	find [搜索的路径] -iname [文件名]
+## 通过inode查找
+	find [搜索的路径] -inum [inode]
+```
+
+#### 按照文件大小搜索
+
+```shell
+## 按照文件大小搜索
+	find [搜索的路径] -size [大小]
+```
+
+#### 按照权限搜索
+
+```shell
+	find [搜索的路径] -perm [数字权限]
+## 三个权限只要有一个比数字权限的大或者等于
+	find [搜索的路径] -perm +[数字权限]
+## 三个权限每一个都要比数字权限的大或者等于
+	find [搜索的路径] -perm -[数字权限]
+```
+
+#### grep
+
+```shell
+## 查找文件中符合条件的字符串
+	grep "ww" [文件名]
+## 输出行号
+	grep -n
+## 不区分大小写
+	grep -i
+## 查找不符合条件的
+	grep -v
+## 符合的部分高亮
+	grep --color=auto
+```
+
+## 压缩与解压缩
+
+### zip格式
+
+```shell
+## 压缩
+	zip [压缩后文件名] [原文件]
+	zip test.zip test.txt
+## 解压缩
+	unzip [压缩文件]
+```
+
+### gz格式
+
+```shell
+## 压缩文件，能压缩目录但不打包
+	gzip [文件名]		# 不保留原文件
+	gzip -r [目录]	# 会将目录内文件一个个压缩，不压缩目录
+## 解压缩
+	gzip -d [压缩文件]
+	gunzip [压缩文件]
+	gzip -dr [目录]
+```
+
+### bz2格式
+
+```shell
+## 压缩，不能压缩目录
+	bzip2 [文件名]			# 不保留原文件
+	bzip2 -k [文件名]		# 保留原文件
+## 解压缩
+	bzip2 -d [压缩文件]
+	bunzip2 [压缩文件]
+```
+
+### tar格式
+
+```shell
+## 打包,c表示打包，f表示指定文件名，v显示打包过程
+	tar -cvf [文件名.tar] [原文件或目录]
+## 解压,x表示解打包
+	tar -xvf [tar包]
+## 压缩包,生成.tar.gz的压缩包
+	gzip [tar包]
+## 解压缩包
+	gzip -d [tar.gz压缩文件]
+```
+
+### tar.gz和tar.bz2
+
+```shell
+## 压缩,z表示tar.gz格式，j表示tar.bz2
+	tar -zcvf [文件名.tar.gz] [原文件或目录]
+	tar -jcvf [文件名.tar.bz2] [原文件或目录]
+## 解压缩
+	tar -zxvf [文件名.tar.gz] 
+	tar -jxvf [文件名.tar.bz2] 
+## 解压缩到指定位置
+	tar -zxvf [文件名.tar.gz] -C [路径]
+	tar -jxvf [文件名.tar.bz2] -C [路径]
+## 只查看不解压，用t参数
+	tar -ztvf [文件名.tar.gz] [原文件或目录]
+	tar -jtvf [文件名.tar.gz] [原文件或目录]
 ```
 
