@@ -3,7 +3,7 @@ title: Mybatis-plus
 date: 2020-11-14
 categories:
   - SpringBoot
-descrition: 顾名思义，plus就是Mybatis的升级版，能帮助你更简便的使用Mybatis。基于springboot的学习，springmvc部分配置有些不同。
+description: 顾名思义，plus就是Mybatis的升级版，能帮助你更简便的使用Mybatis。基于springboot的学习，springmvc部分配置有些不同。
 cover: https://img.yww52.com/2020/11/2020-11-14/top_img.jpg
 ---
 
