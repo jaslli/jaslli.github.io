@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yww52.com/2020/09/21/Springmvc%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/10/25/Swagger/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/11/02/Swagger3/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2019/11/27/git/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/07/10/idea/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
     <loc>https://yww52.com/2019/10/31/static%E4%B8%8Efinal/</loc>
     <lastmod>2020-11-22</lastmod>
   </url>
@@ -93,14 +73,6 @@
     <lastmod>2020-11-22</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2020/06/25/Spring5/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/10/14/SpringBoot/</loc>
-    <lastmod>2020-11-22</lastmod>
-  </url>
-  <url>
     <loc>https://yww52.com/2020/06/29/AOP/</loc>
     <lastmod>2020-11-22</lastmod>
   </url>
@@ -145,6 +117,26 @@
     <lastmod>2020-11-22</lastmod>
   </url>
   <url>
+    <loc>https://yww52.com/2020/09/21/Springmvc%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/10/25/Swagger/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/11/02/Swagger3/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2019/11/27/git/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/07/10/idea/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
     <loc>https://yww52.com/2020/10/26/Docker/</loc>
     <lastmod>2020-11-22</lastmod>
   </url>
@@ -158,6 +150,14 @@
   </url>
   <url>
     <loc>https://yww52.com/2020/06/17/Javase/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/06/25/Spring5/</loc>
+    <lastmod>2020-11-22</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/10/14/SpringBoot/</loc>
     <lastmod>2020-11-22</lastmod>
   </url>
 </urlset> 
