@@ -1,0 +1,1 @@
+"use strict";var avatar=document.querySelector("#aside_content .card-info img");avatar.onmouseover=function(){avatar.style.cssText="animation: bigger 2s;width:115px; height:115px; border:3px solid #ff4000; padding:3px;"},avatar.onmouseout=function(){avatar.style.cssText="animation: smaller 2s;width:105px; height:105px;"};
