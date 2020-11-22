@@ -841,6 +841,7 @@ inject:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.js"></script>
+    #- <script src="1.js"></script>
     # - <script src="xxxx"></script>
 
 # CDN
