@@ -9,7 +9,15 @@ cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
 
 # 简介
 
-# jdk1.7
+HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集合，所以很有必要去了解一下。JDK8相对JDK7优化了不少，结构也改变了，所以这里就分开来学习了。
+
+<div class='tip'>
+    <p>
+        因为我英语不是特别好，所以看源码时候的文档注释有些是机翻的，所以有些文档注释会看不懂，只能理解一下大概意思了。
+    </p>
+</div>
+
+# JDK7
 
 ## 参数和变量
 
@@ -63,7 +71,7 @@ cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
     /**
      * 已对HashMap进行结构修改的次数结构修改是指更改HashMap中的映射数或
      * 以其他方式修改其内部结构（例如，重新哈希）的修改。 此字段用于使HashMap的Collection-view上
-     * 的迭代器快速失败。 （请参见ConcurrentModificationException）。
+     * 的迭代器快速失败。（请参见ConcurrentModificationException）。
      */
     transient int modCount;
 
@@ -173,7 +181,7 @@ cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
     </p>
 </div>
 
-这里就看到，每个节点就是哈希表的最小组成单位了，现在就来看一下这个节点类。jdk1.7的节点类叫`Entry`。
+这里就看出，每个节点就是哈希表的最小组成单位了，现在就来看一下这个节点类。jdk1.7的节点类叫`Entry`。
 
 ```Java
     static class Entry<K,V> implements Map.Entry<K,V> {
@@ -191,7 +199,7 @@ cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
             key = k;
             hash = h;
         }
-		//	get和set方法
+        //  get和set方法
         public final K getKey() {
             return key;
         }
@@ -203,7 +211,7 @@ cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
             value = newValue;
             return oldValue;
         }
-        //	重写equals，
+        //  重写equals
         public final boolean equals(Object o) {
             if (!(o instanceof Map.Entry))
                 return false;
@@ -218,18 +226,18 @@ cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
             }
             return false;
         }
-		//	重写hashCode方法
+        //  重写hashCode方法
         public final int hashCode() {
             return Objects.hashCode(getKey()) ^ Objects.hashCode(getValue());
         }
-		//	重写toString方法
+        //  重写toString方法
         public final String toString() {
             return getKey() + "=" + getValue();
         }
 
         /**
-         * 在存在key下put，就会用该方法覆盖value值
-         */
+        * 在存在key下put，就会用该方法覆盖value值
+        */
         void recordAccess(HashMap<K,V> m) {
         }
 
@@ -257,10 +265,10 @@ public V put(K key, V value) {
     if (table == EMPTY_TABLE) {
         inflateTable(threshold);
     }
-    
+
     if (key == null)
         return putForNullKey(value);
-    
+
     int hash = hash(key);
     int i = indexFor(hash, table.length);
     for (Entry<K,V> e = table[i]; e != null; e = e.next) {
@@ -295,11 +303,11 @@ put方法很有讲究，现在我们就来一步步解析。
     private void inflateTable(int toSize) {
         // 传入容量大小的最小的2的次幂
         int capacity = roundUpToPowerOf2(toSize);
-		//	重新计算阈值 threshold = 容量 * 加载因子
+        //  重新计算阈值 threshold = 容量 * 加载因子
         threshold = (int) Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);
-        //	用最小的2次幂来创建一个新的数组
+        //  用最小的2次幂来创建一个新的数组
         table = new Entry[capacity];
-        //	初始化哈希掩码值，将初始化推迟到我们真正需要它之前。
+        //  初始化哈希掩码值，将初始化推迟到我们真正需要它之前。
         initHashSeedAsNeeded(capacity);
     }
 ```
@@ -308,13 +316,13 @@ put方法很有讲究，现在我们就来一步步解析。
 
 ```Java
     private static int roundUpToPowerOf2(int number) {
-        //	1.如果这个需要的长度大于最大值，就用最大值来创建数组
-        //	2.需要的长度小于1就用1当数组的长度，大于1就用highestOneBit确定长度。
+        //  1.如果这个需要的长度大于最大值，就用最大值来创建数组
+        //  2.需要的长度小于1就用1当数组的长度，大于1就用highestOneBit确定长度。
         return number >= MAXIMUM_CAPACITY
                 ? MAXIMUM_CAPACITY
                 : (number > 1) ? Integer.highestOneBit((number - 1) << 1) : 1;
     }
-	//	这个类就是怎么创建最小的二次幂的方法
+    //  这个类就是怎么创建最小的二次幂的方法
     public static int highestOneBit(int i) {
         // HD, Figure 3-1
         i |= (i >>  1);
@@ -330,9 +338,151 @@ put方法很有讲究，现在我们就来一步步解析。
 
 寻找到最小的二次幂之后，重新计算阈值，然后用最小的2次幂来创建一个新的数组，最后用`initHashSeedAsNeeded`来初始化哈希掩码值。
 
+### 第二步
+
+```Java
+    if (key == null)
+        return putForNullKey(value);
+```
+
+判断传入的key是不是null值，如果是就返回`putForNullKey(value)`，不然就下一步。现在来看看这个方法。
+
+```Java
+    private V putForNullKey(V value) {
+        /**
+         *	遍历table[0]的链表，若有key==null，就用新的value覆盖原来的
+         *	然后返回被覆盖的value，所以table[0]就只会有一个元素
+         */
+        for (Entry<K,V> e = table[0]; e != null; e = e.next) {
+            if (e.key == null) {
+                V oldValue = e.value;
+                e.value = value;
+                e.recordAccess(this);
+                return oldValue;
+            }
+        }
+        modCount++;
+       /**
+         *	要是没有key==null的键，就调用addEntry方法，将空键和值放入table[0]
+         *	第一次table[0]是没有元素的，所以才能到这里添加空键和值
+         */
+        addEntry(0, null, value, 0);
+        return null;
+    }
+```
+
+### 第三步*
+
+```Java
+        int hash = hash(key);
+        int i = indexFor(hash, table.length);
+        for (Entry<K,V> e = table[i]; e != null; e = e.next) {
+            Object k;
+            if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+                V oldValue = e.value;
+                e.value = value;
+                e.recordAccess(this);
+                return oldValue;
+            }
+        }
+```
+
+到这里就是最重要的一步了，确定插入的位置然后插入。首先就是调用`hash`方法来计算传入的`key`的哈希值。
+
+```Java
+    /**
+     * 检索对象哈希码，并将补充哈希函数应用于结果哈希，以防止质量差的哈希函数。
+     * 这很关键，只有HashMap使用2的幂的哈希表，不然哈希表在低位无差异时会遇到冲突。
+     * 注意：空键始终映射到哈希0，因此索引为0。
+     */
+    final int hash(Object k) {
+        int h = hashSeed;
+        //	若哈希值不为0而且不是String类型，就返回一个哈希值
+        if (0 != h && k instanceof String) {
+            return sun.misc.Hashing.stringHash32((String) k);
+        }
+		// 异或
+        h ^= k.hashCode();
+        // 此函数可确保在每个位位置仅相差恒定倍数的hashCode具有一定数量的冲突（在默认的加载因子下约为8）。
+        h ^= (h >>> 20) ^ (h >>> 12);
+        return h ^ (h >>> 7) ^ (h >>> 4);
+    }
+```
+
+得到哈希值之后，就调用`indexFor`方法来计算出应该插入的位置。
+
+```Java
+    /**
+     * 返回计算出来的索引
+     */
+    static int indexFor(int h, int length) {
+        // assert Integer.bitCount(length) == 1 : "长度必须为2的非零次幂";
+        // h & (length-1)表示hash值与数组长度求余
+        // 为什么必须是2的非零次幂，之后还会提到
+        return h & (length-1);
+    }
+```
+
+计算出具体插入的位置之后就开始插入了，这里就是用了一个for循环遍历。
+
+```java
+    //	遍历table[i]这个桶里是否这个key值，有就将原来的value覆盖，并返回原来的value
+	for (Entry<K,V> e = table[i]; e != null; e = e.next) {
+        Object k;
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+
+    modCount++;
+	//	没有就将这对键值对加入到表中
+    addEntry(hash, key, value, i);
+	//	第一次加入到桶就返回null值
+    return null;
+```
+
+至此`put`的流程就结束了，到这里其实还是有问题。用`indexFor`这个方法来求数组的位置，刚刚也分析了这个方法，就是异或求余，那么就会有以下的问题，hash差一定的倍数，求余出来的位置就会一样，这个就是经常提到的`哈希冲突`了，为了解决哈希冲突这个问题，就引进了链表，这就是为什么哈希表底层是用数组和链表构成的了。现在来看个例子，看看链表是怎么解决哈希冲突的。
+
+![](https://img.yww52.com/2020/11/2020-11-20/img2.png)
+
+假设键值对3计算出来的`i`是3，就会被放到数组的第四个位置，直接放入。
+
+假设键值对4计算出来的`i`是2，就会放到数组的第三个位置，但是这个位置已经有键值对1了，这种情况就会用到链表，`头插`到该链表。
+
+![](https://img.yww52.com/2020/11/2020-11-20/img3.png)
+
+但是这种情况下，就无法通过数组来寻找到键值对4了，所以还会进行位移，最后就会变成这样。
+
+![](https://img.yww52.com/2020/11/2020-11-20/img4.png)
+
+### addEntry
+
+在上面put的第三步不难看到，在一个桶里只要有key相同，就覆盖，没有就使用`addEntry`这个方法加入到桶里。不难看出这个方法发生的情况，数组位置没有元素和发生哈希冲突时就会用到这个方法，现在来看看这个方法。
+
+```Java
+    /**
+     * 将具有指定键，值和哈希码的Entry添加到指定存储桶
+     * 如果有必要，该方法也会负责调整表的大小
+     */
+    void addEntry(int hash, K key, V value, int bucketIndex) {
+        if ((size >= threshold) && (null != table[bucketIndex])) {
+            resize(2 * table.length);
+            hash = (null != key) ? hash(key) : 0;
+            bucketIndex = indexFor(hash, table.length);
+        }
+
+        createEntry(hash, key, value, bucketIndex);
+    }
+```
+
+
+
 ## get
 
-# jdk1.8
+# JDK8
 
 ## 变量
 
