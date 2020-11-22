@@ -810,13 +810,13 @@ lazyload:
 # PWA
 # See https://github.com/JLHwung/hexo-offline
 # ---------------
-# pwa:
-#   enable: false
-#   manifest: /image/pwa/manifest.json
-#   apple_touch_icon: /image/pwa/apple-touch-icon.png
-#   favicon_32_32: /image/pwa/32.png
-#   favicon_16_16: /image/pwa/16.png
-#   mask_icon: /image/pwa/safari-pinned-tab.svg
+pwa:
+  enable: false
+  manifest: /manifest.json
+  apple_touch_icon: /image/pwa/apple-touch-icon.png
+  favicon_32_32: /32.png
+  favicon_16_16: /16.png
+  mask_icon: /image/pwa/safari-pinned-tab.svg
 
 # Disable Baidu transformation on mobile devices (禁止百度轉碼)
 disable_baidu_transformation: true
@@ -835,13 +835,12 @@ inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
-    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/StaticFile_HEXO@latest/butterfly/css/flink.min.css">
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.6/other/main.css">
+    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.6/other/main.js"></script>
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css">
-    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@2.5/other/main.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
-    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.js"></script>
-    #- <script src="1.js"></script>
+    - '<div class="app-refresh" id="app-refresh"> <div class="app-refresh-wrap"> <label>✨ 网站已经更新最新版本 👉</label> <a href="javascript:void(0)" onclick="location.reload()">點擊刷新</a> </div></div>'
     # - <script src="xxxx"></script>
 
 # CDN

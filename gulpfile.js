@@ -6,9 +6,25 @@ var htmlclean = require('gulp-htmlclean')
 var imagemin = require('gulp-imagemin')
 var plumber = require("gulp-plumber");  //容错组件（发生错误不跳出任务，并报出错误内容）
 var gulpif = require("gulp-if");        //任务 帮助调用组件
+var workbox = require("workbox-build");
 // babel
 var uglify = require('gulp-uglify')
 var babel = require('gulp-babel')
+
+//pwa
+gulp.task('generate-service-worker', () => {
+  return workbox.injectManifest({
+    swSrc: './sw-template.js',
+    swDest: './public/sw.js',
+    globDirectory: './public',
+    globPatterns: [
+        "**/*.{html,css,js,json,woff2}"
+    ],
+    modifyURLPrefix: {
+        "": "./"
+    }
+  });
+});
 
 // minify js - babel
 gulp.task('compress', () =>
@@ -65,8 +81,10 @@ gulp.task('minify-images', async () => {
 })
 
 // 執行 gulp 命令時執行的任務
-gulp.task('default', gulp.parallel(
-  'compress', 'minify-css', 'minify-html', 'minify-images'
-))
+gulp.task("default", gulp.series("generate-service-worker", gulp.parallel(
+  'compress','minify-html', 'minify-css', 'minify-images'
+)));
+
+
 
 
