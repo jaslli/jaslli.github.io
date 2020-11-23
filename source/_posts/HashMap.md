@@ -13,9 +13,10 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
 
 <div class='tip'>
     <p>
-        因为我英语不是特别好，所以看源码时候的文档注释有些是机翻的，所以有些文档注释会看不懂，只能理解一下大概意思了。
+        因为我英语不是特别好，所以有些源码的文档注释是机翻的，所以有些文档注释读起来怪怪的，只能理解一下大概意思。
     </p>
 </div>
+
 
 # JDK7
 
@@ -334,7 +335,11 @@ put方法很有讲究，现在我们就来一步步解析。
     }
 ```
 
-> highestOneBit是怎样算出最小的二次幂的，就去看看我另一篇文章好了。
+<div class='tip'>
+    <p>
+        highestOneBit是怎样算出最小的二次幂的，就去看看我另一篇文章好了。
+    </p>
+</div>
 
 寻找到最小的二次幂之后，重新计算阈值，然后用最小的2次幂来创建一个新的数组，最后用`initHashSeedAsNeeded`来初始化哈希掩码值。
 
@@ -444,7 +449,14 @@ put方法很有讲究，现在我们就来一步步解析。
     return null;
 ```
 
-至此`put`的流程就结束了，到这里其实还是有问题。用`indexFor`这个方法来求数组的位置，刚刚也分析了这个方法，就是异或求余，那么就会有以下的问题，hash差一定的倍数，求余出来的位置就会一样，这个就是经常提到的`哈希冲突`了，为了解决哈希冲突这个问题，就引进了链表，这就是为什么哈希表底层是用数组和链表构成的了。现在来看个例子，看看链表是怎么解决哈希冲突的。
+至此`put`的流程就结束了，到这里其实还是有问题。用`indexFor`这个方法来求数组的位置，刚刚也分析了这个方法，就是异或求余，那么就会有以下的问题，hash差一定的倍数，求余出来的位置就会一样，这个就是经常提到的`哈希冲突`了，为了解决哈希冲突这个问题，就引进了链表，这就是为什么哈希表底层是用数组和链表构成的了。下面讲讲大概是怎么用到链表的。
+
+<div class='tip'>
+    <p>
+        图中只是为了演示大概解决的过程，实现可以参考下面的createEntry方法和扩容中的transfer方法。由于哈希的计算会使数据尽量平均，而且扩容的时候又会重新计算下标，在数组长度较小的时候哈希冲突的发生的概率是很小的。
+    </p>
+</div>
+
 
 ![](https://img.yww52.com/2020/11/2020-11-20/img2.png)
 
@@ -458,6 +470,7 @@ put方法很有讲究，现在我们就来一步步解析。
 
 ![](https://img.yww52.com/2020/11/2020-11-20/img4.png)
 
+
 ### addEntry
 
 在上面put的第三步不难看到，在一个桶里只要有key相同，就覆盖，没有就使用`addEntry`这个方法加入到桶里。不难看出这个方法发生的情况，数组位置没有元素和发生哈希冲突时就会用到这个方法，现在来看看这个方法。
@@ -468,17 +481,118 @@ put方法很有讲究，现在我们就来一步步解析。
      * 如果有必要，该方法也会负责调整表的大小
      */
     void addEntry(int hash, K key, V value, int bucketIndex) {
+        //	如果当前数组长度大于阈值，并且该桶不是空的就执行下面语句
         if ((size >= threshold) && (null != table[bucketIndex])) {
+            //	扩容到原来长度的两倍
             resize(2 * table.length);
+            //	key等于空，hash赋值为0，不然用hash方法取哈希
             hash = (null != key) ? hash(key) : 0;
+            //	因为扩容了，所以需要重新计算存储位置
             bucketIndex = indexFor(hash, table.length);
         }
-
+		//	创建Entry加入到桶里
         createEntry(hash, key, value, bucketIndex);
+    }
+
+    /**
+     * 与addEntry类似，不同之处在于，在创建条目作为Map构造或“伪构造”（克隆，反序列化）的一部分时使用此版本。
+     * 此版本无需担心调整表的大小。
+     * 子类重写此方法，以更改HashMap（Map），克隆和readObject的行为。
+     */
+    void createEntry(int hash, K key, V value, int bucketIndex) {
+        Entry<K,V> e = table[bucketIndex];
+        //	这条语句就说明了哈希表链表的插入是头插的
+        table[bucketIndex] = new Entry<>(hash, key, value, e);
+        size++;
     }
 ```
 
+## 扩容
 
+刚刚看到`addEntry`中用`resize`方法来扩容，现在就来看看这个方法是怎么扩容的。先看看这个方法的源码。
+
+```Java
+    /**
+     * 将此映射的内容重新映射到容量更大的新数组中。 
+     * 当此映射中的键数达到其阈值时，将自动调用此方法。 
+     * 如果当前容量为MAXIMUM_CAPACITY，则此方法不会调整地图的大小，而是将阈值设置为Integer.MAX_VALUE。 
+     * 这具有防止将来通话的效果。
+     *
+     * @param 新容量必须是2的幂，而且是大于当前容量。
+     *        除非当前容量是MAXIMUM_CAPACITY，这种情况就无关紧要。
+     */
+    void resize(int newCapacity) {
+        //	获取旧的数组和size的大小，判断是不是大于MAXIMUM_CAPACITY。
+        Entry[] oldTable = table;
+        int oldCapacity = oldTable.length;
+        if (oldCapacity == MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            return;
+        }
+		//	创建新的数组
+        Entry[] newTable = new Entry[newCapacity];
+        //	数据迁移，将原来数组的键值对放入新数组
+        transfer(newTable, initHashSeedAsNeeded(newCapacity));
+        table = newTable;
+        //	重新设置阈值，等于新长度*负载因子或者MAXIMUM_CAPACITY + 1
+        threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
+    }
+```
+
+`resize`方法是挺好理解的了，只有这个迁移函数有点讲究。
+
+```Java
+    /**
+     * 将所有桶从当前表转移到newTable
+     */
+    void transfer(Entry[] newTable, boolean rehash) {
+        int newCapacity = newTable.length;
+        //	遍历数组
+        for (Entry<K,V> e : table) {
+            //	遍历桶
+            while(null != e) {
+                //	保存e的节点，因为之后链表会断，然后重新计算e的hash和下标
+                Entry<K,V> next = e.next;
+                if (rehash) {
+                    e.hash = null == e.key ? 0 : hash(e.key);
+                }
+                int i = indexFor(e.hash, newCapacity);
+                //	后面这三句可以参考以下图示。
+                //	这条语句是挺奇怪的，之后也会因为导致问题出现，之后在说
+                e.next = newTable[i];
+                //	节点放到桶里
+                newTable[i] = e;
+                //	计算它的下一个节点
+                e = next;
+            }
+        }
+    }
+```
+
+<div class='tip'>
+    <p>
+        下面例子简化了长度，和一些细节，因为这样转移是很小几率的，只是为了展示转移方法的大概实现。
+    </p>
+</div>
+
+
+![](https://img.yww52.com/2020/11/2020-11-20/img5.png)
+
+![](https://img.yww52.com/2020/11/2020-11-20/img6.png)
+
+![](https://img.yww52.com/2020/11/2020-11-20/img7.png)
+
+![](https://img.yww52.com/2020/11/2020-11-20/img8.png)
+
+![](https://img.yww52.com/2020/11/2020-11-20/img9.png)
+
+![](https://img.yww52.com/2020/11/2020-11-20/img10.png)
+
+<div class='tip'>
+    <p>
+        transfer方法和之前的createEntry方法，表明了1.7的哈希表为什么是头插的。因为头插，哈希表还会出现一些问题，之后还会提到。
+    </p>
+</div>
 
 ## get
 
