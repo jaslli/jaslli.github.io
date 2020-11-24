@@ -2,8 +2,12 @@
 title: HashMap
 date: 2020-11-20
 categories:
-  - Java
+	- Java
 description: HashMap是经常用到的一个集合，很有必要进行深入了解。
+keywords: 
+	- HashMap源码分析
+	- hashmap
+	- 哈希表源码
 cover: https://img.yww52.com/2020/10/2020-10-23top_img.jpg
 ---
 
@@ -84,14 +88,14 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
      */
     static final int ALTERNATIVE_HASHING_THRESHOLD_DEFAULT = Integer.MAX_VALUE;
 
-  /**
+  	/**
      * 与此实例相关联的随机化值，该值应用于键的哈希码，以使哈希冲突更难找到。 如果为0，则禁用备用哈希。
      */
     transient int hashSeed = 0;
 
     private transient Set<Map.Entry<K,V>> entrySet = null;
 
-    // 判断版本
+    // 序列化默认版本号
     private static final long serialVersionUID = 362498820763181265L;
 ```
 
@@ -131,7 +135,7 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
     }
 
     /**
-     * 创建一个大于Map键值对数量的HashMap，
+     * 创建一个大于Map键值对数量的HashMap，然后将键值对加入到HashMap
      * 使用默认的负载因子0.75，和足以包含Map键值对数量的容量
      */
     public HashMap(Map<? extends K, ? extends V> m) {
@@ -593,14 +597,225 @@ put方法很有讲究，现在我们就来一步步解析。
         transfer方法和之前的createEntry方法，表明了1.7的哈希表为什么是头插的。因为头插，哈希表还会出现一些问题，之后还会提到。
     </p>
 </div>
-
 ## get
+
+get方法就没有怎么麻烦了，简单很多。
+
+```Java
+    /**
+     * 返回指定键所映射到的null如果此映射不包含键的映射关系，则返回null 。
+	 * 更正式地讲，如果此映射包含从键k到值v的映射，使得(key==null ? k==null : key.equals(k)) ，则此方法返回v  
+	 * 否则返回null 。（最多可以有一个这样的映射。）
+	 * 返回值null不一定表示该映射不包含该键的映射。 映射也可能将键显式映射为null 。 
+	 * containsKey操作可用于区分这两种情况
+     */
+    public V get(Object key) {
+        if (key == null)
+            return getForNullKey();
+        Entry<K,V> entry = getEntry(key);
+
+        return null == entry ? null : entry.getValue();
+    }
+```
+
+### 第一步
+
+```Java
+        if (key == null)
+            return getForNullKey();
+```
+
+首先就是判断key值是不是为null，如果是null就调用`getForNullKey`。
+
+```Java
+    /**
+     * get以查找空键。 空键映射到索引0。
+     * 为了在两个最常用的操作（获取和放置）中提高性能，此空情况被拆分为单独的方法，但在其他条件中并入了条件。
+     */
+    private V getForNullKey() {
+        //	要是数组没有值就返回null
+        if (size == 0) {
+            return null;
+        }
+        //	遍历table[0]的桶，寻找key==null的value值，并返回
+        for (Entry<K,V> e = table[0]; e != null; e = e.next) {
+            if (e.key == null)
+                return e.value;
+        }
+        //	桶里没有就返回null
+        return null;
+    }
+```
+
+### 第二步
+
+```Java
+        Entry<K,V> entry = getEntry(key);
+		//	entry为null，就返回null，不然就返回value
+        return null == entry ? null : entry.getValue();
+```
+
+这两句也挺好理解的，用`getEntry`方法来获取键值对，然后返回value。
+
+```Java
+    /**
+     * 返回与HashMap中的指定键关联的条目。 如果HashMap不包含该键的映射，则返回null
+     */
+    final Entry<K,V> getEntry(Object key) {
+        //	数组为空返回null
+        if (size == 0) {
+            return null;
+        }
+		//	计算key的哈希值
+        int hash = (key == null) ? 0 : hash(key);
+        //	先通过哈希计算下标，然后遍历下标所在的桶，找到就返回entry，没找到就返回null
+        for (Entry<K,V> e = table[indexFor(hash, table.length)];
+             e != null;
+             e = e.next) {
+            Object k;
+            if (e.hash == hash &&
+                ((k = e.key) == key || (key != null && key.equals(k))))
+                return e;
+        }
+        return null;
+    }
+```
 
 # JDK8
 
-## 变量
+<div class='tip success'>
+    <p>
+        JDK8优化了不少，但与JDK7在很多部分是一样的，所以我着重去分析不一样的地方。
+    </p>
+</div>
+
+## 参数和变量
+
+```Java
+	//	相同的参数或者变量
+	private static final long serialVersionUID = 362498820763181265L;
+	static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; 
+	static final int MAXIMUM_CAPACITY = 1 << 30;
+	static final float DEFAULT_LOAD_FACTOR = 0.75f;
+	transient int size;
+	transient int modCount;
+    final float loadFactor;
+    int threshold;
+
+	//	JDK7独有的
+	static final Entry<?,?>[] EMPTY_TABLE = {};
+	transient Entry<K,V>[] table = (Entry<K,V>[]) EMPTY_TABLE;
+	static final int ALTERNATIVE_HASHING_THRESHOLD_DEFAULT = Integer.MAX_VALUE;
+	transient int hashSeed = 0;
+	private transient Set<Map.Entry<K,V>> entrySet = null;
+
+	//	JDK8独有的
+	transient Node<K,V>[] table;
+	transient Set<Map.Entry<K,V>> entrySet;
+	static final int TREEIFY_THRESHOLD = 8;
+	static final int UNTREEIFY_THRESHOLD = 6;
+	static final int MIN_TREEIFY_CAPACITY = 64;
+```
+
+```Java
+    /**
+     * 该表在首次使用时初始化，并根据需要调整大小。 
+     * 分配时，长度始终是2的幂。（在某些操作中，我们还允许长度为零，以允许使用当前不需要的引导机制。）
+     */
+    transient Node<K,V>[] table;
+    /**
+     * 保存缓存的entrySet（）。 注意，AbstractMap字段用于keySet（）和values（）
+     */
+    transient Set<Map.Entry<K,V>> entrySet;
+
+	//	链表的树化阈值，即链表长度大于8就会有可能转换成红黑树
+    static final int TREEIFY_THRESHOLD = 8;
+	//	链表的还原阈值，即红黑树的节点小于6就换转换成链表
+	static final int UNTREEIFY_THRESHOLD = 6;
+	//	最小树形化阈值，数组长度大于64才会转换成红黑树
+	static final int MIN_TREEIFY_CAPACITY = 64;
+```
 
 ## 构造器
+
+```Java
+    public HashMap() {
+        this.loadFactor = DEFAULT_LOAD_FACTOR; // 其他字段默认
+    }
+
+    public HashMap(int initialCapacity) {
+        this(initialCapacity, DEFAULT_LOAD_FACTOR);
+    }
+
+    public HashMap(int initialCapacity, float loadFactor) {
+        if (initialCapacity < 0)
+            throw new IllegalArgumentException("Illegal initial capacity: " +
+                                               initialCapacity);
+        if (initialCapacity > MAXIMUM_CAPACITY)
+            initialCapacity = MAXIMUM_CAPACITY;
+        if (loadFactor <= 0 || Float.isNaN(loadFactor))
+            throw new IllegalArgumentException("Illegal load factor: " +
+                                               loadFactor);
+        this.loadFactor = loadFactor;
+        //	上面与JDK7的一样，不一样的就是这句和省略了init初始化方法
+        this.threshold = tableSizeFor(initialCapacity);
+    }
+
+    /**
+     * 与JDK7的实现有些不一样，但作用是一样的
+     */
+    public HashMap(Map<? extends K, ? extends V> m) {
+        this.loadFactor = DEFAULT_LOAD_FACTOR;
+        putMapEntries(m, false);
+    }
+```
+
+可以看出只有两个比较特殊的地方，那就是`tableSizeFor`和`putMapEntries`这两个方法了。
+
+```Java
+    /**
+     * 返回大于指定值的最小二次幂，作用类似highestOneBit方法
+     * 用来代替JDK7中的roundUpToPowerOf2方法
+     */
+    static final int tableSizeFor(int cap) {
+        int n = cap - 1;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        //	可认为将JDK7中roundUpToPowerOf2和highestOneBit方法合并了
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+    }
+
+    /**
+     * 实现Map.putAll和Map构造函数。
+     * 将map中的元素加入到HashMap中去。
+     */
+    final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
+        int s = m.size();
+        if (s > 0) {
+            if (table == null) { // pre-size
+                float ft = ((float)s / loadFactor) + 1.0F;
+                int t = ((ft < (float)MAXIMUM_CAPACITY) ?
+                         (int)ft : MAXIMUM_CAPACITY);
+                if (t > threshold)
+                    threshold = tableSizeFor(t);
+            }
+            else if (s > threshold)
+                resize();
+            for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
+                K key = e.getKey();
+                V value = e.getValue();
+                putVal(hash(key), key, value, false, evict);
+            }
+        }
+    }
+```
+
+## 数据结构
+
+JDK8的底层进行了一些优化，主体依旧是数组，链表为辅，但为了解决有时候链表过长，多引入了红黑树，链表在一定情况会转换为红黑树。
 
 ## get
 
