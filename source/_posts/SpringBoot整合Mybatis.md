@@ -5,7 +5,7 @@ categories:
   - SpringBoot
 description: 用SpringBoot整合Mybatis，并简单的使用
 keywords: SpringBoot使用Mybatis,Mybatis
-cover: https://img.yww52.com/2020/10/2020-10-15top_img.jpg
+cover:https://img.yww52.com/2020/11/2020-11-25top_img3.jpg
 ---
 
 # 简介

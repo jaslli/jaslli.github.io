@@ -5,7 +5,7 @@ categories:
   - SpringBoot
 description: SpringBoot整合使用Druid.
 keywords: SpringBoot整合使用Druid,Druid
-cover: https://img.yww52.com/2020/10/2020-10-15top_img.jpg
+cover: https://img.yww52.com/2020/11/2020-11-25top_img2.jpg
 ---
 
 # 简介
@@ -38,7 +38,7 @@ Druid是的一个阿里巴巴的开源项目，它是一个数据库连接池的
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-		</dependency>
+        </dependency>
         <!--单元测试-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
