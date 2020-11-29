@@ -3,7 +3,7 @@ title: HCS
 categories:
   - 无类可分
 date: 2019-11-25
-description: HTML+CSS+JavaScript，前端三件套。
+description: HTML+CSS+JavaScript，前端三件套。以弃。
 cover: https://img.yww52.com/2019/11/2019-11-25top_img.jpg
 ---
 
@@ -445,7 +445,7 @@ cover: https://img.yww52.com/2019/11/2019-11-25top_img.jpg
 #### 注释
 
 - 单行	//注释内容
-- 多行    /*注释内容*/
+- 多行    /\*注释内容\*/
 
 #### 数据类型
 
