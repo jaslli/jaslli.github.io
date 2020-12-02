@@ -1,11 +1,14 @@
 var gulp = require('gulp')
-var debug = require("gulp-debug"); // 修改Error in plugin "gulp-htmlmin"异常
+// debug插件
+var debug = require("gulp-debug");
 var cleanCSS = require('gulp-clean-css')
 var htmlmin = require('gulp-htmlmin')
 var htmlclean = require('gulp-htmlclean')
 var imagemin = require('gulp-imagemin')
-var plumber = require("gulp-plumber");  //容错组件（发生错误不跳出任务，并报出错误内容）
-var gulpif = require("gulp-if");        //任务 帮助调用组件
+//发生错误不跳出任务，并报出错误内容
+var plumber = require("gulp-plumber");
+//任务 帮助调用组件
+var gulpif = require("gulp-if");
 var workbox = require("workbox-build");
 // babel
 var uglify = require('gulp-uglify')
