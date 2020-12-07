@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GC垃圾回收机制 | Yw</title><meta name="keywords" content="GC,垃圾回收,垃圾回收算法"><meta name="author" content="Yw"><meta name="copyright" content="Yw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Java程序在运行中难免会产生一些垃圾，所以Java就使用了GC垃圾回收机制来自动的进行垃圾回收。"><meta property="og:type" content="article"><meta property="og:title" content="GC垃圾回收机制"><meta property="og:url" content="https://yww52.com/2020/12/06/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/index.html"><meta property="og:site_name" content="Yw"><meta property="og:description" content="Java程序在运行中难免会产生一些垃圾，所以Java就使用了GC垃圾回收机制来自动的进行垃圾回收。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img.yww52.com/2020/10/2020-10-27/top_img.jpg"><meta property="article:published_time" content="2020-12-06T16:00:00.000Z"><meta property="article:modified_time" content="2020-12-07T14:18:53.051Z"><meta property="article:author" content="Yw"><meta property="article:tag" content="yw,Yw"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.yww52.com/2020/10/2020-10-27/top_img.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/icon.ico"><link rel="canonical" href="https://yww52.com/2020/12/06/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE={isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2020-12-07 22:18:53"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://img.yww52.com/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">45</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont iconfaxian-copy"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont iconbumenguidangtongji"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont iconfenlei"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont iconlianjie"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont iconaixin"></i> <span>关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://img.yww52.com/2020/10/2020-10-27/top_img.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yw</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont iconfaxian-copy"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont iconbumenguidangtongji"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont iconfenlei"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont iconlianjie"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont iconaixin"></i> <span>关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">GC垃圾回收机制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-06T16:00:00.000Z" title="发表于 2020-12-07 00:00:00">2020-12-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-12-07T14:18:53.051Z" title="更新于 2020-12-07 22:18:53">2020-12-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/JVM/">JVM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="什么是垃圾"><a href="#什么是垃圾" class="headerlink" title="什么是垃圾"></a>什么是垃圾</h1><p>在进行垃圾回收之前，就要先判断出什么是垃圾。</p><p>垃圾其实指的是在这次运行程序中没有被任何指针指向的对象，也就是没有被引用机会的对象，因为没有指向也就无法引用，所以这些对象就是要清理的垃圾。</p><p>如果垃圾不及时的清理，那么在这次运行程序的过程中就会一直占用部分内存，严重的还会导致<code>内存溢出</code>。</p><div class="tip"><p>内存溢出就是指程序运行过程中申请的内存大于系统所能够提供的内存，这就会导致无法申请足够的内存，于是就发生了内存溢出。</p></div><h1 id="哪里需要垃圾回收"><a href="#哪里需要垃圾回收" class="headerlink" title="哪里需要垃圾回收"></a>哪里需要垃圾回收</h1><p>垃圾回收就需要关注哪里产生垃圾，其实垃圾的产生主要在运行时数据区中的<code>方法区</code>和<code>堆</code>。因为栈是用完就会推出的，计数器也不需要回收，所以GC的作用区域就是方法区和堆了。虽然说这两块区域会有GC行为，但正常来说主要的还是堆空间的GC，方法区很少会有GC行为。</p><h1 id="垃圾回收的算法"><a href="#垃圾回收的算法" class="headerlink" title="垃圾回收的算法"></a>垃圾回收的算法</h1><h2 id="垃圾标记阶段"><a href="#垃圾标记阶段" class="headerlink" title="垃圾标记阶段"></a>垃圾标记阶段</h2><p>垃圾标记阶段顾名思义就是标记垃圾的阶段。标记垃圾其实就是判断哪些对象是死的（死的意思就是没有被引用机会的对象），将这些对象打上一个标记，方便之后的清理。判断对象存活的方法一般有两个，引用计数算法和可达性分析算法。</p><h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>计数算法其实就是为每个对象保存以个整型的引用计数器属性，每当该对象被引用了，改对象的引用计数器就会加1，引用失效了计数器就会减1，只要对象的计数器为0，即表示该对象已经不会被引用了，就会为它做上一个标记。</p><div class="tip waring"><p>引用计数算法是很简单高效的算法，但是对象一多，每个对象的计数器也是一个很大的开销。<br>而且引用计数算法还有一个很严重的问题,无法处理循环引用的情况，这是很致命的，所以Java的垃圾回收器没有使用这个算法。</p></div><h4 id="循环引用问题"><a href="#循环引用问题" class="headerlink" title="循环引用问题"></a>循环引用问题</h4><p><img src="https://img.yww52.com/loading.gif" data-lazy-src="https://img.yww52.com/2020/12/2020-12-7/img1.png"></p><p><img src="https://img.yww52.com/loading.gif" data-lazy-src="https://img.yww52.com/2020/12/2020-12-7/img2.png"></p><p>从上图就可以看出对象的引用关系只要形成环形，很大的可能就会出现循环引用的问题，这就会出现<code>内存泄漏</code>的问题。</p><h4 id="分析Java是否使用引用计数算法"><a href="#分析Java是否使用引用计数算法" class="headerlink" title="分析Java是否使用引用计数算法"></a>分析Java是否使用引用计数算法</h4><ol><li><p>配置JVM的虚拟机参数，打印JVM的情况。<br>我是使用IDEA，所以按照IDEA的配置来讲。点击RUN-&gt;Edit Configurations-&gt;Applacion-&gt;VM options。配置以下参数</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGCDetails</span><br></pre></td></tr></table></figure></li><li><p>模拟循环引用的情况。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yw;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> ReferenceCount</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Descriprtion</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> yww</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCount</span> </span>&#123;</span><br><span class="line">    <span class="comment">//	设置引用属性</span></span><br><span class="line">    Object reference = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ReferenceCount A = <span class="keyword">new</span> ReferenceCount();</span><br><span class="line">        ReferenceCount B = <span class="keyword">new</span> ReferenceCount();</span><br><span class="line">	<span class="comment">//	形成引用环</span></span><br><span class="line">        A.reference = B;</span><br><span class="line">        B.reference = A;</span><br><span class="line">	<span class="comment">//	断开外部引用，A与B形成循环引用</span></span><br><span class="line">        A = <span class="keyword">null</span>;</span><br><span class="line">        B = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有显示调用GC的内存情况</span></span><br><span class="line">Heap</span><br><span class="line"> PSYoungGen      total <span class="number">38400</span>K, used <span class="number">3330</span>K [<span class="number">0x00000000d5f80000</span>, <span class="number">0x00000000d8a00000</span>, <span class="number">0x0000000100000000</span>)</span><br><span class="line">  eden space <span class="number">33280</span>K, <span class="number">10</span>% used [<span class="number">0x00000000d5f80000</span>,<span class="number">0x00000000d62c09a8</span>,<span class="number">0x00000000d8000000</span>)</span><br><span class="line">  from space <span class="number">5120</span>K, <span class="number">0</span>% used [<span class="number">0x00000000d8500000</span>,<span class="number">0x00000000d8500000</span>,<span class="number">0x00000000d8a00000</span>)</span><br><span class="line">  to   space <span class="number">5120</span>K, <span class="number">0</span>% used [<span class="number">0x00000000d8000000</span>,<span class="number">0x00000000d8000000</span>,<span class="number">0x00000000d8500000</span>)</span><br><span class="line"> ParOldGen       total <span class="number">87552</span>K, used <span class="number">0</span>K [<span class="number">0x0000000081e00000</span>, <span class="number">0x0000000087380000</span>, <span class="number">0x00000000d5f80000</span>)</span><br><span class="line">  object space <span class="number">87552</span>K, <span class="number">0</span>% used [<span class="number">0x0000000081e00000</span>,<span class="number">0x0000000081e00000</span>,<span class="number">0x0000000087380000</span>)</span><br><span class="line"> Metaspace       used <span class="number">3141</span>K, capacity <span class="number">4496</span>K, committed <span class="number">4864</span>K, reserved <span class="number">1056768</span>K</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">space</span>    <span class="title">used</span> 342<span class="title">K</span>, <span class="title">capacity</span> 388<span class="title">K</span>, <span class="title">committed</span> 512<span class="title">K</span>, <span class="title">reserved</span> 1048576<span class="title">K</span></span></span><br></pre></td></tr></table></figure></li><li><p>显示调用的GC之后</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yw;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@ClassName</span> ReferenceCount</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Descriprtion</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> yww</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCount</span> </span>&#123;</span><br><span class="line">    <span class="comment">//	设置引用属性</span></span><br><span class="line">    Object reference = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ReferenceCount A = <span class="keyword">new</span> ReferenceCount();</span><br><span class="line">        ReferenceCount B = <span class="keyword">new</span> ReferenceCount();</span><br><span class="line">	<span class="comment">//	形成引用环</span></span><br><span class="line">        A.reference = B;</span><br><span class="line">        B.reference = A;</span><br><span class="line">	<span class="comment">//	断开外部引用，A与B形成循环引用</span></span><br><span class="line">        A = <span class="keyword">null</span>;</span><br><span class="line">        B = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">//	显示调用GC</span></span><br><span class="line">        System.gc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//	使用了GC之后的内存情况</span></span><br><span class="line">[GC (System.gc()) [PSYoungGen: <span class="number">2664</span>K-&gt;<span class="number">776</span>K(<span class="number">38400</span>K)] <span class="number">2664</span>K-&gt;<span class="number">784</span>K(<span class="number">125952</span>K), <span class="number">0.0012757</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] </span><br><span class="line">[<span class="function">Full <span class="title">GC</span> <span class="params">(System.gc()</span>) [PSYoungGen: 776K-&gt;0<span class="title">K</span><span class="params">(<span class="number">38400</span>K)</span>] [ParOldGen: 8K-&gt;617<span class="title">K</span><span class="params">(<span class="number">87552</span>K)</span>] 784K-&gt;617<span class="title">K</span><span class="params">(<span class="number">125952</span>K)</span>, [Metaspace: 3136K-&gt;3136<span class="title">K</span><span class="params">(<span class="number">1056768</span>K)</span>], 0.0039173 secs] [Times: user</span>=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] </span><br><span class="line">Heap</span><br><span class="line"> PSYoungGen      total <span class="number">38400</span>K, used <span class="number">998</span>K [<span class="number">0x00000000d5f80000</span>, <span class="number">0x00000000d8a00000</span>, <span class="number">0x0000000100000000</span>)</span><br><span class="line">  eden space <span class="number">33280</span>K, <span class="number">3</span>% used [<span class="number">0x00000000d5f80000</span>,<span class="number">0x00000000d6079b20</span>,<span class="number">0x00000000d8000000</span>)</span><br><span class="line">  from space <span class="number">5120</span>K, <span class="number">0</span>% used [<span class="number">0x00000000d8000000</span>,<span class="number">0x00000000d8000000</span>,<span class="number">0x00000000d8500000</span>)</span><br><span class="line">  to   space <span class="number">5120</span>K, <span class="number">0</span>% used [<span class="number">0x00000000d8500000</span>,<span class="number">0x00000000d8500000</span>,<span class="number">0x00000000d8a00000</span>)</span><br><span class="line"> ParOldGen       total <span class="number">87552</span>K, used <span class="number">617</span>K [<span class="number">0x0000000081e00000</span>, <span class="number">0x0000000087380000</span>, <span class="number">0x00000000d5f80000</span>)</span><br><span class="line">  object space <span class="number">87552</span>K, <span class="number">0</span>% used [<span class="number">0x0000000081e00000</span>,<span class="number">0x0000000081e9a458</span>,<span class="number">0x0000000087380000</span>)</span><br><span class="line"> Metaspace       used <span class="number">3148</span>K, capacity <span class="number">4496</span>K, committed <span class="number">4864</span>K, reserved <span class="number">1056768</span>K</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">space</span>    <span class="title">used</span> 343<span class="title">K</span>, <span class="title">capacity</span> 388<span class="title">K</span>, <span class="title">committed</span> 512<span class="title">K</span>, <span class="title">reserved</span> 1048576<span class="title">K</span></span></span><br></pre></td></tr></table></figure></li><li><p>分析<br>可以清楚的看到调用了GC之后，内存的占用率变低了，如果Java使用的是引用计数算法，那么内存是不应该降低的，所以可以知道的是Java不适用引用计算这种算法。</p></li></ol><h3 id="可行性分析算法"><a href="#可行性分析算法" class="headerlink" title="可行性分析算法"></a>可行性分析算法</h3></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.yww52.com/2020/10/2020-10-27/top_img.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/12/03/%E5%88%9D%E8%AF%86JVM/"><img class="next-cover" data-lazy-src="https://img.yww52.com/2020/12/2020-12-4/top_img.jpg" onerror='onerror=null,src="/img/404.jpg"'><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">初识JVM</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://img.yww52.com/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"><div class="author-info__name">Yw</div><div class="author-info__description">永远相信美好的事情即将发生</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">45</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jaslli"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE"><span class="toc-number">1.</span> <span class="toc-text">什么是垃圾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%93%AA%E9%87%8C%E9%9C%80%E8%A6%81%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-number">2.</span> <span class="toc-text">哪里需要垃圾回收</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">垃圾回收的算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5"><span class="toc-number">3.1.</span> <span class="toc-text">垃圾标记阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.1.</span> <span class="toc-text">引用计数算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">循环引用问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90Java%E6%98%AF%E5%90%A6%E4%BD%BF%E7%94%A8%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">分析Java是否使用引用计数算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.2.</span> <span class="toc-text">可行性分析算法</span></a></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Yw</div><div id="running-time"><script>setInterval(() => {
+    //2019年10月31号起
+    let create_time = Math.round(new Date(18200*24*60*60*1000).getTime() / 1000);
+    let timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+    let second = timestamp - create_time;
+    let time = new Array(0, 0, 0, 0, 0);
+    if (second >= 365 * 24 * 3600) {
+        time[0] = parseInt(second / (365 * 24 * 3600));
+        second %= 365 * 24 * 3600
+    }
+    if (second >= 24 * 3600) {
+        time[1] = parseInt(second / (24 * 3600));
+        second %= 24 * 3600
+    }
+    if (second >= 3600) {
+        time[2] = parseInt(second / 3600);
+        second %= 3600
+    }
+    if (second >= 60) {
+        time[3] = parseInt(second / 60);
+        second %= 60
+    }
+    if (second > 0) {
+        time[4] = second
+    }
+    currentTimeHtml = '小破站已经安全运行 ' + time[0] + ' 年 ' + time[1] + ' 天 ' + time[2] + ' 时 ' + time[3] + ' 分 ' + time[4] + ' 秒';
+    var elementById = document.getElementById('running-time');
+    if (elementById) {
+        elementById.innerHTML = currentTimeHtml
+    }
+}, 1000);</script></div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://img.yww52.com/cdnlogo.png" align="absmiddle" height="30px" width="60px"></a>提供CDN加速</div><div class="icp"><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.beian.miit.gov.cn"><img class="icp-icon" src="/img/icp.png" alt="ICP"><span>桂ICP备20005765号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      master:'6a8eb636174b1425b0f0f36711f8d133',
+      friends:'d062f6c881b7b502fb60f262abbabf7c,429d94ae943510552277cd3bfdf193e2,fcb88dccdfa8b4bafda50531ed00d125,7c962fe531532726d380d156d5f5b22c,617f018ac45b08f999632bf84ce9dd03',
+      appId: 'D1fvRHFdzJkrS7IfbaxET2ii-gzGzoHsz',
+      appKey: '5RweNCelj4e5Dm949dwf56RR',
+      placeholder: '在名称处输入QQ号自动获取QQ的信息哦',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN/',
+      emojiMaps: {
+      "bilibilitv2": "bilibilitv/[tv_doge].png",
+      "bilibilitv3": "bilibilitv/[tv_亲亲].png",
+      "bilibilitv4": "bilibilitv/[tv_偷笑].png",
+      "bilibilitv5": "bilibilitv/[tv_再见].png",
+      "bilibilitv6": "bilibilitv/[tv_冷漠].png",
+      "bilibilitv7": "bilibilitv/[tv_发怒].png",
+      "bilibilitv8": "bilibilitv/[tv_发财].png",
+      "bilibilitv9": "bilibilitv/[tv_可爱].png",
+      "bilibilitv10": "bilibilitv/[tv_吐血].png",
+      "bilibilitv11": "bilibilitv/[tv_呆].png",
+      "bilibilitv12": "bilibilitv/[tv_呕吐].png",
+      "bilibilitv13": "bilibilitv/[tv_困].png",
+      "bilibilitv14": "bilibilitv/[tv_坏笑].png",
+      "bilibilitv15": "bilibilitv/[tv_大佬].png",
+      "bilibilitv16": "bilibilitv/[tv_大哭].png",
+      "bilibilitv17": "bilibilitv/[tv_委屈].png",
+      "bilibilitv18": "bilibilitv/[tv_害羞].png",
+      "bilibilitv19": "bilibilitv/[tv_尴尬].png",
+      "bilibilitv20": "bilibilitv/[tv_微笑].png",
+      "bilibilitv21": "bilibilitv/[tv_思考].png",
+      "bilibilitv22": "bilibilitv/[tv_惊吓].png",
+      "bilibilitv23": "bilibilitv/[tv_打脸].png",
+      "bilibilitv24": "bilibilitv/[tv_抓狂].png",
+      "bilibilitv25": "bilibilitv/[tv_抠鼻].png",
+      "bilibilitv26": "bilibilitv/[tv_斜眼笑].png",
+      "bilibilitv27": "bilibilitv/[tv_无奈].png",
+      "bilibilitv28": "bilibilitv/[tv_晕].png",
+      "bilibilitv29": "bilibilitv/[tv_流汗].png",
+      "bilibilitv30": "bilibilitv/[tv_流泪].png",
+      "bilibilitv31": "bilibilitv/[tv_流鼻血].png",
+      "bilibilitv32": "bilibilitv/[tv_点赞].png",
+      "bilibilitv33": "bilibilitv/[tv_生气].png",
+      "bilibilitv34": "bilibilitv/[tv_生病].png",
+      "bilibilitv35": "bilibilitv/[tv_疑问].png",
+      "bilibilitv36": "bilibilitv/[tv_白眼].png",
+      "bilibilitv37": "bilibilitv/[tv_皱眉].png",
+      "bilibilitv38": "bilibilitv/[tv_目瞪口呆].png",
+      "bilibilitv39": "bilibilitv/[tv_睡着].png",
+      "bilibilitv40": "bilibilitv/[tv_笑哭].png",
+      "bilibilitv41": "bilibilitv/[tv_腼腆].png",
+      "bilibilitv42": "bilibilitv/[tv_色].png",
+      "bilibilitv43": "bilibilitv/[tv_调侃].png",
+      "bilibilitv44": "bilibilitv/[tv_调皮].png",
+      "bilibilitv45": "bilibilitv/[tv_鄙视].png",
+      "bilibilitv46": "bilibilitv/[tv_闭嘴].png",
+      "bilibilitv47": "bilibilitv/[tv_难过].png",
+      "bilibilitv48": "bilibilitv/[tv_馋].png",
+      "bilibilitv49": "bilibilitv/[tv_鬼脸].png",
+      "bilibilitv50": "bilibilitv/[tv_黑人问号].png",
+      "bilibilitv51": "bilibilitv/[tv_鼓掌].png",
+      "bilibili22332": "bilibili2233/[2233娘_卖萌].png",
+      "bilibili22333": "bilibili2233/[2233娘_吃惊].png",
+      "bilibili22334": "bilibili2233/[2233娘_吐魂].png",
+      "bilibili22335": "bilibili2233/[2233娘_喝水].png",
+      "bilibili22336": "bilibili2233/[2233娘_困惑].png",
+      "bilibili22337": "bilibili2233/[2233娘_大哭].png",
+      "bilibili22338": "bilibili2233/[2233娘_大笑].png",
+      "bilibili22339": "bilibili2233/[2233娘_委屈].png",
+      "bilibili223310": "bilibili2233/[2233娘_怒].png",
+      "bilibili223311": "bilibili2233/[2233娘_无言].png",
+      "bilibili223312": "bilibili2233/[2233娘_汗].png",
+      "bilibili223313": "bilibili2233/[2233娘_疑问].png",
+      "bilibili223314": "bilibili2233/[2233娘_第一].png",
+      "bilibili223315": "bilibili2233/[2233娘_耶].png",
+      "bilibili223316": "bilibili2233/[2233娘_郁闷].png"},
+      enableQQ: true,
+      path: window.location.pathname,
+      metaPlaceholder: {"nick":"昵称/QQ号(必填)","mail":"邮箱(必填)","link":"最好填上你的博客网址哦"}
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine()
+  else $.getScript('https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/valine.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.css"><script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/main.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css"><script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script><div class="app-refresh" id="app-refresh"><div class="app-refresh-wrap"><label>✨ 网站已经更新最新版本 👉</label> <a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()">點擊刷新</a></div></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!0,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async mobile="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>
