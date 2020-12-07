@@ -1,7 +1,7 @@
 ---
 title: git常用命令
 categories:
-  - 无类可分
+  - 工具
 date: 2019-11-28
 description: Git是目前世界上最先进的分布式版本控制系统，能够很好的帮你管理项目。
 cover: https://img.yww52.com/2019/11/2019-11-28/top_img.jpg

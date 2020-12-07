@@ -2,6 +2,7 @@
 title: 初识JVM
 date: 2020-12-4
 categories:
+  - Java
   - JVM
 description: 初步认识学习JVM。
 cover: https://img.yww52.com/2020/12/2020-12-4/top_img.jpg

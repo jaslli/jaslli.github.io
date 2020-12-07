@@ -2,7 +2,8 @@
 title: Swagger3
 date: 2020-11-3
 categories:
-	- API文档
+    - SpringBoot
+    - API文档
 cover: https://img.yww52.com/2020/11/2020-11-3top_img.jpg
 descrtion: 更加方便的整合swagger。
 ---

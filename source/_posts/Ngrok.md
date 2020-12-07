@@ -2,7 +2,7 @@
 title: Ngrok内网穿透
 date: 2020-7-3
 categories:
-  - 无类可分
+  - 工具
 cover: https://img.yww52.com/2020/7/2020-7-3/top_img.jpg
 description: Ngrok内网穿透就是让外网也能访问内网IP。
 ---

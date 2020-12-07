@@ -27,7 +27,7 @@ comments: false
 <p class=t1> 🌍关于本站<p>
 {% radio green checked,2019年本站正式诞生，是由hexo生成，托管在GitHub上，图片寄存在又拍云和GitHub上%}
 
-{% radio green checked,之前是使用的主题是next，后来改成了[butterfly](https://lli7744.com/2020/06/17/博客主题更换/)%}
+{% radio green checked,之前是使用的主题是next，后来改成了[butterfly](https://yww52.com/2020/06/16/博客主题更换/)%}
 
 {% radio green checked,之前没怎么好好维护(主要是太懒)，之后应该会积极一点%}
 

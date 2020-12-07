@@ -2,6 +2,7 @@
 title: swagger
 date: 2020-10-26
 categories:
+    - SpringBoot
     - API文档
 cover: https://img.yww52.com/2020/10/2020-10-26/top_img.jpg
 description: swagger是一款让你能更好书写API文档的框架。

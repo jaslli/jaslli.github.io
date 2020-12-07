@@ -2,7 +2,7 @@
 title: Linux
 date: 2020-11-11
 categories:
-  - Linux
+  - 工具
 description: 学习尚硅谷的教程时候的学习笔记。
 cover: https://img.yww52.com/2020/11/2020-11-11/top_img.jpg
 ---

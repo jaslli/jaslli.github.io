@@ -2,7 +2,7 @@
 title: IntelliJ IDEA的优化配置
 date: 2020-7-11
 categories:
-  - 无类可分
+  - 工具
 description: 将IDEA配置好可以很大程度的提升你的学习体验。
 cover: https://img.yww52.com/2020/7/2020-7-11/top_img.jpg
 ---

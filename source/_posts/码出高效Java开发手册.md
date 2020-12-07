@@ -1,7 +1,7 @@
 ---
 title: Java开发手册
 categories:
-  - 读书笔记
+  - 无类可分
 date: 2020-10-19
 description: 码出高效Java开发手册对Java开发的人来说是本很值得看的书。
 cover: https://img.yww52.com/2020/10/2020-10-19top_img.jpg

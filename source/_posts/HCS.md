@@ -1,7 +1,7 @@
 ---
 title: HCS
 categories:
-  - 无类可分
+  - 工具
 date: 2019-11-25
 description: HTML+CSS+JavaScript，前端三件套。以弃。
 cover: https://img.yww52.com/2019/11/2019-11-25top_img.jpg

@@ -2,7 +2,8 @@
 title: 第一个Servlet程序
 date: 2020-6-5
 categories:
-- javaweb
+   - Java
+   - javaweb
 cover: https://img.yww52.com/2020/6/2020-6-5/top_img.jpg
 description: 简单使用servlet的小demo
 ---
