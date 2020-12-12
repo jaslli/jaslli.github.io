@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>腾讯精选练习50题 | Yw</title><meta name="keywords" content="yw,Yw"><meta name="author" content="Yw"><meta name="copyright" content="Yw"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="LeetCode上的腾讯精选练习50题的专题的刷题笔记。"><meta property="og:type" content="article"><meta property="og:title" content="腾讯精选练习50题"><meta property="og:url" content="https://yww52.com/2020/12/11/%E8%85%BE%E8%AE%AF%E7%B2%BE%E9%80%89%E7%BB%83%E4%B9%A050%E9%A2%98/index.html"><meta property="og:site_name" content="Yw"><meta property="og:description" content="LeetCode上的腾讯精选练习50题的专题的刷题笔记。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img.yww52.com/2020/12/2020-12-12top_img.jpg"><meta property="article:published_time" content="2020-12-11T16:00:00.000Z"><meta property="article:modified_time" content="2020-12-12T15:48:09.653Z"><meta property="article:author" content="Yw"><meta property="article:tag" content="yw,Yw"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.yww52.com/2020/12/2020-12-12top_img.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/icon.ico"><link rel="canonical" href="https://yww52.com/2020/12/11/%E8%85%BE%E8%AE%AF%E7%B2%BE%E9%80%89%E7%BB%83%E4%B9%A050%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE={isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2020-12-12 23:48:09"}</script><noscript><style>#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://img.yww52.com/avatar.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont iconfaxian-copy"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont iconbumenguidangtongji"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont iconfenlei"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont iconlianjie"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont iconaixin"></i> <span>关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://img.yww52.com/2020/12/2020-12-12top_img.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yw</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont iconfaxian-copy"></i> <span>首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont iconbumenguidangtongji"></i> <span>归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont iconfenlei"></i> <span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont iconlianjie"></i> <span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont iconaixin"></i> <span>关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">腾讯精选练习50题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-11T16:00:00.000Z" title="发表于 2020-12-12 00:00:00">2020-12-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-12-12T15:48:09.653Z" title="更新于 2020-12-12 23:48:09">2020-12-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">952</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="238-除自身以外数组的乘积"><a href="#238-除自身以外数组的乘积" class="headerlink" title="238. 除自身以外数组的乘积"></a>238. 除自身以外数组的乘积</h1><p>这题不难，只是题目要求时间复杂度为O(n)和不能使用除法。这样的话就只能单个的for循环了，所以就可以考虑从左开始乘到当前树（不包含当前数），然后再加个for循环，再乘右边。这种方法速度很快，但是内存消耗太多，暂时还找不到内存消耗小的方法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] productExceptSelf(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums.length;</span><br><span class="line">        <span class="keyword">int</span>[] output = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i &lt; len; i++) &#123;</span><br><span class="line">            output[i] = left;</span><br><span class="line">            left = left * nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            output[i] = output[i] * right;</span><br><span class="line">            right = right * nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> output;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="292-Nim-游戏"><a href="#292-Nim-游戏" class="headerlink" title="292. Nim 游戏"></a>292. Nim 游戏</h1><p>这题有点搞，我大费周章的想了很久，结果看到评论我傻了，这就是一道脑经急转弯。</p><p>这就是巴什博弈，先手的话，只要是n%(m+1)==0的时候就是一定会输。反之就一定是赢的。在两个人都是最优解的情况。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canWinNim</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">4</span>==<span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>简化一下就一行</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canWinNim</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> n%<span class="number">4</span>!=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="344-反转字符串"><a href="#344-反转字符串" class="headerlink" title="344. 反转字符串"></a>344. 反转字符串</h1><p>这个就直接用遍历双指针遍历就好了，不同的就是交换变量的方式而已。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> front = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> rear = s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">            s[front] ^= s[rear];</span><br><span class="line">            s[rear] ^= s[front];</span><br><span class="line">            s[front] ^= s[rear];</span><br><span class="line">            front++;</span><br><span class="line">            rear--; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> front = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> rear = s.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">            <span class="keyword">char</span> c = s[front];</span><br><span class="line">            s[front] = s[rear];</span><br><span class="line">            s[rear] = c;</span><br><span class="line">            front++;</span><br><span class="line">            rear--; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="557-反转字符串中的单词-III"><a href="#557-反转字符串中的单词-III" class="headerlink" title="557. 反转字符串中的单词 III"></a>557. 反转字符串中的单词 III</h1><h2 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h2><p>这题就是先用<code>split方法</code>分割字串，然后可以用StringBuffer的字符串反转方法进行反转。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        String[] arr = s.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == arr.length-<span class="number">1</span>) &#123;</span><br><span class="line">            arr[i] = <span class="keyword">new</span> StringBuffer(arr[i]).reverse().toString();</span><br><span class="line">            res = res + arr[i]; </span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[i] = <span class="keyword">new</span> StringBuffer(arr[i]).reverse().toString();</span><br><span class="line">            res = res + arr[i] + <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样效率是很低，字符串这样拼接不好，建议使用StringBuffer。时间和内存消耗效率都很低。</p><h2 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h2><p>先用<code>split方法</code>分割字串，使用StringBuffer进行拼接；</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        String[] arr = s.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuffer res = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            res.append(<span class="keyword">new</span> StringBuffer(arr[i]).reverse().toString());</span><br><span class="line">            res.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//	trim去除首尾空格</span></span><br><span class="line">        <span class="keyword">return</span> res.toString().trim();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h2><p>直接在原数组上进行反转。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] arr = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> front = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> rear = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                rear = i - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">                    arr[front] ^= arr[rear];</span><br><span class="line">                    arr[rear] ^= arr[front];</span><br><span class="line">                    arr[front] ^= arr[rear];</span><br><span class="line">                    front++;</span><br><span class="line">                    rear--;</span><br><span class="line">                &#125;</span><br><span class="line">                front = i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//	反转最后一个单词</span></span><br><span class="line">        rear = s.length()-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">                arr[front] ^= arr[rear];</span><br><span class="line">                arr[rear] ^= arr[front];</span><br><span class="line">                arr[front] ^= arr[rear];</span><br><span class="line">                front++;</span><br><span class="line">                rear--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(arr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在优化一下</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] arr = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> front = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                reverse(arr,front,i - <span class="number">1</span>);</span><br><span class="line">                front = i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//	反转最后一个单词</span></span><br><span class="line">        reverse(arr,front,s.length()-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(arr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span>[] arr,<span class="keyword">int</span> front,<span class="keyword">int</span> rear)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">            arr[front] ^= arr[rear];</span><br><span class="line">            arr[rear] ^= arr[front];</span><br><span class="line">            arr[front] ^= arr[rear];</span><br><span class="line">            front++;</span><br><span class="line">            rear--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>另外一个搜索的思路</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseWords</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] arr = s.toCharArray();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> front = i;</span><br><span class="line">            <span class="keyword">while</span>(i &lt; s.length() &amp;&amp; arr[i]!=<span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            reverse(arr,front,i - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(arr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span>[] arr,<span class="keyword">int</span> front,<span class="keyword">int</span> rear)</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">            arr[front] ^= arr[rear];</span><br><span class="line">            arr[rear] ^= arr[front];</span><br><span class="line">            arr[front] ^= arr[rear];</span><br><span class="line">            front++;</span><br><span class="line">            rear--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://img.yww52.com/2020/12/2020-12-12top_img.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/12/12/CMS%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/"><img class="prev-cover" data-lazy-src="https://img.yww52.com/2020/12/2020-12-13/top_img.jpg" onerror='onerror=null,src="/img/404.jpg"'><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CMS垃圾回收器</div></div></a></div><div class="next-post pull-right"><a href="/2020/12/06/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"><img class="next-cover" data-lazy-src="https://img.yww52.com/2020/12/2020-12-7/top_img.jpg" onerror='onerror=null,src="/img/404.jpg"'><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">GC垃圾回收机制</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://img.yww52.com/avatar.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"><div class="author-info__name">Yw</div><div class="author-info__description">永远相信美好的事情即将发生</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jaslli"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#238-%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF"><span class="toc-number">1.</span> <span class="toc-text">238. 除自身以外数组的乘积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#292-Nim-%E6%B8%B8%E6%88%8F"><span class="toc-number">2.</span> <span class="toc-text">292. Nim 游戏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#344-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">344. 反转字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#557-%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D-III"><span class="toc-number">4.</span> <span class="toc-text">557. 反转字符串中的单词 III</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80"><span class="toc-number">4.1.</span> <span class="toc-text">解法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C"><span class="toc-number">4.2.</span> <span class="toc-text">解法二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%89"><span class="toc-number">4.3.</span> <span class="toc-text">解法三</span></a></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By Yw</div><div id="running-time"><script>setInterval(() => {
+    //2019年10月31号起
+    let create_time = Math.round(new Date(18200*24*60*60*1000).getTime() / 1000);
+    let timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+    let second = timestamp - create_time;
+    let time = new Array(0, 0, 0, 0, 0);
+    if (second >= 365 * 24 * 3600) {
+        time[0] = parseInt(second / (365 * 24 * 3600));
+        second %= 365 * 24 * 3600
+    }
+    if (second >= 24 * 3600) {
+        time[1] = parseInt(second / (24 * 3600));
+        second %= 24 * 3600
+    }
+    if (second >= 3600) {
+        time[2] = parseInt(second / 3600);
+        second %= 3600
+    }
+    if (second >= 60) {
+        time[3] = parseInt(second / 60);
+        second %= 60
+    }
+    if (second > 0) {
+        time[4] = second
+    }
+    currentTimeHtml = '小破站已经安全运行 ' + time[0] + ' 年 ' + time[1] + ' 天 ' + time[2] + ' 时 ' + time[3] + ' 分 ' + time[4] + ' 秒';
+    var elementById = document.getElementById('running-time');
+    if (elementById) {
+        elementById.innerHTML = currentTimeHtml
+    }
+}, 1000);</script></div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://img.yww52.com/cdnlogo.png" align="absmiddle" height="30px" width="60px"></a>提供CDN加速</div><div class="icp"><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.beian.miit.gov.cn"><img class="icp-icon" src="/img/icp.png" alt="ICP"><span>桂ICP备20005765号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      master:'6a8eb636174b1425b0f0f36711f8d133',
+      friends:'d062f6c881b7b502fb60f262abbabf7c,429d94ae943510552277cd3bfdf193e2,fcb88dccdfa8b4bafda50531ed00d125,7c962fe531532726d380d156d5f5b22c,617f018ac45b08f999632bf84ce9dd03',
+      appId: 'D1fvRHFdzJkrS7IfbaxET2ii-gzGzoHsz',
+      appKey: '5RweNCelj4e5Dm949dwf56RR',
+      placeholder: '在名称处输入QQ号自动获取QQ的信息哦',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN/',
+      emojiMaps: {
+      "bilibilitv2": "bilibilitv/[tv_doge].png",
+      "bilibilitv3": "bilibilitv/[tv_亲亲].png",
+      "bilibilitv4": "bilibilitv/[tv_偷笑].png",
+      "bilibilitv5": "bilibilitv/[tv_再见].png",
+      "bilibilitv6": "bilibilitv/[tv_冷漠].png",
+      "bilibilitv7": "bilibilitv/[tv_发怒].png",
+      "bilibilitv8": "bilibilitv/[tv_发财].png",
+      "bilibilitv9": "bilibilitv/[tv_可爱].png",
+      "bilibilitv10": "bilibilitv/[tv_吐血].png",
+      "bilibilitv11": "bilibilitv/[tv_呆].png",
+      "bilibilitv12": "bilibilitv/[tv_呕吐].png",
+      "bilibilitv13": "bilibilitv/[tv_困].png",
+      "bilibilitv14": "bilibilitv/[tv_坏笑].png",
+      "bilibilitv15": "bilibilitv/[tv_大佬].png",
+      "bilibilitv16": "bilibilitv/[tv_大哭].png",
+      "bilibilitv17": "bilibilitv/[tv_委屈].png",
+      "bilibilitv18": "bilibilitv/[tv_害羞].png",
+      "bilibilitv19": "bilibilitv/[tv_尴尬].png",
+      "bilibilitv20": "bilibilitv/[tv_微笑].png",
+      "bilibilitv21": "bilibilitv/[tv_思考].png",
+      "bilibilitv22": "bilibilitv/[tv_惊吓].png",
+      "bilibilitv23": "bilibilitv/[tv_打脸].png",
+      "bilibilitv24": "bilibilitv/[tv_抓狂].png",
+      "bilibilitv25": "bilibilitv/[tv_抠鼻].png",
+      "bilibilitv26": "bilibilitv/[tv_斜眼笑].png",
+      "bilibilitv27": "bilibilitv/[tv_无奈].png",
+      "bilibilitv28": "bilibilitv/[tv_晕].png",
+      "bilibilitv29": "bilibilitv/[tv_流汗].png",
+      "bilibilitv30": "bilibilitv/[tv_流泪].png",
+      "bilibilitv31": "bilibilitv/[tv_流鼻血].png",
+      "bilibilitv32": "bilibilitv/[tv_点赞].png",
+      "bilibilitv33": "bilibilitv/[tv_生气].png",
+      "bilibilitv34": "bilibilitv/[tv_生病].png",
+      "bilibilitv35": "bilibilitv/[tv_疑问].png",
+      "bilibilitv36": "bilibilitv/[tv_白眼].png",
+      "bilibilitv37": "bilibilitv/[tv_皱眉].png",
+      "bilibilitv38": "bilibilitv/[tv_目瞪口呆].png",
+      "bilibilitv39": "bilibilitv/[tv_睡着].png",
+      "bilibilitv40": "bilibilitv/[tv_笑哭].png",
+      "bilibilitv41": "bilibilitv/[tv_腼腆].png",
+      "bilibilitv42": "bilibilitv/[tv_色].png",
+      "bilibilitv43": "bilibilitv/[tv_调侃].png",
+      "bilibilitv44": "bilibilitv/[tv_调皮].png",
+      "bilibilitv45": "bilibilitv/[tv_鄙视].png",
+      "bilibilitv46": "bilibilitv/[tv_闭嘴].png",
+      "bilibilitv47": "bilibilitv/[tv_难过].png",
+      "bilibilitv48": "bilibilitv/[tv_馋].png",
+      "bilibilitv49": "bilibilitv/[tv_鬼脸].png",
+      "bilibilitv50": "bilibilitv/[tv_黑人问号].png",
+      "bilibilitv51": "bilibilitv/[tv_鼓掌].png",
+      "bilibili22332": "bilibili2233/[2233娘_卖萌].png",
+      "bilibili22333": "bilibili2233/[2233娘_吃惊].png",
+      "bilibili22334": "bilibili2233/[2233娘_吐魂].png",
+      "bilibili22335": "bilibili2233/[2233娘_喝水].png",
+      "bilibili22336": "bilibili2233/[2233娘_困惑].png",
+      "bilibili22337": "bilibili2233/[2233娘_大哭].png",
+      "bilibili22338": "bilibili2233/[2233娘_大笑].png",
+      "bilibili22339": "bilibili2233/[2233娘_委屈].png",
+      "bilibili223310": "bilibili2233/[2233娘_怒].png",
+      "bilibili223311": "bilibili2233/[2233娘_无言].png",
+      "bilibili223312": "bilibili2233/[2233娘_汗].png",
+      "bilibili223313": "bilibili2233/[2233娘_疑问].png",
+      "bilibili223314": "bilibili2233/[2233娘_第一].png",
+      "bilibili223315": "bilibili2233/[2233娘_耶].png",
+      "bilibili223316": "bilibili2233/[2233娘_郁闷].png"},
+      enableQQ: true,
+      path: window.location.pathname,
+      metaPlaceholder: {"nick":"昵称/QQ号(必填)","mail":"邮箱(必填)","link":"最好填上你的博客网址哦"}
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine()
+  else $.getScript('https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/valine.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.css"><script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/main.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css"><script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script><div class="app-refresh" id="app-refresh"><div class="app-refresh-wrap"><label>✨ 网站已经更新最新版本 👉</label> <a href="javascript:void(0)" rel="external nofollow noreferrer" onclick="location.reload()">點擊刷新</a></div></div><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!0,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async mobile="true"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>
