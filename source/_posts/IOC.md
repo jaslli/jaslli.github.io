@@ -11,7 +11,7 @@ cover: https://img.yww52.com/2020/6/2020-6-23top_img.jpg
 
 ## 前言
 
-今天看见了Iteye的开涛对IOC的理解，[原文地址](http://jinnianshilongnian.iteye.com/blog/1413846)，对IOC的有了一些理解，所以来记录一下。
+今天看了Iteye的开涛对IOC的理解，[原文地址](http://jinnianshilongnian.iteye.com/blog/1413846)，对IOC的有了一些理解，所以来记录一下。
 
 ## 什么是IOC
 
