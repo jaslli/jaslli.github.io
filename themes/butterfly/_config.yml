@@ -836,7 +836,7 @@ inject:
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.css">
-    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/main.js"></script>
+    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.7/other/main.js"></script>
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
     - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
