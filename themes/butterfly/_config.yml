@@ -314,7 +314,7 @@ valine:
     nick: 昵称/QQ号(必填)
     mail: 邮箱(必填)
     link: 最好填上你的博客网址哦
-  option:
+    option:
 
 # utterances
 # https://utteranc.es/
@@ -631,7 +631,7 @@ aside:
       link: https://github.com/jaslli
   card_announcement:
     enable: true
-    content: 欢迎来到我的博客
+    content: 欢迎来到我的博客!
   card_recent_post:
     enable: false
     limit: 3 # if set 0 will show all
@@ -768,7 +768,7 @@ artitalk:
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
 pjax:
-  enable: true
+  enable: false
   exclude:
     # - xxxx
     # - xxxx
