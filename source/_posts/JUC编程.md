@@ -774,3 +774,555 @@ public class Test{
 
 # 阻塞队列
 
+阻塞队列顾名思义就是会阻塞的队列，是队列的子类，其类为`BlockingQueue`,数组的实现方式是`ArrayBlockingQueue`和链表的实现方式是`LinkedBlockingQueue`。
+
+## 有返回值会抛出异常
+
+```Java
+public class Test{
+    public static void main(String[] args) {
+        ArrayBlockingQueue<String> arrayBlockingQueue = new ArrayBlockingQueue<>(3);
+        // 队列满了在用add方法入队就会抛出异常
+        // java.lang.IllegalStateException: Queue full
+        arrayBlockingQueue.add("1");
+        arrayBlockingQueue.add("2");
+        arrayBlockingQueue.add("3");
+        arrayBlockingQueue.add("4");
+        //	返回队首元素
+        System.out.println(arrayBlockingQueue.element());
+        // 队列空了再用remove出队就会抛出异常
+        // java.util.NoSuchElementException
+        arrayBlockingQueue.remove();
+        arrayBlockingQueue.remove();
+        arrayBlockingQueue.remove();
+        arrayBlockingQueue.remove();
+    }
+}
+```
+
+```Java
+    // add的实现，add是用了父类的实现
+    public boolean add(E e) {
+        return super.add(e);
+    }
+	// 父类实现
+	public boolean add(E e) {
+        if (offer(e))
+            return true;
+        else
+            throw new IllegalStateException("Queue full");
+    }
+	// remove方法的实现
+    public E remove() {
+        E x = poll();
+        if (x != null)
+            return x;
+        else
+            throw new NoSuchElementException();
+    }
+	//	element方法的实现
+    public E element() {
+        E x = peek();
+        if (x != null)
+            return x;
+        else
+            throw new NoSuchElementException();
+    }
+```
+
+> 这里可以看出这三个方法都是调用了下面不抛出异常的三个方法，加以修饰让其抛出异常而已。
+
+## 有返回值不抛出异常
+
+```Java
+public class Test{
+    public static void main(String[] args) {
+        ArrayBlockingQueue<String> arrayBlockingQueue = new ArrayBlockingQueue<>(3);
+        // 用offer入队，满了也不会出异常，会返回false
+        System.out.println(arrayBlockingQueue.offer("1"));
+        System.out.println(arrayBlockingQueue.offer("2"));
+        System.out.println(arrayBlockingQueue.offer("3"));
+        System.out.println(arrayBlockingQueue.offer("4"));
+        
+        // 返回队首元素
+        System.out.println(arrayBlockingQueue.peek());
+        
+		// 用poll出队，对空会返回null
+        System.out.println(arrayBlockingQueue.poll());
+        System.out.println(arrayBlockingQueue.poll());
+        System.out.println(arrayBlockingQueue.poll());
+        System.out.println(arrayBlockingQueue.poll());
+
+    }
+}
+```
+
+```Java
+	// offer的实现
+	public boolean offer(E e) {
+        checkNotNull(e);
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            if (count == items.length)
+                return false;
+            else {
+                enqueue(e);
+                return true;
+            }
+        } finally {
+            lock.unlock();
+        }
+	// poll的实现 
+    public E poll() {
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            return (count == 0) ? null : dequeue();
+        } finally {
+            lock.unlock();
+        }
+    }
+    // peek的实现
+    public E peek() {
+        final ReentrantLock lock = this.lock;
+        lock.lock();
+        try {
+            return itemAt(takeIndex); // null when queue is empty
+        } finally {
+            lock.unlock();
+        }
+    }
+      
+```
+
+由此可以看出这三个方法都是用到了锁的，使得上面抛出异常的三个方法也是加锁了的。
+
+## 阻塞等待
+
+```Java
+public class Test{
+    public static void main(String[] args) throws InterruptedException {
+        ArrayBlockingQueue<String> arrayBlockingQueue = new ArrayBlockingQueue<>(3);
+		// 因为队满了在用put入队，就会一直等待
+        arrayBlockingQueue.put("1");
+        arrayBlockingQueue.put("2");
+        arrayBlockingQueue.put("3");
+        arrayBlockingQueue.put("4");
+		// 因为队空了在用take出队，就会一直等待
+        System.out.println(arrayBlockingQueue.take());
+        System.out.println(arrayBlockingQueue.take());
+        System.out.println(arrayBlockingQueue.take());
+        System.out.println(arrayBlockingQueue.take());
+    }
+}
+```
+
+```Java
+    // put的实现
+    public void put(E e) throws InterruptedException {
+        checkNotNull(e);
+        final ReentrantLock lock = this.lock;
+        lock.lockInterruptibly();
+        try {
+            while (count == items.length)
+                notFull.await();
+            enqueue(e);
+        } finally {
+            lock.unlock();
+        }
+    }
+	// take的实现
+    public E take() throws InterruptedException {
+        final ReentrantLock lock = this.lock;
+        lock.lockInterruptibly();
+        try {
+            while (count == 0)
+                notEmpty.await();
+            return dequeue();
+        } finally {
+            lock.unlock();
+        }
+    }
+```
+
+## 超时等待
+
+```Java
+public class Test{
+    public static void main(String[] args) throws InterruptedException {
+        ArrayBlockingQueue<String> arrayBlockingQueue = new ArrayBlockingQueue<>(3);
+		// 在队满的时候在入队，可以设置一个时间，时间过了就不等待了
+        arrayBlockingQueue.offer("1");
+        arrayBlockingQueue.offer("2");
+        arrayBlockingQueue.offer("3");
+        arrayBlockingQueue.offer("4",2, TimeUnit.SECONDS);
+		// 在队空的时候在出队，可以设置一个时间，时间过了就不等待了
+        System.out.println(arrayBlockingQueue.poll());
+        System.out.println(arrayBlockingQueue.poll());
+        System.out.println(arrayBlockingQueue.poll());
+        System.out.println(arrayBlockingQueue.poll(2,TimeUnit.SECONDS));
+    }
+}
+```
+
+```Java
+	// 这是超时等待的offer方法
+	public boolean offer(E e, long timeout, TimeUnit unit)
+        throws InterruptedException {
+
+        checkNotNull(e);
+        long nanos = unit.toNanos(timeout);
+        final ReentrantLock lock = this.lock;
+        lock.lockInterruptibly();
+        try {
+            while (count == items.length) {
+                if (nanos <= 0)
+                    return false;
+                nanos = notFull.awaitNanos(nanos);
+            }
+            enqueue(e);
+            return true;
+        } finally {
+            lock.unlock();
+        }
+    }
+	// 这是超时等待的poll方法
+    public E poll(long timeout, TimeUnit unit) throws InterruptedException {
+        long nanos = unit.toNanos(timeout);
+        final ReentrantLock lock = this.lock;
+        lock.lockInterruptibly();
+        try {
+            while (count == 0) {
+                if (nanos <= 0)
+                    return null;
+                nanos = notEmpty.awaitNanos(nanos);
+            }
+            return dequeue();
+        } finally {
+            lock.unlock();
+        }
+    }
+```
+
+## 总结
+
+|     方法     | 有返回值抛出异常 | 有返回值不抛出异常 | 阻塞等待 |   超时等待    |
+| :----------: | :--------------: | :----------------: | :------: | :-----------: |
+|     入队     |       add        |       offer        |   put    | 带参数的offer |
+|     出队     |      remove      |        poll        |   take   | 带参数的poll  |
+| 返回队首元素 |     element      |        peek        |    -     |       -       |
+
+
+
+## 同步队列
+
+`BlockingQueue`还有一个实现类为同步队列`SynchronousQueue`，这个队列只能容纳一个元素，当元素满了再入队就会等待，当元素空了再出队也会等待，类似于上述的阻塞等待，但是只能容纳一个元素。
+
+```Java
+public class Test{
+    public static void main(String[] args)  {
+        BlockingQueue<String> blockingQueue = new SynchronousQueue<>();
+
+        new Thread(()->{
+            try {
+                System.out.println(Thread.currentThread().getName() + "put  1");
+                blockingQueue.put("1");
+                System.out.println(Thread.currentThread().getName() + "put  2");
+                blockingQueue.put("2");
+                System.out.println(Thread.currentThread().getName() + "put  3");
+                blockingQueue.put("3");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },"线程一").start();
+
+        new Thread(()->{
+            try {
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println(Thread.currentThread().getName() + "take  1");
+                System.out.println(blockingQueue.take());
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println(Thread.currentThread().getName() + "take  2");
+                System.out.println(blockingQueue.take());
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println(Thread.currentThread().getName() + "take  3");
+                System.out.println(blockingQueue.take());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },"线程二").start();
+    }
+}
+```
+
+# 线程池
+
+## 三个方法
+
+1. 创建线程池的方法
+
+   ```Java
+   	// 创建一个单例线程池，即只有一个线程的线程池
+   	ExecutorService pool1 = Executors.newSingleThreadExecutor();
+   	// 创建一个自定义线程的线程池，这里表示该线程池有五个线程
+       ExecutorService pool2 = Executors.newFixedThreadPool(5);
+   	// 创建一个可伸缩的线程池，多个线程就有多个线程（看CPU）
+       ExecutorService pool3 = Executors.newCachedThreadPool();
+   ```
+
+   ```Java
+   // 看一下创建线程的底层实现
+       public static ExecutorService newSingleThreadExecutor() {
+           return new FinalizableDelegatedExecutorService
+               (new ThreadPoolExecutor(1, 1,
+                                       0L, TimeUnit.MILLISECONDS,
+                                       new LinkedBlockingQueue<Runnable>()));
+       }
+       public static ExecutorService newFixedThreadPool(int nThreads) {
+           return new ThreadPoolExecutor(nThreads, nThreads,
+                                         0L, TimeUnit.MILLISECONDS,
+                                         new LinkedBlockingQueue<Runnable>());
+       }
+       public static ExecutorService newCachedThreadPool() {
+           return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                         60L, TimeUnit.SECONDS,
+                                         new SynchronousQueue<Runnable>());
+       }
+   ```
+
+   > 阿里巴巴编程规范不建议用这种方式开启线程池，建议使用原生的ThreadPoolExecutor来开辟。
+
+2. 使用线程池里的线程
+
+   ```Java
+   	// 丢入Runnable即可
+   	pool1.execute();
+   	// 比如
+       pool1.execute(()->{
+           System.out.println(Thread.currentThread().getName());
+       });
+   ```
+
+3. 使用完记得关闭线程池
+
+   ```Java
+   	pool1.shutdown();
+   ```
+
+## 七大参数
+
+七大参数其实就是`ThreadPoolExecutor`的参数，先看一下构造方法。
+
+```Java
+    public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue) {
+        this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,
+             Executors.defaultThreadFactory(), defaultHandler);
+    }
+	// 点进this之后，上面只是简化版
+    public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              ThreadFactory threadFactory,
+                              RejectedExecutionHandler handler) {
+        if (corePoolSize < 0 ||
+            maximumPoolSize <= 0 ||
+            maximumPoolSize < corePoolSize ||
+            keepAliveTime < 0)
+            throw new IllegalArgumentException();
+        if (workQueue == null || threadFactory == null || handler == null)
+            throw new NullPointerException();
+        this.acc = System.getSecurityManager() == null ?
+                null :
+                AccessController.getContext();
+        this.corePoolSize = corePoolSize;
+        this.maximumPoolSize = maximumPoolSize;
+        this.workQueue = workQueue;
+        this.keepAliveTime = unit.toNanos(keepAliveTime);
+        this.threadFactory = threadFactory;
+        this.handler = handler;
+    }
+```
+
+|               参数                |                             含义                             |
+| :-------------------------------: | :----------------------------------------------------------: |
+|         int corePoolSize          |                          核心线程数                          |
+|        int maximumPoolSize        | 最大并发的线程数，只有阻塞队列满了才会开启更多的线程直到最大并发数 |
+|        long keepAliveTime         |              超时等候时间，时间到了就会释放线程              |
+|           TimeUnit unit           |                设置时间长度，与上一个参数搭配                |
+| BlockingQueue<Runnable> workQueue |                           阻塞队列                           |
+|    ThreadFactory threadFactory    |                      线程工厂，一般固定                      |
+| RejectedExecutionHandler handler  | 拒绝策略，即线程数多到使阻塞队列满了而且最大线程数不够用了才执行的策略 |
+
+```Java
+public class Test{
+    public static void main(String[] args)  {
+        ExecutorService pool = new ThreadPoolExecutor(
+                2,
+                5,
+                3,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(5),
+                Executors.defaultThreadFactory(),	//	一般都是这个
+                new ThreadPoolExecutor.AbortPolicy()
+        );
+    }
+}
+```
+
+
+
+## 四个拒绝策略
+
+拒绝策略共有四个，都是当线程数大于最大并发数加阻塞队列容量的时候，才会采取的策略。
+
+```Java
+ * <ol>
+ *
+ * <li> In the default {@link ThreadPoolExecutor.AbortPolicy}, the
+ * handler throws a runtime {@link RejectedExecutionException} upon
+ * rejection. </li>
+ *
+ * <li> In {@link ThreadPoolExecutor.CallerRunsPolicy}, the thread
+ * that invokes {@code execute} itself runs the task. This provides a
+ * simple feedback control mechanism that will slow down the rate that
+ * new tasks are submitted. </li>
+ *
+ * <li> In {@link ThreadPoolExecutor.DiscardPolicy}, a task that
+ * cannot be executed is simply dropped.  </li>
+ *
+ * <li>In {@link ThreadPoolExecutor.DiscardOldestPolicy}, if the
+ * executor is not shut down, the task at the head of the work queue
+ * is dropped, and then execution is retried (which can fail again,
+ * causing this to be repeated.) </li>
+ *
+ * </ol>
+```
+
+1. `AbortPolicy`
+   这个拒绝策略可以看出，不会处理多出的线程并抛出异常
+
+   ```Java
+       public static class AbortPolicy implements RejectedExecutionHandler {
+           /**
+            * Creates an {@code AbortPolicy}.
+            */
+           public AbortPolicy() { }
+   
+           /**
+            * Always throws RejectedExecutionException.
+            *
+            * @param r the runnable task requested to be executed
+            * @param e the executor attempting to execute this task
+            * @throws RejectedExecutionException always
+            */
+           public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+               throw new RejectedExecutionException("Task " + r.toString() +
+                                                    " rejected from " +
+                                                    e.toString());
+           }
+       }
+   ```
+
+   这是默认的一个拒绝策略，在类中也可以看到。
+
+   ```Java
+       private static final RejectedExecutionHandler defaultHandler =
+           new AbortPolicy();
+   ```
+
+2. `CallerRunsPolicy`
+
+   当线程数大于最大并发数加阻塞队列容量的时候，多出来的线程从哪里来就到哪里执行，一般从主线程来，所以多出来的线程就会是main线程在执行。
+
+   ```Java
+       public static class CallerRunsPolicy implements RejectedExecutionHandler {
+           /**
+            * Creates a {@code CallerRunsPolicy}.
+            */
+           public CallerRunsPolicy() { }
+   
+           /**
+            * Executes task r in the caller's thread, unless the executor
+            * has been shut down, in which case the task is discarded.
+            *
+            * @param r the runnable task requested to be executed
+            * @param e the executor attempting to execute this task
+            */
+           public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+               if (!e.isShutdown()) {
+                   r.run();
+               }
+           }
+       }
+   ```
+
+3. `DiscardPolicy`
+   当线程数大于最大并发数加阻塞队列容量的时候，就会抛弃多出的线程，不抛出异常
+
+   ```Java
+       public static class DiscardPolicy implements RejectedExecutionHandler {
+           /**
+            * Creates a {@code DiscardPolicy}.
+            */
+           public DiscardPolicy() { }
+   
+           /**
+            * Does nothing, which has the effect of discarding task r.
+            *
+            * @param r the runnable task requested to be executed
+            * @param e the executor attempting to execute this task
+            */
+           public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+           }
+       }
+   ```
+
+4. `DiscardOldestPolicy`
+
+   当线程数大于最大并发数加阻塞队列容量的时候，会尝试看看最早的线程是否要结束，快结束了就加入到队列。
+
+   ```Java
+       public static class DiscardOldestPolicy implements RejectedExecutionHandler {
+           /**
+            * Creates a {@code DiscardOldestPolicy} for the given executor.
+            */
+           public DiscardOldestPolicy() { }
+   
+           /**
+            * Obtains and ignores the next task that the executor
+            * would otherwise execute, if one is immediately available,
+            * and then retries execution of task r, unless the executor
+            * is shut down, in which case task r is instead discarded.
+            *
+            * @param r the runnable task requested to be executed
+            * @param e the executor attempting to execute this task
+            */
+           public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+               if (!e.isShutdown()) {
+                   e.getQueue().poll();
+                   e.execute(r);
+               }
+           }
+       }
+   ```
+
+## 关于最大并发线程数的设置
+
+   1. CPU密集型
+      CPU有几核就设置为多少个线程。
+
+      ```Java
+      	// 该方法可以返回CPU的核心数
+      	Runtime.getRuntime().availableProcessors();
+      ```
+
+   2. IO密集型
+      根据具体情况确定，若有15个任务，那最大并发线程数可以设置为大于15，比如设置为30
+
