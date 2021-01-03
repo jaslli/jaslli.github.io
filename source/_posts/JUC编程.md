@@ -1,5 +1,5 @@
 ---
-title: 代理模式
+title: JUC编程
 date: 2021-1-2
 categories:
 	- Java
