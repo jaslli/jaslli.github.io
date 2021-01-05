@@ -4,7 +4,7 @@ date: 2020-11-20
 categories:
 	- Java
 description: HashMap是经常用到的一个集合，很有必要进行深入了解。
-keywords: 
+keywords:
 	- HashMap源码分析
 	- hashmap
 	- 哈希表源码
@@ -103,14 +103,14 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
 
 ```Java
     /**
-     * 使用more默认的容量16和负载因子0.75创建HashMap
+     * 使用默认的容量16和负载因子0.75创建HashMap
      */
     public HashMap() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * 使用指定容量和默认的负载因子0.75创建HashMap
+     * 使用指定容量和默认的负载因子创建HashMap
      */
     public HashMap(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
@@ -149,7 +149,7 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
 
 <div class='tip'>
     <p>
-        从构造方法来看，HashMap(int initialCapacity, float loadFactor)这个方法才是主体。接下来就来分析一下这个类。
+        从构造方法来看，HashMap(int initialCapacity, float loadFactor)这个方法才是主体。接下来就来分析一下这个构造方法。
     </p>
 </div>
 
@@ -176,7 +176,7 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
 
 ## 数据结构
 
-创建方法讲完了，就讲讲HashMap的数据结构了。jdk1.7的HashMap是数组加链表组成的，数组为主，链表为辅。大概结构如下。
+构造方法看完了，现在来看看HashMap的数据结构。JDK7的HashMap是以数组为主，链表为辅的结构。大概结构如下。
 
 ![](https://img.yww52.com/2020/11/2020-11-20/img1.png)
 
@@ -186,7 +186,7 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
     </p>
 </div>
 
-这里就看出，每个节点就是哈希表的最小组成单位了，现在就来看一下这个节点类。jdk1.7的节点类叫`Entry`。
+这里就看出，每个节点就是哈希表的最小组成单位了，现在就来看一下这个节点类。JDK7时的节点类叫`Entry`。
 
 ```Java
     static class Entry<K,V> implements Map.Entry<K,V> {
@@ -258,7 +258,7 @@ HashMap是Map经常使用的一个实现类,也是我们经常用到的一个集
 
 ## put
 
-创建了哈希表之后，就用put方法来存放键值对，现在就来看看put方法的源码。
+创建了哈希表之后，就可以用put方法来存放键值对，现在就来看看put方法的源码。
 
 ```Java
 /**
@@ -292,7 +292,7 @@ public V put(K key, V value) {
 }
 ```
 
-put方法很有讲究，现在我们就来一步步解析。
+put方法有很多门道，现在我们就来一步步解析。
 
 ### 第一步
 
@@ -302,13 +302,13 @@ put方法很有讲究，现在我们就来一步步解析。
     }
 ```
 
-首先就是判断这个哈希表是不是一个空表。如果是就会调用`inflateTable(threshold);`这个语句，不是就进行下一步。我们去看看这个方法。
+首先就是判断这个哈希表是不是一个空表。如果是就会调用`inflateTable(threshold);`这个方法，不是就进行下一步。我们去看看这个方法。
 
 ```Java
     private void inflateTable(int toSize) {
-        // 传入容量大小的最小的2的次幂
+        // 计算出传入比传入容量大的最小的二次幂
         int capacity = roundUpToPowerOf2(toSize);
-        //  重新计算阈值 threshold = 容量 * 加载因子
+        //  重新计算阈值 threshold = 容量 * 负载因子
         threshold = (int) Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);
         //  用最小的2次幂来创建一个新的数组
         table = new Entry[capacity];
@@ -317,17 +317,17 @@ put方法很有讲究，现在我们就来一步步解析。
     }
 ```
 
-这个类就是用来创建数组的，通过`roundUpToPowerOf2`方法来确定最小的能大于需要长度`toSize`的二次幂，是有点绕，现在去看看这个方法。
+这个方法就是用来创建数组的，通过`roundUpToPowerOf2`方法来确定最小的能大于需要长度`toSize`的二次幂，是有点绕，那现在去看看这个方法。
 
 ```Java
     private static int roundUpToPowerOf2(int number) {
         //  1.如果这个需要的长度大于最大值，就用最大值来创建数组
-        //  2.需要的长度小于1就用1当数组的长度，大于1就用highestOneBit确定长度。
+        //  2.需要的长度小于1就用1当数组的长度，大于1就用highestOneBit方法来确定长度。
         return number >= MAXIMUM_CAPACITY
                 ? MAXIMUM_CAPACITY
                 : (number > 1) ? Integer.highestOneBit((number - 1) << 1) : 1;
     }
-    //  这个类就是怎么创建最小的二次幂的方法
+    //  这个方法就是用来确定最小的二次幂
     public static int highestOneBit(int i) {
         // HD, Figure 3-1
         i |= (i >>  1);
@@ -338,12 +338,6 @@ put方法很有讲究，现在我们就来一步步解析。
         return i - (i >>> 1);
     }
 ```
-
-<div class='tip'>
-    <p>
-        highestOneBit是怎样算出最小的二次幂的，就去看看我另一篇文章好了。
-    </p>
-</div>
 
 寻找到最小的二次幂之后，重新计算阈值，然后用最小的2次幂来创建一个新的数组，最后用`initHashSeedAsNeeded`来初始化哈希掩码值。
 
@@ -359,8 +353,8 @@ put方法很有讲究，现在我们就来一步步解析。
 ```Java
     private V putForNullKey(V value) {
         /**
-         *	遍历table[0]的链表，若有key==null，就用新的value覆盖原来的
-         *	然后返回被覆盖的value，所以table[0]就只会有一个元素
+         *  遍历table[0]的链表，若有key==null，就用新的value覆盖原来的
+         *  然后返回被覆盖的value，所以table[0]就只会有一个元素
          */
         for (Entry<K,V> e = table[0]; e != null; e = e.next) {
             if (e.key == null) {
@@ -372,8 +366,8 @@ put方法很有讲究，现在我们就来一步步解析。
         }
         modCount++;
        /**
-         *	要是没有key==null的键，就调用addEntry方法，将空键和值放入table[0]
-         *	第一次table[0]是没有元素的，所以才能到这里添加空键和值
+         *  要是没有key==null的键，就调用addEntry方法，将空键和值放入table[0]
+         *  第一次table[0]是没有元素的，所以才能到这里添加空键和值
          */
         addEntry(0, null, value, 0);
         return null;
@@ -396,7 +390,8 @@ put方法很有讲究，现在我们就来一步步解析。
         }
 ```
 
-到这里就是最重要的一步了，确定插入的位置然后插入。首先就是调用`hash`方法来计算传入的`key`的哈希值。
+这步是最重要的一步，找到插入的位置然后将键值对插入到hashmap中。
+首先就是调用`hash`方法来计算传入的`key`的哈希值。
 
 ```Java
     /**
@@ -406,11 +401,11 @@ put方法很有讲究，现在我们就来一步步解析。
      */
     final int hash(Object k) {
         int h = hashSeed;
-        //	若哈希值不为0而且不是String类型，就返回一个哈希值
+        //  若哈希值不为0而且不是String类型，就返回一个哈希值
         if (0 != h && k instanceof String) {
             return sun.misc.Hashing.stringHash32((String) k);
         }
-		// 异或
+        // 异或
         h ^= k.hashCode();
         // 此函数可确保在每个位位置仅相差恒定倍数的hashCode具有一定数量的冲突（在默认的加载因子下约为8）。
         h ^= (h >>> 20) ^ (h >>> 12);
@@ -418,7 +413,7 @@ put方法很有讲究，现在我们就来一步步解析。
     }
 ```
 
-得到哈希值之后，就调用`indexFor`方法来计算出应该插入的位置。
+得到哈希值之后，就会调用`indexFor`方法来计算出应该插入的位置。
 
 ```Java
     /**
@@ -426,7 +421,7 @@ put方法很有讲究，现在我们就来一步步解析。
      */
     static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "长度必须为2的非零次幂";
-        // h & (length-1)表示hash值与数组长度求余
+        // h & (length-1)表示hash值与数组长度求余，使用位移运算可以提高效率
         // 为什么必须是2的非零次幂，之后还会提到
         return h & (length-1);
     }
@@ -435,9 +430,10 @@ put方法很有讲究，现在我们就来一步步解析。
 计算出具体插入的位置之后就开始插入了，这里就是用了一个for循环遍历。
 
 ```java
-    //	遍历table[i]这个桶里是否这个key值，有就将原来的value覆盖，并返回原来的value
-	for (Entry<K,V> e = table[i]; e != null; e = e.next) {
+    //  遍历table[i]这个桶里是否存在这个key值，若有就将原来的value覆盖，并返回原来的value
+    for (Entry<K,V> e = table[i]; e != null; e = e.next) {
         Object k;
+        //  如果哈希值相同，并且key值也相同，就进行替换
         if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
             V oldValue = e.value;
             e.value = value;
@@ -447,13 +443,14 @@ put方法很有讲究，现在我们就来一步步解析。
     }
 
     modCount++;
-	//	没有就将这对键值对加入到表中
+    //  如果桶里不存在这个key值就将这对键值对加入到桶中
     addEntry(hash, key, value, i);
-	//	第一次加入到桶就返回null值
+    //  第一次加入到桶就返回null值
     return null;
 ```
 
-至此`put`的流程就结束了，到这里其实还是有问题。用`indexFor`这个方法来求数组的位置，刚刚也分析了这个方法，就是异或求余，那么就会有以下的问题，hash差一定的倍数，求余出来的位置就会一样，这个就是经常提到的`哈希冲突`了，为了解决哈希冲突这个问题，就引进了链表，这就是为什么哈希表底层是用数组和链表构成的了。下面讲讲大概是怎么用到链表的。
+至此`put`的流程就结束了，到这里其实还是有问题。用`indexFor`这个方法来求数组的位置，刚刚也分析了这个方法，就是异或求余，那么就会有以下的问题，hash差为一定的倍数的时候，求余出来的下标就会是一样的，这个问题就是经常提到的`哈希冲突`。
+为了解决哈希冲突这个问题，就引进了链表，也就是之前说的加入到桶中，这就是为什么哈希表底层是用数组和链表构成的了。下面讲讲大概是怎么用到链表的。
 
 <div class='tip'>
     <p>
@@ -470,14 +467,14 @@ put方法很有讲究，现在我们就来一步步解析。
 
 ![](https://img.yww52.com/2020/11/2020-11-20/img3.png)
 
-但是这种情况下，就无法通过数组来寻找到键值对4了，所以还会进行位移，最后就会变成这样。
+但是如果是这种情况，就无法通过数组来寻找到键值对4了，所以还会变化一下指针的指向，最后就会变成这样。
 
 ![](https://img.yww52.com/2020/11/2020-11-20/img4.png)
 
 
 ### addEntry
 
-在上面put的第三步不难看到，在一个桶里只要有key相同，就覆盖，没有就使用`addEntry`这个方法加入到桶里。不难看出这个方法发生的情况，数组位置没有元素和发生哈希冲突时就会用到这个方法，现在来看看这个方法。
+在上面put的第三步不难看到，在一个桶里只要有key相同，就覆盖，没有就使用`addEntry`这个方法加入到桶里。不难看出这个方法发生的情况，数组指定位置没有该元素或者是发生哈希冲突时就会用到这个方法，现在来看看这个方法。
 
 ```Java
     /**
@@ -485,16 +482,16 @@ put方法很有讲究，现在我们就来一步步解析。
      * 如果有必要，该方法也会负责调整表的大小
      */
     void addEntry(int hash, K key, V value, int bucketIndex) {
-        //	如果当前数组长度大于阈值，并且该桶不是空的就执行下面语句
+        //  如果当前数组长度大于阈值，并且该桶不是空的就执行下面语句
         if ((size >= threshold) && (null != table[bucketIndex])) {
-            //	扩容到原来长度的两倍
+            //  扩容到原来长度的两倍
             resize(2 * table.length);
-            //	key等于空，hash赋值为0，不然用hash方法取哈希
+            //  key等于空，hash赋值为0，不然用hash方法获取哈希
             hash = (null != key) ? hash(key) : 0;
-            //	因为扩容了，所以需要重新计算存储位置
+            //  因为扩容了，所以需要重新计算存储位置
             bucketIndex = indexFor(hash, table.length);
         }
-		//	创建Entry加入到桶里
+        //  创建Entry加入到桶里
         createEntry(hash, key, value, bucketIndex);
     }
 
@@ -505,7 +502,7 @@ put方法很有讲究，现在我们就来一步步解析。
      */
     void createEntry(int hash, K key, V value, int bucketIndex) {
         Entry<K,V> e = table[bucketIndex];
-        //	这条语句就说明了哈希表链表的插入是头插的
+        //  这条语句就说明了哈希表链表的插入是头插的
         table[bucketIndex] = new Entry<>(hash, key, value, e);
         size++;
     }
@@ -517,25 +514,25 @@ put方法很有讲究，现在我们就来一步步解析。
 
 ```Java
     /**
-     * 将此映射的内容重新映射到容量更大的新数组中。 
-     * 当此映射中的键数达到其阈值时，将自动调用此方法。 
-     * 如果当前容量为MAXIMUM_CAPACITY，则此方法不会调整地图的大小，而是将阈值设置为Integer.MAX_VALUE。 
+     * 将此映射的内容重新映射到容量更大的新数组中。
+     * 当此映射中的键数达到其阈值时，将自动调用此方法。
+     * 如果当前容量为MAXIMUM_CAPACITY，则此方法不会调整地图的大小，而是将阈值设置为Integer.MAX_VALUE。
      * 这具有防止将来通话的效果。
      *
      * @param 新容量必须是2的幂，而且是大于当前容量。
      *        除非当前容量是MAXIMUM_CAPACITY，这种情况就无关紧要。
      */
     void resize(int newCapacity) {
-        //	获取旧的数组和size的大小，判断是不是大于MAXIMUM_CAPACITY。
+        //  获取旧的数组和size的大小，判断是不是大于MAXIMUM_CAPACITY。
         Entry[] oldTable = table;
         int oldCapacity = oldTable.length;
         if (oldCapacity == MAXIMUM_CAPACITY) {
             threshold = Integer.MAX_VALUE;
             return;
         }
-		//	创建新的数组
+        //  创建新的数组
         Entry[] newTable = new Entry[newCapacity];
-        //	数据迁移，将原来数组的键值对放入新数组
+        //  数据迁移，将原来数组的键值对放入新数组
         transfer(newTable, initHashSeedAsNeeded(newCapacity));
         table = newTable;
         //	重新设置阈值，等于新长度*负载因子或者MAXIMUM_CAPACITY + 1
@@ -551,22 +548,23 @@ put方法很有讲究，现在我们就来一步步解析。
      */
     void transfer(Entry[] newTable, boolean rehash) {
         int newCapacity = newTable.length;
-        //	遍历数组
+        //  遍历数组
         for (Entry<K,V> e : table) {
-            //	遍历桶
+            //  遍历桶
             while(null != e) {
-                //	保存e的节点，因为之后链表会断，然后重新计算e的hash和下标
+                //  保存e的下一个节点，因为之后链表会断开
                 Entry<K,V> next = e.next;
+                //  重新计算e的hash和下标
                 if (rehash) {
                     e.hash = null == e.key ? 0 : hash(e.key);
                 }
                 int i = indexFor(e.hash, newCapacity);
-                //	后面这三句可以参考以下图示。
-                //	这条语句是挺奇怪的，之后也会因为导致问题出现，之后在说
+                //  后面这三句可以参考以下图示。
+                //  这条语句是挺奇怪的，之后也会导致一些问题出现，之后在说
                 e.next = newTable[i];
-                //	节点放到桶里
+                //  节点放到桶里
                 newTable[i] = e;
-                //	计算它的下一个节点
+                //  继续处理原来链表中的下一个节点
                 e = next;
             }
         }
@@ -597,17 +595,19 @@ put方法很有讲究，现在我们就来一步步解析。
         transfer方法和之前的createEntry方法，表明了1.7的哈希表为什么是头插的。因为头插，哈希表还会出现一些问题，之后还会提到。
     </p>
 </div>
+
 ## get
 
-get方法就没有怎么麻烦了，简单很多。
+get方法就没有put需要考虑到这么多情况了了，所以简单很多。
 
 ```Java
     /**
      * 返回指定键所映射到的null如果此映射不包含键的映射关系，则返回null 。
-	 * 更正式地讲，如果此映射包含从键k到值v的映射，使得(key==null ? k==null : key.equals(k)) ，则此方法返回v  
-	 * 否则返回null 。（最多可以有一个这样的映射。）
-	 * 返回值null不一定表示该映射不包含该键的映射。 映射也可能将键显式映射为null 。 
-	 * containsKey操作可用于区分这两种情况
+     * 更正式地讲，如果此映射包含从键k到值v的映射，
+     * 使得(key==null ? k==null : key.equals(k)) ，则此方法返回v
+     * 否则返回null 。（最多可以有一个这样的映射。）
+     * 返回值null不一定表示该映射不包含该键的映射。 映射也可能将键显式映射为null 。
+     * containsKey操作可用于区分这两种情况
      */
     public V get(Object key) {
         if (key == null)
@@ -633,16 +633,16 @@ get方法就没有怎么麻烦了，简单很多。
      * 为了在两个最常用的操作（获取和放置）中提高性能，此空情况被拆分为单独的方法，但在其他条件中并入了条件。
      */
     private V getForNullKey() {
-        //	要是数组没有值就返回null
+        //  要是数组没有值就返回null
         if (size == 0) {
             return null;
         }
-        //	遍历table[0]的桶，寻找key==null的value值，并返回
+        //  遍历table[0]的桶，寻找key==null的value值，并返回
         for (Entry<K,V> e = table[0]; e != null; e = e.next) {
             if (e.key == null)
                 return e.value;
         }
-        //	桶里没有就返回null
+        //  桶里没有就返回null
         return null;
     }
 ```
@@ -651,7 +651,7 @@ get方法就没有怎么麻烦了，简单很多。
 
 ```Java
         Entry<K,V> entry = getEntry(key);
-		//	entry为null，就返回null，不然就返回value
+        //  entry为null，就返回null，不然就返回value
         return null == entry ? null : entry.getValue();
 ```
 
@@ -662,13 +662,13 @@ get方法就没有怎么麻烦了，简单很多。
      * 返回与HashMap中的指定键关联的条目。 如果HashMap不包含该键的映射，则返回null
      */
     final Entry<K,V> getEntry(Object key) {
-        //	数组为空返回null
+        //  数组为空返回null
         if (size == 0) {
             return null;
         }
-		//	计算key的哈希值
+        //  计算key的哈希值
         int hash = (key == null) ? 0 : hash(key);
-        //	先通过哈希计算下标，然后遍历下标所在的桶，找到就返回entry，没找到就返回null
+        //  先通过哈希计算下标，然后遍历下标所在的桶，找到就返回entry，没找到就返回null
         for (Entry<K,V> e = table[indexFor(hash, table.length)];
              e != null;
              e = e.next) {
@@ -685,41 +685,41 @@ get方法就没有怎么麻烦了，简单很多。
 
 <div class='tip success'>
     <p>
-        JDK8优化了不少，但与JDK7在很多部分是一样的，所以我着重去分析不一样的地方。
+        JDK8优化了不少，但与JDK7在很多部分是一样的，所以我着重去分析一下不一样的地方。
     </p>
 </div>
 
 ## 参数和变量
 
 ```Java
-	//	相同的参数或者变量
-	private static final long serialVersionUID = 362498820763181265L;
-	static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; 
-	static final int MAXIMUM_CAPACITY = 1 << 30;
-	static final float DEFAULT_LOAD_FACTOR = 0.75f;
-	transient int size;
-	transient int modCount;
+    //  相同的参数或者变量
+    private static final long serialVersionUID = 362498820763181265L;
+    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
+    static final int MAXIMUM_CAPACITY = 1 << 30;
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    transient int size;
+    transient int modCount;
     final float loadFactor;
     int threshold;
 
-	//	JDK7独有的
-	static final Entry<?,?>[] EMPTY_TABLE = {};
-	transient Entry<K,V>[] table = (Entry<K,V>[]) EMPTY_TABLE;
-	static final int ALTERNATIVE_HASHING_THRESHOLD_DEFAULT = Integer.MAX_VALUE;
-	transient int hashSeed = 0;
-	private transient Set<Map.Entry<K,V>> entrySet = null;
+    //  JDK7独有的
+    static final Entry<?,?>[] EMPTY_TABLE = {};
+    transient Entry<K,V>[] table = (Entry<K,V>[]) EMPTY_TABLE;
+    static final int ALTERNATIVE_HASHING_THRESHOLD_DEFAULT = Integer.MAX_VALUE;
+    transient int hashSeed = 0;
+    private transient Set<Map.Entry<K,V>> entrySet = null;
 
-	//	JDK8独有的
-	transient Node<K,V>[] table;
-	transient Set<Map.Entry<K,V>> entrySet;
-	static final int TREEIFY_THRESHOLD = 8;
-	static final int UNTREEIFY_THRESHOLD = 6;
-	static final int MIN_TREEIFY_CAPACITY = 64;
+    //  JDK8独有的
+    transient Node<K,V>[] table;
+    transient Set<Map.Entry<K,V>> entrySet;
+    static final int TREEIFY_THRESHOLD = 8;
+    static final int UNTREEIFY_THRESHOLD = 6;
+    static final int MIN_TREEIFY_CAPACITY = 64;
 ```
 
 ```Java
     /**
-     * 该表在首次使用时初始化，并根据需要调整大小。 
+     * 该表在首次使用时初始化，并根据需要调整大小。
      * 分配时，长度始终是2的幂。（在某些操作中，我们还允许长度为零，以允许使用当前不需要的引导机制。）
      */
     transient Node<K,V>[] table;
@@ -728,12 +728,12 @@ get方法就没有怎么麻烦了，简单很多。
      */
     transient Set<Map.Entry<K,V>> entrySet;
 
-	//	链表的树化阈值，即链表长度大于8就会有可能转换成红黑树
+    //  链表的树化阈值，即链表长度大于8就会有可能转换成红黑树
     static final int TREEIFY_THRESHOLD = 8;
-	//	链表的还原阈值，即红黑树的节点小于6就换转换成链表
-	static final int UNTREEIFY_THRESHOLD = 6;
-	//	最小树形化阈值，数组长度大于64才会转换成红黑树
-	static final int MIN_TREEIFY_CAPACITY = 64;
+    //  链表的还原阈值，即红黑树的节点小于6就换转换成链表
+    static final int UNTREEIFY_THRESHOLD = 6;
+    //  最小树形化阈值，数组长度大于64才会转换成红黑树
+    static final int MIN_TREEIFY_CAPACITY = 64;
 ```
 
 ## 构造器
@@ -757,7 +757,7 @@ get方法就没有怎么麻烦了，简单很多。
             throw new IllegalArgumentException("Illegal load factor: " +
                                                loadFactor);
         this.loadFactor = loadFactor;
-        //	上面与JDK7的一样，不一样的就是这句和省略了init初始化方法
+        //  上面与JDK7的一样，不一样的就是这句和省略了init初始化方法
         this.threshold = tableSizeFor(initialCapacity);
     }
 
@@ -784,7 +784,7 @@ get方法就没有怎么麻烦了，简单很多。
         n |= n >>> 4;
         n |= n >>> 8;
         n |= n >>> 16;
-        //	可认为将JDK7中roundUpToPowerOf2和highestOneBit方法合并了
+        //  可认为将JDK7中roundUpToPowerOf2和highestOneBit方法合并了
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
     }
 
@@ -815,7 +815,10 @@ get方法就没有怎么麻烦了，简单很多。
 
 ## 数据结构
 
-JDK8的底层进行了一些优化，主体依旧是数组，链表为辅，但为了解决有时候链表过长，多引入了红黑树，链表在一定情况会转换为红黑树。
+JDK8的底层进行了一些优化，主体依旧是数组，链表为辅，但是链表过长会导致hashmap的查询效率变低
+因为链表的查询操作的时间复杂度为O(n)，所以在JDK8中引入了红黑树。
+当链表达到树化阈值的时候，就会转变为红黑树
+因为红黑树的查询操作的时间复杂度为O(log(n))，所以可以提高查询桶里节点的效率
 
 ## get
 
