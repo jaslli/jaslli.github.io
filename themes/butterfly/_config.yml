@@ -768,7 +768,7 @@ artitalk:
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
 pjax:
-  enable: false
+  enable: true
   exclude:
     # - xxxx
     # - xxxx
@@ -836,10 +836,10 @@ inject:
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.css">
-    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.7/other/main.js"></script>
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css">
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
-    - <script src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
+    - <script async data-pjax src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.7/other/main.js"></script>
+    - <script async data-pjax src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
     # - <script src="xxxx"></script>
 
 # CDN
