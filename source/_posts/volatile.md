@@ -270,9 +270,58 @@ class Data {
 
 得到的结果按理说应该是20000,但是执行了很多次出来的结果都不是20000，都是比20000少的。这显而易见，每个线程并不能全部完成自己的任务，从而可知volatile不保证原子性。为什么不保证原子性呢？
 
-假设存在两个线程，A和B。A和B将值读取到自己的工作内存当中，并将该值进行自增，当A即将将工作内存中的值写入到内存时，B也有可能会争抢写入到主内存，此时假设A成功抢到，并将主内存中的值刷新了，而由于计算机处理速度很快，在没有成功进行总线嗅探的时候也将工作内存的值写入到主内存，从而发生了丢失修改的错误，故结果总是低于20000（其实是有可能出现等于两万的，不过当并发量更大的时候，发生丢失修改的几率也会变大）。
+首先要知道的一点是，自增或者自减其实并不是一个原子性的操作，我们总觉得它是一个语句所以就把它当成了一个原子性操作，这是不对的，在底层`i++`是有几个指令组成的，现在来探究一下。
 
-出现这种情况的原因是自增这个复合操作不是原子性的，所以volatile是不能保证原子性的。
+首先写一个简单的自增语句。
+
+```Java
+package com.yw;
+
+public class Test{
+    public static void main(String[] args) throws InterruptedException {
+        int i = 0;
+        i++;
+        System.out.println(i);
+    }
+}
+```
+
+对该程序进行`javap -c`的反汇编得到以下的指令。
+
+```Java
+Compiled from "Test.java"
+public class com.yw.Test {
+  public com.yw.Test();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+    Code:
+       0: iconst_0
+       1: istore_1
+       2: iinc          1, 1
+       5: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       8: iload_1
+       9: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
+      12: return
+}
+```
+
+于是就可以得到`i++`的指令。
+
+```Java
+       1: istore_1				//	将栈顶int型数值存入第一个本地变量
+       2: iinc          1, 1	//	将指定int型变量增加指定值
+       5: getstatic     #2		//	获取指定类中的静态域，并将其压入栈顶
+```
+
+所以可以看到自增的指令并不是一条，所以就会有可能出现一些情况导致出现错误。
+
+比如存在两个线程A和B。这两个线程都在各自线程的工作内存获取了相同并正确的值，并执行完`iinc`的自增指令，并将其压入栈中，但是由于存在线程竞争的情况，将其写回主内存时就会出现这种情况，A抢到时间片将自增写回主内存，时间片结束轮到B线程进行写入，可能会出现执行速度过快，导致没有进行嗅探将线程错误的初始值确认为无效，然后也将工作内存中的值写回主内存，于是就出现了丢失修改的错误。
+
+所以说valatile并不能解决这样的错误，只要不是原子性的操作，就不能保证总体的原子性,如果需要保证原子性那就需要用到锁了。
 
 ## 禁止指令重排
 
@@ -332,3 +381,4 @@ class Data {
 
 - [Java并发编程的艺术](https://book.douban.com/subject/26591326/)
 - [并发编程网](http://ifeve.com/)
+- [字节码指令](https://segmentfault.com/a/1190000008722128)
