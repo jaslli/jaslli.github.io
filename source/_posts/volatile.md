@@ -4,10 +4,11 @@ date: 2021-1-8
 categories:
 	- Java
 	- JUC
-description: volatile是一个轻量级的同步机制。
+description: volatile是Java提供的一个关键字，是一个轻量级的同步机制。
 keywords:
 	- volatile关键字
 	- volatile详解
+	- JMM
 cover: https://img.yww52.com/2021/1/2021-1-8/top_img.jpg
 ---
 
@@ -326,3 +327,8 @@ class Data {
 - 在每个volatile读操作后面插入一个`LoadStore Barriers`
 
 ![](https://img.yww52.com/2021/1/2021-1-8/img4.png)
+
+# 参考资料
+
+- [Java并发编程的艺术](https://book.douban.com/subject/26591326/)
+- [并发编程网](http://ifeve.com/)
