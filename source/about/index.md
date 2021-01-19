@@ -44,7 +44,7 @@ comments: false
 
 {% radio green checked,图片源于网络，若是涉及侵权请联系我删除%}
 
-{% radio green checked,由于本人比较菜，所以写的文章多多少少会存在一些问题，若有意见不同的可以指点%}
+{% radio green checked,由于本人比较菜，所以写的文章多多少少会存在一些问题，不合理的地方可以指正%}
 </br>
 
 
