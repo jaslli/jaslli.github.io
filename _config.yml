@@ -99,6 +99,8 @@ pagination_dir: page
 baidusitemap:
   path: baidusitemap.xml
 
+
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
