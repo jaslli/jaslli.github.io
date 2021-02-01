@@ -8,7 +8,7 @@ description: synchronized是Java提供的一个关键字，是一种同步锁。
 keywords:
 	- synchronized关键字
 	- synchronized详解
-	- synchronized锁种类
+	- synchronized锁
 cover: https://img.yww52.com/2021/1/2021-1-11/top_img.jpg
 ---
 
