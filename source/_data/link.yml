@@ -10,8 +10,8 @@
       avatar: https://gitee.com/kylincw/images/raw/master/img/20200807181526.jpg
       descr: 学习不易，努力努力~
     - name: 沉默的小嘉
-      link: https://www.imzjw.cn/
-      avatar: https://blog.imzjw.cn/img/avatar.png
+      link: https://blog.imzjw.cn/
+      avatar: https://cdn.jsdelivr.net/gh/zjwo/CDN/img/blog/avatar.jpg
       descr: 好记性不如烂笔头
     - name: PluShine
       link: https://plushine.cn
@@ -37,3 +37,7 @@
       link: https://blog.zhheo.com/
       avatar: https://blog.zhheo.com/img/avatar.png
       descr: 爱折腾的设计师
+    - name: OY
+      link: https://oy6090.top/
+      avatar: https://cdn.jsdelivr.net/gh/OYCodeSite/CDN@0.2/oy_img/avatar.jpg
+      descr: 放弃不难，但坚持一定很酷

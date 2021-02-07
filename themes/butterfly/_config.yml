@@ -294,8 +294,10 @@ valine:
   - d062f6c881b7b502fb60f262abbabf7c  #小号
   - 429d94ae943510552277cd3bfdf193e2  #XJHui
   - fcb88dccdfa8b4bafda50531ed00d125  #Kylin
-  - 7c962fe531532726d380d156d5f5b22c  #GarveyZhong
+  - 60eb1336008fbb676875bc22433a1715  #GarveyZhong
   - 617f018ac45b08f999632bf84ce9dd03  #ConstOwn
+  - 10b35cf3145235a854a43e4ff0bb5c8f  # oY
+  - 62d8c76b1fd8822cd95efe0abec26b70  #HEO
   appId: D1fvRHFdzJkrS7IfbaxET2ii-gzGzoHsz # leancloud application app id
   appKey: 5RweNCelj4e5Dm949dwf56RR # leancloud application app key
   pageSize: 10 # comment list page size
