@@ -13,14 +13,9 @@ menu:
   分类: /categories/ || iconfont iconfenlei
   友链: /link/ || iconfont iconlianjie
   关于: /about/ || iconfont iconaixin
-  # List||fas fa-list:
-  #   - Music || /music/ || fas fa-music
-  #   - Movie || /movies/ || fas fa-video
-  # Link: /link/ || fas fa-link
-  # About: /about/ || fas fa-heart
 
 # Hide the child menu items in mobile sidebar
-hide_sidebar_menu_child: true
+hide_sidebar_menu_child: false
 
 # Code Blocks (代碼相關)
 # --------------------------------------
@@ -43,7 +38,7 @@ copy:
 # formal:
 #   icon: link || the description
 social:
-  1
+ 1
 
 # search (搜索)
 # --------------------------------------
@@ -86,6 +81,9 @@ favicon: https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/icon.ico
 avatar:
   img: https://img.yww52.com/avatar.jpg
   effect: false
+
+# Disable all banner image
+disable_top_img: false
 
 # The banner image of home page
 index_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
@@ -174,6 +172,7 @@ index_post_content:
 toc:
   enable: true
   number: true
+  style_simple: true
 
 post_copyright:
   enable: false
@@ -192,6 +191,14 @@ reward:
     #   link:
     #   text: alipay
 
+# Post edit
+# Easily browse and edit blog source code online.
+post_edit:
+  enable: false
+  # url: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name/
+  # For example: https://github.com/jerryc127/butterfly.js.org/edit/main/source/
+  url:
+
 # Related Articles
 related_post:
   enable: true
@@ -200,6 +207,13 @@ related_post:
 
 # figcaption (圖片描述文字)
 photofigcaption: true
+
+# post_pagination (分頁)
+# value: 1 || 2 || false
+# 1: The 'next post' will link to old post
+# 2: The 'next post' will link to new post
+# false: disable pagination
+post_pagination: 1
 
 # anchor
 # when you scroll in post, the URL will update according to header id.
@@ -240,7 +254,7 @@ addtoany:
 
 comments:
   # Up to two comments system, the first will be shown as default
-  # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Utterances/Facebook Comments
+  # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo
   use:
    - Valine
   # - Disqus
@@ -248,7 +262,8 @@ comments:
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
   lazyload: false
-  count: false # Display comment count in top_img
+  count: false # Display comment count in post's top_img
+  card_post_count: false # Display comment count in Home Page
 
 # disqus
 # https://disqus.com/
@@ -296,14 +311,14 @@ valine:
   - fcb88dccdfa8b4bafda50531ed00d125  #Kylin
   - 60eb1336008fbb676875bc22433a1715  #GarveyZhong
   - 617f018ac45b08f999632bf84ce9dd03  #ConstOwn
-  - 10b35cf3145235a854a43e4ff0bb5c8f  # oY
+  - 10b35cf3145235a854a43e4ff0bb5c8f  #oY
   - 62d8c76b1fd8822cd95efe0abec26b70  #HEO
   appId: D1fvRHFdzJkrS7IfbaxET2ii-gzGzoHsz # leancloud application app id
   appKey: 5RweNCelj4e5Dm949dwf56RR # leancloud application app key
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
   lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
-  placeholder: 在名称处输入QQ号自动获取QQ的信息哦 # valine comment input placeholder (like: Please leave your footprints)
+  placeholder: 可以只在名称处输入QQ号,可以自动获取QQ的信息哦 # valine comment input placeholder (like: Please leave your footprints)
   guest_info: nick,mail,link # valine comment header info (nick/mail/link)
   recordIP: true # Record reviewer IP
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
@@ -315,8 +330,17 @@ valine:
   metaPlaceholder: # 输入框的背景文字
     nick: 昵称/QQ号(必填)
     mail: 邮箱(必填)
-    link: 最好填上你的博客网址哦
+    link: 最好填上找得到你的网址哦！
     option:
+
+# waline - A simple comment system with backend support fork from Valine
+# https://waline.js.org/
+waline:
+  serverURL: # Waline server address url
+  avatar: monsterid # gravatar style https://zh-tw.gravatar.com/site/implement/images/#default-image
+  emojiCDN: # emoji CDN
+  bg: # waline background
+  option:
 
 # utterances
 # https://utteranc.es/
@@ -340,6 +364,9 @@ facebook_comments:
 # Twikoo
 # https://github.com/imaegoo/twikoo
 twikoo:
+  envId:
+  region:
+  option:
 
 # Chat Services
 # --------------------------------------
@@ -386,21 +413,17 @@ crisp:
 footer:
   owner:
     enable: true
-    since: 2019
-  custom_text: <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://img.yww52.com/cdnlogo.png" align="absmiddle" height="30px" width="60px"/></a> 提供CDN加速
+    since: 2018
+  custom_text:
+  - <a href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referra"><img src="https://img.yww52.com/cdnlogo.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span> </br><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.beian.miit.gov.cn"><img class="icp-icon loading" src="/img/icp.png" alt="ICP" data-ll-status="loading"><span>桂ICP备20005765号</span></a>
   copyright: true # Copyright of theme and framework
-  ICP: # Chinese ICP License
-    enable: true
-    url: http://www.beian.miit.gov.cn
-    text: 桂ICP备20005765号
-    icon: /img/icp.png
 
 # Analysis
 # --------------------------------------
 
 # Baidu Analytics
 # https://tongji.baidu.com/web/welcome/login
-baidu_analytics: 
+baidu_analytics:
 
 # Google Analytics
 # https://analytics.google.com/analytics/web/
@@ -413,6 +436,14 @@ tencent_analytics:
 # CNZZ Analytics
 # https://www.umeng.com/
 cnzz_analytics:
+
+# Cloudflare Analytics
+# https://www.cloudflare.com/zh-tw/web-analytics/
+cloudflare_analytics:
+
+# Microsoft Clarity
+# https://clarity.microsoft.com/
+microsoft_clarity:
 
 # Advertisement
 # --------------------------------------
@@ -556,7 +587,8 @@ ClickShowText:
     # - I
     # - LOVE
     # - YOU
-  fontSize: 15px
+  fontSize: 16px
+  random: false
   mobile: false
 
 # Default display mode (網站默認的顯示模式)
@@ -599,10 +631,10 @@ subtitle:
   loop: true
   # source調用第三方服務
   # source: false 關閉調用
-  # source: 1  調用搏天api的隨機語錄（簡體） https://api.btstu.cn/
-  # source: 2  調用一言網的一句話（簡體） https://hitokoto.cn/
-  # source: 3  調用一句網（簡體） http://yijuzhan.com/
-  # source: 4  調用今日詩詞（簡體） https://www.jinrishici.com/
+  # source: 1  調用搏天api的隨機語錄（簡體）
+  # source: 2  調用一言網的一句話（簡體）
+  # source: 3  調用一句網（簡體）
+  # source: 4  調用今日詩詞（簡體）
   # subtitle 會先顯示 source , 再顯示 sub 的內容
   source: false
   # 如果有英文逗號' , ',請使用轉義字元 &#44;
@@ -621,16 +653,17 @@ preloader: false
 aside:
   enable: true
   hide: false
-  button: false
+  button: true
   mobile: true # display on mobile
   position: left # left or right
   card_author:
     enable: true
     description:
     button:
+      enable: false
       icon: fab fa-github
-      text: Github
-      link: https://github.com/jaslli
+      text: Follow Me
+      link: https://github.com/xxxxxx
   card_announcement:
     enable: true
     content: 欢迎来到我的博客!
@@ -638,24 +671,29 @@ aside:
     enable: false
     limit: 3 # if set 0 will show all
     sort: date # date or updated
+    sort_order: # Don't modify the setting unless you know how it works
   card_categories:
     enable: true
-    limit: 0 # if set 0 will show all
+    limit: 8 # if set 0 will show all
     expand: none # none/true/false
+    sort_order: 1 # Don't modify the setting unless you know how it works
   card_tags:
     enable: false
     limit: 40 # if set 0 will show all
     color: false
+    sort_order: # Don't modify the setting unless you know how it works
   card_archives:
     enable: false
     type: monthly # yearly or monthly
-    format: YYYY MMMM # eg: YYYY年MM月
+    format: MMMM YYYY # eg: YYYY年MM月
     order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
     limit: 8 # if set 0 will show all
+    sort_order: # Don't modify the setting unless you know how it works
   card_webinfo:
     enable: true
     post_count: true
     last_push_date: true
+    sort_order: 2 # Don't modify the setting unless you know how it works
 
 # busuanzi count for PV / UV in site
 # 訪問人數
@@ -673,14 +711,12 @@ runtimeshow:
 # Aside widget - Newest Comments
 newest_comments:
   enable: false
+  sort_order: # Don't modify the setting unless you know how it works
   limit: 6
+  storage: 10 # unit: mins, save data to localStorage
   avatar: true
-  leancloud:
-    enable: false
-    appId: # leancloud application app id
-    appKey: # leancloud application app key
-    serverURL: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
-    default_avatar: # mp/identicon/monsterid/wavatar/retro/robohash/blank
+  # You can only choose one, or neither
+  valine: false
   github_issues:
     enable: false
     repo:
@@ -688,9 +724,14 @@ newest_comments:
     enable: false
     forum:
     api_key:
+  twikoo: false
+  waline: false
 
 # Bottom right button (右下角按鈕)
 # --------------------------------------
+
+# Change font size
+change_font_size: true
 
 # Conversion between Traditional and Simplified Chinese (簡繁轉換)
 translate:
@@ -698,7 +739,7 @@ translate:
   # The text of a button
   default: 繁
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
-  defaultEncoding: 2
+  defaultEncoding: 1
   # Time delay
   translateDelay: 0
   # The text of the button when the language is Simplified Chinese
@@ -718,7 +759,7 @@ darkmode:
   # autoChangeMode: 1  Following System Settings, if the system doesn't support dark mode, it will switch dark mode between 6 pm to 6 am
   # autoChangeMode: 2  Switch dark mode between 6 pm to 6 am
   # autoChangeMode: false
-  autoChangeMode: false
+  autoChangeMode: 1
 
 # Lightbox (圖片大圖查看模式)
 # --------------------------------------
@@ -786,12 +827,9 @@ aplayerInject:
 # 可選 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
   enable: true
-  position: top-center
+  position: bottom-left
   bg_light: '#49b1f5' # The background color of Toast Notification in light mode
   bg_dark: '#121212' # The background color of Toast Notification in dark mode
-
-# Baidu Push (百度推送)
-baidu_push: false
 
 # https://instant.page/
 # prefetch (預加載)
@@ -812,23 +850,20 @@ lazyload:
 # PWA
 # See https://github.com/JLHwung/hexo-offline
 # ---------------
-pwa:
-  enable: false
-  manifest: /manifest.json
-  apple_touch_icon: /image/pwa/apple-touch-icon.png
-  favicon_32_32: /32.png
-  favicon_16_16: /16.png
-  mask_icon: /image/pwa/safari-pinned-tab.svg
-
-# Disable Baidu transformation on mobile devices (禁止百度轉碼)
-disable_baidu_transformation: true
+# pwa:
+#   enable: false
+#   manifest: /pwa/manifest.json
+#   apple_touch_icon: /pwa/apple-touch-icon.png
+#   favicon_32_32: /pwa/32.png
+#   favicon_16_16: /pwa/16.png
+#   mask_icon: /pwa/safari-pinned-tab.svg
 
 # Open graph meta tags
 # https://developers.facebook.com/docs/sharing/webmasters/
 Open_Graph_meta: true
 
-# Caches the contents in a fragment, speed up the generation (開啟hexo自帶的緩存,加快生成速度)
-fragment_cache: true
+# Add the vendor prefixes to ensure compatibility
+css_prefix: true
 
 # Inject
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
@@ -837,11 +872,10 @@ inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
-    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/main.css">
-    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/tag.css">
-    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@master/other/iconfont.css">
-    - <script async data-pjax src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v2.7/other/main.js"></script>
-    - <script async data-pjax src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@latest/other/iconfont.js"></script>
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v5.0/other/main.css">
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v5.0/other/tag.css">
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v5.0/other/iconfont.css">
+    - <script async data-pjax src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v5.0/other/main.js"></script>
     # - <script src="xxxx"></script>
 
 # CDN
@@ -865,6 +899,7 @@ CDN:
   disqusjs_css: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css
   utterances: https://utteranc.es/client.js
   twikoo: https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js
+  waline: https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js
 
   # share
   addtoany: https://static.addtoany.com/menu/page.js

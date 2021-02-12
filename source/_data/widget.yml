@@ -1,0 +1,6 @@
+- class_name: card-widget card-like
+  id_name: lovelygirl
+  name:
+  icon:
+  order: 0
+  html: <img src="https://img.yww52.com/lovely.jpg"/>
