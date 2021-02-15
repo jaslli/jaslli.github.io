@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yww52.com/2020/07/02/Ngrok/</loc>
-    <lastmod>2021-02-15</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2021/02/14/Redis/</loc>
-    <lastmod>2021-02-15</lastmod>
-  </url>
-  <url>
     <loc>https://yww52.com/2020/11/24/SpringBoot%E6%95%B4%E5%90%88Druid/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
@@ -129,10 +121,6 @@
     <lastmod>2021-02-15</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2020/06/07/Mybatis%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2021-02-15</lastmod>
-  </url>
-  <url>
     <loc>https://yww52.com/2021/01/24/Shiro/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
@@ -201,6 +189,10 @@
     <lastmod>2021-02-15</lastmod>
   </url>
   <url>
+    <loc>https://yww52.com/2020/07/02/Ngrok/</loc>
+    <lastmod>2021-02-15</lastmod>
+  </url>
+  <url>
     <loc>https://yww52.com/2020/10/26/Docker/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
@@ -213,11 +205,19 @@
     <lastmod>2021-02-15</lastmod>
   </url>
   <url>
+    <loc>https://yww52.com/2020/06/07/Mybatis%E6%A1%86%E6%9E%B6/</loc>
+    <lastmod>2021-02-15</lastmod>
+  </url>
+  <url>
     <loc>https://yww52.com/2021/01/01/JUC%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
   <url>
     <loc>https://yww52.com/2020/06/17/Javase/</loc>
+    <lastmod>2021-02-15</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2021/02/14/Redis/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
 </urlset> 
