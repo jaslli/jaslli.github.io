@@ -4,7 +4,7 @@ date: 2021-2-15
 categories:
   - SpringBoot
 description: 学习Redis的笔记
-cover: https://img.yww52.com/2020/10/2020-10-15top_img.jpg
+cover: https://img.yww52.com/2021/2/2021-2-15/top_img.jpg
 ---
 
 
@@ -117,6 +117,242 @@ Redis不是默认启动的，为了方便学习，要设置成默认启动的，
 	exit
 ```
 
-# Redis 性能测试
+# 性能测试
 
-Redis的目录下还会有一个
+Redis的目录下还会有一个命令`redis-benchmark`。
+
+这个命令是官方自带的性能测试的命令，用来测试Redis的一些基础命令读写的速度，以下是命令的参数。
+
+| 参数选项 |                    描述                    |  默认值   |
+| :------: | :----------------------------------------: | :-------: |
+|    -h    |              指定服务器主机名              | 127.0.0.1 |
+|    -p    |               指定服务器端口               |   6379    |
+|    -s    |             指定服务器 socket              |           |
+|    -c    |               指定并发连接数               |    50     |
+|    -n    |                 指定请求数                 |   10000   |
+|    -d    |   以字节的形式指定 SET/GET 值的数据大小    |     2     |
+|    -k    |          1=keep alive 0=reconnect          |     1     |
+|    -r    | SET/GET/INCR 使用随机 key, SADD 使用随机值 |           |
+|    -P    |         通过管道传输 <numreq> 请求         |     1     |
+|    -q    |    强制退出 redis。仅显示 query/sec 值     |           |
+|  --csv   |              以 CSV 格式输出               |           |
+|    -l    |           生成循环，永久执行测试           |           |
+|    -t    |       仅运行以逗号分隔的测试命令列表       |           |
+|    -I    |  Idle 模式。仅打开 N 个 idle 连接并等待。  |           |
+
+# 数据类型
+
+Redis支持的数据类型有很多，官网也写的很清楚了。
+
+> Redis provides data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes, and streams.
+
+## String(字符串)
+
+```bash
+# 值为一个字符串
+
+# 设置键值对
+	set [key] [value]
+# 获取值
+	get [key]
+# 查看所有的键值对
+	keys *
+# 切换数据库（redis默认16个数据库，从0开始）
+	select [index]
+# 清空数据库
+	flushdb	 # 当前数据库
+	flushall # 所有的数据库 
+# 判断键值对是否存在
+	exists [key]
+# 往值追加字符串
+	append [key] [value]
+# 获取字符串的长度
+	strlen [key]
+# 自增,注意该字符串是要是数字
+	incr [key]	# 步长为1
+	incrby [key] [length]
+# 自减
+	decr [key]
+	decrby [key] [length]
+# 获取区间的值
+	getrange [key] [index1] [index2]
+# 替换值,从第几个开始替换值
+	setrange [key] [index] [value]
+# 给给定键设置过期时间
+	expire [key] [秒]
+# 创建一个键值对并设置过期时间
+	setex [key] [秒] [value]
+# 查看是否过期，负数表示已过期的时间
+	ttl [key]
+#  如果不存在该键就设置键值对
+	setnx [key] [value]
+# 批量创建键值对
+	mset [key1] [value1] [key2] [value3] ...
+# 批量获取值
+	mget [key1] [key2] ...
+# 批量创建键值对,原子操作，若是有一个键已经存在，那就全部都会创建失败
+	msetnx [key1] [value1] [key2] [value3] ...
+# 先获取键值对在创建键值对
+	getset [key] [value]
+```
+
+## List(列表)
+
+```bash
+# 值为类似一个双端的链表
+
+# lpush表示从头部增加值，rpush从韦部增加值
+	lpush [key] [value]
+	rpush [key] [value]
+# 获取列表中的值,从index1到index2区间获取值
+	lrange [key] [index1] [index2]
+	lrange [key] 0 -1 # 表示查询列表所有值
+# lpop移除第一个值，rpop移除最后一个值
+	lpop [key]
+	rpop [key]
+# 按下标获取值
+	lindex [key] [index]
+# 查询键的长度，即有多少个值
+	llen [key]
+# 移除指定的值
+	lrem [key] [个数] [value]
+# 截取列表,即修改列表中的值
+	ltrim [key] [index1] [index2]
+# 移除列表最后一个值，移动到另一个列表中
+	rpoplpush [key1] [value] [key2]
+# 替换列表中指定的值
+	lset [key] [index] [value]
+# 判断列表是否存在
+	exists [key]
+# 插入值
+# 在列表的value1值的前面插入一个value2的值
+	linsert [key] before [value1] [value2]
+# 在列表的value1值的后面插入一个value2的值
+	linsert [key] after [value1] [value2]	
+```
+
+## Set(集合)
+
+```bash
+# set不能重复添加相同的元素
+
+# 往集合中添加值
+	sadd [key] [value]
+# 查看集合的所有值
+	smembers [key]
+# 判断集合是否存在该元素
+	sismember [key] [value]
+# 查看集合中元素的个数
+	scard [key]
+# 移除指定元素
+	srem [key] [value]
+# 随机抽选元素
+	srandmember [key] # 默认一个
+	srandmember [key] [length]
+# 随机移除一个元素
+	spop [key]
+# 将一个元素移动到另一个集合
+	smove [key1] [value] [key2]
+# 差集
+	sdiff [key1] [key2]
+# 交集
+	sinter [key1] [key2]
+# 并集
+	sunion [key1] [key2]
+```
+
+## Hash(哈希)
+
+``` bash
+# 值为一个哈希表,语法和String差不多
+
+# 设置一个键值对
+	hset [key] [key1] [value1]
+# 获取值
+	hget [key] [key1]
+# 批量设置键值对
+	hmset [key] [key1] [value1] [key2] [value2]...
+# 批量获取值
+	hmget [key] [key1] [key2]...
+# 获取全部键值对	
+	hgetall [key]
+# 删除指定键值对
+	hdel [key] [key1]
+# 查看键值对的个数
+	hlen [key]
+# 判断一个键值对是否存在
+	hexists [key] [key1]
+# 获取所有的键
+	hkeys [key]
+# 获取所有的值
+	hvals [key]
+# 不存在可以创建
+	hsetnx [key] [key1] [value1]
+```
+
+## Zset(有序的集合)
+
+```bash
+# 在set基础上增加了序号
+
+# 在指定位置增加值
+	zadd [key] [index] [value]
+	zadd [key] [index1] [value1] [index2] [value2]..
+# 有顺序地显示区间内的值，可以说是增序排序 
+	zrangebyscore [key] [min] [max]
+	zrangebyscore [key] -inf +inf 		# 表示按增序顺序显示所有的值
+# 有顺序地显示区间内的值，可以说是降序排序
+	zrevrange [key] 0 -1	# 表示降序顺序显示所有的值
+# 获取有序集合的个数
+	zcrad [key]
+# 获取指定区间的元素的个数
+	zount [key] [index1] [index2]
+```
+
+## geospatial(地理位置)
+
+```bash
+# 用来表示地理位置，经纬度，实现底层就是Zset，所以一些命令也适用
+
+# 添加一个地理位置
+	geoadd [key] [经度] [纬度] [value]
+# 获取指定值的经纬度
+	geopos [key] [value]
+# 获取两个位置之间的距离
+	geodist [key] [value1] [value2] [单位]
+# 指定某个位置和某个半径，返回半径内的值
+	georadius [key] [经度] [纬度] [半径] [单位]
+	georadius [key] [经度] [纬度] [半径] [单位] withdist	# 还会显示到中心位置的距离
+	georadius [key] [经度] [纬度] [半径] [单位] withcoord	# 会显示值当前的经纬度
+# 指定一个元素和某个半径，返回离这个元素位置半径内的值
+	georadiusbymember [key] [value] [半径] [单位]
+# 将指定位置经纬度转换为字符串
+	geohash [key] [value]
+```
+
+## Hyperloglog(基数统计)
+
+```bash
+# 基数，表示不重复元素的个数，存在误差
+
+# 添加键值对,值为一个集合
+	pfadd [key] [value1] [value2] [value3]...
+# 合并集合,不会重复
+	pfmerge [key] [key1] [key2]
+# 统计基数数量
+	pfcount [key]
+```
+
+## Bitmaps(位)
+
+```bash
+# 使用二进制来表示状态，用于那些只有两个状态
+
+# 添加键值对
+	setbit [key] [index] [1或0]
+# 获取值的状态
+	getbit [key] [index]
+# 统计1的个数
+	bitcount sign
+```
+
