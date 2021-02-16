@@ -1376,6 +1376,9 @@ rdbcompression yes
 # 对保存的rdb文件时进行校验检测
 rdbchecksum yes
 
+# rdb文件的默认文件名
+dbfilename dump.rdb
+
 # rdb文件保存的目录
 dir ./
 
@@ -1417,6 +1420,514 @@ appendfsync everysec
 # 不执行同步，交给操作系统自己同步
 # appendfsync no
 
+# 执行重写时同步数据到AOF文件，默认为no，yes表示不同步直接写入新的AOF文件
+no-appendfsync-on-rewrite no
+
+# 重写触发条件
+# 当AOF文件大于64mb而且比上一次重写的文件体积大了至少一倍，就会AOF重写
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+```
+
+
+
+# 持久化
+
+存储在内存中的数据，一旦机器出现问题，那么内存中的数据就会丢失，所以为了尽量避免这个问题，Redis提供了两种持久化的方法，接下来来了解一下这两种持久化的方式。
+
+## RDB
+
+RDB持久化机制是将某个时刻的数据快照写入磁盘，也就是将某个时刻的数据保存下来，等到Redis服务启动，就会自动加载这个快照文件进行数据恢复。
+
+### 手动触发
+
+- save命令（不建议使用）
+
+  save是一个同步的命令，也就是说执行save命令，会让Redis的服务器发生阻塞，直到RDB持久化完成，其他命令才能正常进行。
+
+  ![](https://img.yww52.com/2021/2/2021-2-15/img4.png)
+
+- bgsave命令
+
+  bgsave是一个异步的命令，执行bgsave命令，Redis会`fork`一个子进程来进行RDB持久化，只有fork时才会阻塞，其他时间Redis正常运行。
+
+  ![](https://img.yww52.com/2021/2/2021-2-15/img5.png)
+
+### 自动触发
+
+![](https://img.yww52.com/2021/2/2021-2-15/img6.png)
+
+- 满足配置文件中save配置的文件，默认配置如下，可以自己配置
+
+  ```bash
+  # 当900秒内至少有1个键值对发生变动，触发持久化
+  save 900 1
+  # 当300秒内至少有10个键值对发生变动，触发持久化
+  save 300 10
+  # 当60秒内至少有10000个键值对发生变动，触发持久化
+  save 60 10000
+  ```
+
+- 执行`flushall`命令清空数据库时，触发持久化
+
+- 执行`shutdown`命令等手段退出Redis时，触发持久化
+
+### RDB文件
+
+从配置文件可以看到配置文件的默认路径和默认名。
+
+```bash
+# rdb文件的默认文件名
+dbfilename dump.rdb
+
+# rdb文件保存的目录
+dir ./
+```
+
+## AOF
+
+AOF持久化全称`Append Only File`，当我们执行的改变数据的操作时就会将该命令追加到一个AOF文件的末尾，当Redis服务重新启动的时候，就会重新执行AOF文件内的命令，用来同步数据。
+
+<div class='tip'><p>
+    AOF不是默认的持久化方式，故默认关闭的，需要去配置文件手动开启。
+</p></div>
+
+
+
+![](https://img.yww52.com/2021/2/2021-2-15/img7.png)
+
+### AOF触发策略
+
+```bash
+# appendfsync always	
+appendfsync everysec
+# appendfsync no
+```
+
+- always
+
+  每次有新的修改数据的命令，就会将缓冲区内的命令同步追加到AOF文件，十分安全，但是效率低
+
+- evertsec
+
+  默认的策略，每秒将缓冲区内的命令同步追加到AOF文件，但是无法做到实时持久化，还是会可能丢失一秒的数据
+
+- no
+
+  交给操作系统来决定什么时候去同步追加数据
+
+### 重写机制
+
+当命令不断被追加到AOF文件内，文件会越来越大，这对使用来说很不好，所以Redis提供了一个AOF的重写机制来解决这个问题，将AOF文件内的命令优化，重写为可以恢复到当前数据的最小指令集，从而减少文件的大小，达到压缩AOF文件的目的。
+
+触发流程如下。
+
+![](https://img.yww52.com/2021/2/2021-2-15/img8.png)
+
+### 手动触发
+
+手动输入`bgrewriteaof`命令触发重写机制。
+
+### 自动触发
+
+自动触发就需要自行修改配置文件内AOF重写的配置。
+
+```bash
+# 重写触发条件
+# 当AOF文件大于64mb而且比上一次重写的文件体积大了至少一倍，就会AOF重写
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+```
+
+
+
+## 持久化流程
+
+![](https://img.yww52.com/2021/2/2021-2-15/img9.png)
+
+
+
+# 发布订阅
+
+发布订阅是一种消息通信模式。
+
+发送者发送消息，订阅者接受发送者的消息。
+
+接下来进行一个简单的测试。
+
+1. 订阅一个频道，这里订阅`yww`这个频道
+
+   ```bash
+   127.0.0.1:6379> subscribe yww
+   Reading messages... (press Ctrl-C to quit)
+   1) "subscribe"
+   2) "yww"
+   3) (integer) 1
+   ```
+
+2. 在打开一个Redis的客户端，然后往`yww`频道发送两条消息
+
+   ```bash
+   127.0.0.1:6379> publish yww "Hello Redis"
+   (integer) 1
+   127.0.0.1:6379> publish yww "Hello World"
+   (integer) 1
+   127.0.0.1:6379> 
+   ```
+
+3. 在订阅频道的订阅者的客户端就能接收到频道的消息了
+
+   ```bash
+   127.0.0.1:6379> subscribe yww
+   Reading messages... (press Ctrl-C to quit)
+   1) "subscribe"
+   2) "yww"
+   3) (integer) 1
+   1) "message"
+   2) "yww"
+   3) "Hello Redis"
+   1) "message"
+   2) "yww"
+   3) "Hello World"
+   ```
+
+以下是一些常用的API
+
+```bash
+# 订阅一个或多个符和给定模式的频道
+psubscribe pattern[pattern...]
+
+# 退订一个或多个给定模式的频道
+punsubscribe [pattern[pattern]]
+
+# 查看订阅与发布系统状态
+pubsub subcommand [argument[argument...]]
+
+# 将消息发送到指定的频道
+publish channel message
+
+# 订阅一个或多个频道的信息
+subscribe channel[channel ...]
+
+# 退订一个或多个频道的信息
+unsubscribe [channel[channel...]]
+```
+
+# 主从复制，读写分离
+
+当数据量过大的时候，服务器的压力就会提高，为了解决这个问题，Redis提供了`主从复制，读写分离`的方案，因为大部分的压力是读操作，所以可以搭建一个Redis集群（最低要求三台，一主二从)，主节点负责写操作，从节点用来提供读的服务，这样就能减少服务器的压力了。
+
+![](https://img.yww52.com/2021/2/2021-2-15/img10.png)
+
+当然还可以有以下这种情况
+
+![](https://img.yww52.com/2021/2/2021-2-15/img11.png)
+
+节点是既可以当主节点，又可以当子节点的。
+
+Redis的主从复制表示只有主节点能进行写操作，从节点是不能进行写操作的，只能进行读操作，主节点的数据会同步到子节点，达到整个集群的数据一致。
+
+## 同步机制
+
+上边说到的同步方式根据是否是全量来分为`全量同步`和`增量同步`。
+
+- 全量同步
+
+  全量同步的数据复制一般只会发生在`slave从节点`连接主节点的时候，这时从节点会将主节点中的所有数据都复制到从节点中，从而从节点连接主节点后数据通同步。
+
+  期间发生的具体步骤如下。
+
+  1. 从节点连接主节点后，向主节点发出`SYNC`命令
+  2. 主节点收到`SYNC`命令后，开始执行`BGSAVE`生成RDB文件，因为是异步的操作，所以主节点继续处理命令，并将被执行的命令放入缓冲区
+  3. 生成RDB文件后，就会向从节点发送快照文件
+  4. 从节点收到主节点发送的RDB文件后，就会放弃原来存在的旧数据，然后载入RDB文件同步数据
+  5. 触发增量同步
+
+  这样主节点的数据旧全量同步复制到了从节点上。
+
+- 增量同步
+
+  除了首次从节点的全量同步，一般数据的同步都是使用增量同步的方式
+
+  1. 主节点将缓冲区中的命令发送给从节点
+  2. 从节点接收到命令请求，就会执行这些命令，完成部分写命令带来的数据同步
+
+## 模拟Redis集群
+
+这里使用同一个服务器，不同端口搭建的Redis集群进行学习。
+
+当然你有多台服务器可以使用不同服务器来搭建集群来学习。
+
+再不然可以直接开三个容器来搭建Redis集群来学习。
+
+首先是了解一个基本的命令。
+
+```bash
+# 查看当前服务的信息
+info replication
+
+127.0.0.1:6379> info replication
+# Replication
+role:master				# 角色为主节点，没有配置，默认每个服务都是主机
+connected_slaves:0		# 连接从节点的个数
+master_replid:fb2dce24da3d78a04f01a6f55abdd48e1751dda0
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:0
+second_repl_offset:-1
+repl_backlog_active:0
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:0
+repl_backlog_histlen:0
+127.0.0.1:6379> 
+```
+
+创建三个配置文件，用来开启三个服务。
+
+```bash
+redis6379.conf  redis6380.conf  redis6381.conf
+```
+
+然后配置这三个文件。
+
+```bash
+# redis6379.conf	主节点的配置
+logfile "6379log.log"
+dbfilename dump6379.rdb
+
+# redis6380.conf
+port 6380
+pidfile /var/run/redis_6380.pid
+logfile "6380log.log"
+dbfilename dump80.rdb
+
+# redis6381.conf
+port 6381
+pidfile /var/run/redis_6381.pid
+logfile "6381log.log
+dbfilename dump6381.rdb
+
+# 开启redis集群服务
+# redis-server ./myconf/redis6379.conf 
+# redis-server ./myconf/redis6380.conf 
+# redis-server ./myconf/redis6381.conf 
+# ps -ef |grep redis
+root     19536 19481  0 20:19 pts/1    00:00:00 redis-cli
+root     32040     1  0 22:30 ?        00:00:00 redis-server 127.0.0.1:6379
+root     32052     1  0 22:30 ?        00:00:00 redis-server 127.0.0.1:6380
+root     32062     1  0 22:30 ?        00:00:00 redis-server 127.0.0.1:6381
+root     32106 30264  0 22:30 pts/2    00:00:00 grep --color=auto redis
+
+# 开启三个客户端，这里使用主节点的客户端演示，子节点客户端另开窗口
+# redis-cli -p 6379
+```
+
+然后是建立主从联系，这里使用6379的服务当成主节点，建立联系有两种方法。
+
+- 在从节点中使用命令连接主机，这是简单的连接，要是从节点服务关闭了，之后重启旧连接不到主节点了，可以说是一次性的
+
+  ```bash
+  	SLAVEOF [host] [port]
+  ```
+
+- 使用配置设置，这种情况，从节点服务重启后就会继续连接主机
+
+  ```bash
+  ################################# REPLICATION #################################
+  
+  # 在这下面配置主节点服务地址就好了，样例已经给出
+  # replicaof <masterip> <masterport>
+  
+  # 要是主节点服务有密码可以在这里配置
+  # masterauth <master-password>
+  ```
+
+这里连接6379当成主节点。
+
+```bash
+# 配置6380从节点
+127.0.0.1:6380> SLAVEOF 127.0.0.1 6379
+OK
+127.0.0.1:6380> info replication
+# Replication
+role:slave
+master_host:127.0.0.1
+master_port:6379
+master_link_status:up
+master_last_io_seconds_ago:3
+master_sync_in_progress:0
+slave_repl_offset:28
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_replid:8ed59f23d41ec553e33eae6b5fb13cfd1d807e80
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:28
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:28
+
+
+# 配置6381从节点
+127.0.0.1:6381> SLAVEOF 127.0.0.1 6379
+OK
+127.0.0.1:6381> info replication
+# Replication
+role:slave
+master_host:127.0.0.1
+master_port:6379
+master_link_status:up
+master_last_io_seconds_ago:9
+master_sync_in_progress:0
+slave_repl_offset:42
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_replid:8ed59f23d41ec553e33eae6b5fb13cfd1d807e80
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:42
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:15
+repl_backlog_histlen:28 
+
+
+# 查看6379主节点信息
+127.0.0.1:6379> info replication
+# Replication
+role:master
+connected_slaves:2
+slave0:ip=127.0.0.1,port=6380,state=online,offset=70,lag=1
+slave1:ip=127.0.0.1,port=6381,state=online,offset=70,lag=1
+master_replid:8ed59f23d41ec553e33eae6b5fb13cfd1d807e80
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:70
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:70
+
+```
+
+然后在主机设置的数据，可以在从机中获取数据。
+
+## 哨兵模式（Sentinel）
+
+通过配置连接的子节点出现故障，重启服务后，因为配置连接的缘故那还是子节点，所以子节点出现故障的情况很简单。
+
+<div class='tip'><p>
+    要是这个子节点有子节点，那么主机故障后，子节点的role依旧是salve，所以还是不能进行写操作。
+</p></div>
+
+接下来重点了解一下主节点出现故障的情况。
+
+当主节点出现故障后，它的子节点身份是不会变的，当主节点的服务重新启动后，集群依旧存在。
+
+当我们不清楚主节点何时恢复，总不能一直不进行写操作，所以就需要重新推出一个主节点。
+
+```bash
+# 令从节点恢复master
+SLAVEOF no one
+# 然后在配置其他节点连接至该节点
+```
+
+ 这是手动配置主节点，这其实还是挺麻烦的，所以为了解决这个问题，Redis从2.8的版本后就提供了`哨兵模式`这个方案。
+
+---
+
+哨兵模式其实就是自动推选主节点的一种方案。
+
+先来简单了解一下哨兵模式。
+
+哨兵是一个独立的进程，在Redis的命令中也能看到它`redis-sentinel`。
+
+该进程通过向各个节点发送命令，通过节点返回的信息来监控节点的使用情况。
+
+![](https://img.yww52.com/2021/2/2021-2-15/img12.png)
+
+当主节点宕机了，哨兵向主节点发送命令却得不到返回信息，过段时间哨兵确认主节点宕机后，就会随机给从节点随机投票，获得投票的节点就会当选为主节点，然后通过发布订阅模式通知其他的从节点修改配置，让它们切换主节点对象，从而实现集群正常服务。
+
+那要是哨兵宕机了怎么办呢？这样的设置还是会出现问题。所以哨兵不能只有一台，哨兵也要形成一个集群（最好三个起步），于是最终的解决方案就如下图。
+
+![](https://img.yww52.com/2021/2/2021-2-15/img13.png)
+
+多个哨兵进行监控，当有一个哨兵检测到主节点宕机，并不会马上切换，因为有可能是哨兵的问题，所以哨兵只会主观认为主节点宕机（这种情况叫主观下线）。
+
+当一定个数的哨兵都认为主节点宕机后，那大概率就不是哨兵的问题了，那么哨兵之前就会对剩余的从节点投票，投票结束后，随机一个哨兵进行`failover`操作（这种情况叫客观下线）。
+
+`failover`又称故障转移，它会从从节点中挑选一个作为Redis集群中的新的主节点。
+
+1. 选择票数高的从节点当为主节点，若是不存在（同票的情况），就继续判断。
+2. 选择主从复制，同步数据最完整的节点成为主节点，若是不存在就继续判断。
+3. 选择启动最早的子节点当为新的主节点。
+
+对选出来的主节点执行`slaveof no one`将身份转换成主节点，然后向其他的从节点发送订阅模式通知，各个哨兵就会让他们的节点切换主节点的对象为新的主节点。最后更新之前宕掉的节点的身份为从节点，当宕机恢复后，就自动成为该集群的从节点。
+
+---
+
+哨兵的启动需要先配置哨兵启动的配置文件`sentinel.conf`。
+
+```bash
+# Example sentinel.conf
+ 
+# 哨兵sentinel运行的端口，默认26379
+port 26379
+ 
+# 哨兵sentinel的工作目录
+dir /tmp
+ 
+# 最主要的一个配置，这个是必定配置的
+# master-name为主节点名称,ip为主节点的ip，port主节点Redis服务断开
+# 哨兵对主节点主观下线的个数达到quorum个后，就会执行故障转移。(三个节点就用2)
+# sentinel monitor <master-name> <ip> <redis-port> <quorum>
+sentinel monitor mymaster 127.0.0.1 6379 2
+ 
+# 设置哨兵sentinel 连接主从的密码 注意必须为主从设置一样的验证密码
+# sentinel auth-pass <master-name> <password>
+
+ 
+# 当哨兵向主节点发送命令后，超过times毫秒没得到回应，该哨兵就会认为主节点宕机，默认30秒
+# sentinel down-after-milliseconds <master-name> <milliseconds>
+
+ 
+# 这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行同步
+# sentinel parallel-syncs <master-name> <numslaves>
+
+ 
+
+# 故障转移的超时时间 failover-timeout，默认三分钟
+# sentinel failover-timeout <master-name> <milliseconds>
+
+ 
+# SCRIPTS EXECUTION
+# 配置当某一事件发生时所需要执行的脚本，对于脚本的运行结果有以下规则：
+# 若脚本执行后返回1，那么该脚本稍后将会被再次执行，重复次数默认为10
+# 若脚本执行后返回2，或者比2更高的一个返回值，脚本将不会重复执行。
+# 如果脚本在执行过程中由于收到系统中断信号被终止了，则同返回值为1时的行为相同。
+# 一个脚本的最大执行时间为60s，如果超过这个时间，脚本将会被一个SIGKILL信号终止，之后重新执行。
+# 
+#
+# 通知型脚本，主要用于通知故障的情况
+# sentinel notification-script <master-name> <script-path>
+
+# 客户端重新配置主节点参数脚本
+# 当一个master由于failover而发生改变时，这个脚本将会被调用，通知相关的客户端关于master地址已经发生改变的信息。
+# 以下参数将会在调用脚本时传给脚本:
+# <master-name> <role> <state> <from-ip> <from-port> <to-ip> <to-port>
+# 目前<state>总是“failover”,
+# <role>是“leader”或者“observer”中的一个。 
+# 参数 from-ip, from-port, to-ip, to-port是用来和旧的master和新的master(即旧的slave)通信的
+# 这个脚本应该是通用的，能被多次调用，不是针对性的。
+# sentinel client-reconfig-script <master-name> <script-path>
+
+```
+
+```bash
+# 开启哨兵线程
+	redis-sentinel ./sentinel.conf
 ```
 
 
@@ -1425,3 +1936,8 @@ appendfsync everysec
 
 - <https://zhuanlan.zhihu.com/p/105587132>
 - <https://www.bilibili.com/video/BV1S54y1R7SB?p=1>
+- <https://baijiahao.baidu.com/s?id=1654694618189745916&wfr=spider&for=pc>
+- <https://blog.csdn.net/weixin_39040059/article/details/79120444>
+- <https://www.runoob.com/redis/redis-tutorial.html>
+- <https://www.cnblogs.com/daofaziran/p/10978628.html>
+- <https://www.jianshu.com/p/06ab9daf921d>
