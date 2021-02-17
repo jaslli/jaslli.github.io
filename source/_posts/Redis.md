@@ -1321,116 +1321,6 @@ class RedisTestApplicationTests {
 }
 ```
 
-# redis.conf
-
-Redis.conf是Redis的配置文件，学习一下配置文件。
-
-```bash
-################################## INCLUDES ###################################
-# include /path/to/local.conf
-# include /path/to/other.conf
-# 包含多个配置文件
-
-################################## NETWORK #####################################
-# 绑定IP
-bind 127.0.0.1
-# 打开安全模式，默认是打开的
-protected-mode yes
-# 绑定端口
-port 6379
-
-################################# GENERAL #####################################
-# 是否以守护线程方式开启服务，默认为no,建议改为yes
-daemonize no
-# 如果以后台方式运行，需要指定pid文件
-pidfile /var/run/redis_6379.pid
-
-# 日志形式
-# This can be one of:
-# debug (a lot of information, useful for development/testing)
-# verbose (many rarely useful info, but not a mess like the debug level)
-# notice (moderately verbose, what you want in production probably)
-# warning (only very important / critical messages are logged)
-loglevel notice
-
-# 指定日志文件路径
-logfile ""
-
-# 数据库数量
-databases 16
-
-################################ SNAPSHOTTING  ################################
-# 持久化设置
-# save s k
-# 表示在s秒内，若是有至少修改了k个键值对，就会进行持久化操作
-save 900 1
-save 300 10
-save 60 10000
-
-# 持久化出错是否继续工作
-stop-writes-on-bgsave-error yes
-
-# 是否压缩rdb文件
-rdbcompression yes
-
-# 对保存的rdb文件时进行校验检测
-rdbchecksum yes
-
-# rdb文件的默认文件名
-dbfilename dump.rdb
-
-# rdb文件保存的目录
-dir ./
-
-################################## SECURITY ###################################
-# 设置密码，默认是没有设置该选项的
-# requirepass foobared
-
-################################### CLIENTS ####################################
-# 设置最大连接的客户端数
-# maxclients 10000
-
-############################## MEMORY MANAGEMENT ################################
-# 设置redis最大的内存容量
-# maxmemory <bytes>
-
-# 内存满了的处理策略
-# maxmemory-policy noeviction
-# 1. noeviction：当内存使用超过配置的时候会返回错误，不会驱逐任何键
-# 2. allkeys-lru：加入键的时候，如果过限，首先通过LRU算法驱逐最久没有使用的键
-# 3. volatile-lru：加入键的时候如果过限，首先从设置了过期时间的键集合中驱逐最久没有使用的键
-# 4. allkeys-random：加入键的时候如果过限，从所有key随机删除
-# 5. volatile-random：加入键的时候如果过限，从过期键的集合中随机驱逐
-# 6. volatile-ttl：从配置了过期时间的键中驱逐马上就要过期的键
-# 7. volatile-lfu：从所有配置了过期时间的键中驱逐使用频率最少的键
-# 8. allkeys-lfu：从所有键中驱逐使用频率最少的键
-
-############################## APPEND ONLY MODE ###############################
-# 是否开启aof模式，默认不开启，使用rdb方式持久化
-appendonly no
-
-# 持久化的文件名字
-appendfilename "appendonly.aof"
-
-# 同步策略
-# 每次都会同步
-# appendfsync always	
-# 每秒进行一次同步
-appendfsync everysec
-# 不执行同步，交给操作系统自己同步
-# appendfsync no
-
-# 执行重写时同步数据到AOF文件，默认为no，yes表示不同步直接写入新的AOF文件
-no-appendfsync-on-rewrite no
-
-# 重写触发条件
-# 当AOF文件大于64mb而且比上一次重写的文件体积大了至少一倍，就会AOF重写
-auto-aof-rewrite-percentage 100
-auto-aof-rewrite-min-size 64mb
-```
-
-
-
 # 持久化
 
 存储在内存中的数据，一旦机器出现问题，那么内存中的数据就会丢失，所以为了尽量避免这个问题，Redis提供了两种持久化的方法，接下来来了解一下这两种持久化的方式。
@@ -1931,6 +1821,122 @@ sentinel monitor mymaster 127.0.0.1 6379 2
 ```
 
 
+
+# redis.conf
+
+```bash
+################################## INCLUDES ###################################
+# include /path/to/local.conf
+# include /path/to/other.conf
+# 包含多个配置文件
+
+################################## NETWORK #####################################
+# 绑定IP
+bind 127.0.0.1
+# 打开安全模式，默认是打开的
+protected-mode yes
+# 绑定端口
+port 6379
+
+################################# GENERAL #####################################
+# 是否以守护线程方式开启服务，默认为no,建议改为yes
+daemonize no
+# 如果以后台方式运行，需要指定pid文件
+pidfile /var/run/redis_6379.pid
+
+# 日志形式
+# This can be one of:
+# debug (a lot of information, useful for development/testing)
+# verbose (many rarely useful info, but not a mess like the debug level)
+# notice (moderately verbose, what you want in production probably)
+# warning (only very important / critical messages are logged)
+loglevel notice
+
+# 指定日志文件路径
+logfile ""
+
+# 数据库数量
+databases 16
+
+
+################################# REPLICATION #################################
+
+# 在这下面配置主节点服务地址就好了，样例已经给出
+# replicaof <masterip> <masterport>
+
+# 要是主节点服务有密码可以在这里配置
+# masterauth <master-password>
+
+
+################################ SNAPSHOTTING  ################################
+# 持久化设置
+# save s k
+# 表示在s秒内，若是有至少修改了k个键值对，就会进行持久化操作
+save 900 1
+save 300 10
+save 60 10000
+
+# 持久化出错是否继续工作
+stop-writes-on-bgsave-error yes
+
+# 是否压缩rdb文件
+rdbcompression yes
+
+# 对保存的rdb文件时进行校验检测
+rdbchecksum yes
+
+# rdb文件的默认文件名
+dbfilename dump.rdb
+
+# rdb文件保存的目录
+dir ./
+
+################################## SECURITY ###################################
+# 设置密码，默认是没有设置该选项的
+# requirepass foobared
+
+################################### CLIENTS ####################################
+# 设置最大连接的客户端数
+# maxclients 10000
+
+############################## MEMORY MANAGEMENT ################################
+# 设置redis最大的内存容量
+# maxmemory <bytes>
+
+# 内存满了的处理策略
+# maxmemory-policy noeviction
+# 1. noeviction：当内存使用超过配置的时候会返回错误，不会驱逐任何键
+# 2. allkeys-lru：加入键的时候，如果过限，首先通过LRU算法驱逐最久没有使用的键
+# 3. volatile-lru：加入键的时候如果过限，首先从设置了过期时间的键集合中驱逐最久没有使用的键
+# 4. allkeys-random：加入键的时候如果过限，从所有key随机删除
+# 5. volatile-random：加入键的时候如果过限，从过期键的集合中随机驱逐
+# 6. volatile-ttl：从配置了过期时间的键中驱逐马上就要过期的键
+# 7. volatile-lfu：从所有配置了过期时间的键中驱逐使用频率最少的键
+# 8. allkeys-lfu：从所有键中驱逐使用频率最少的键
+
+############################## APPEND ONLY MODE ###############################
+# 是否开启aof模式，默认不开启，使用rdb方式持久化
+appendonly no
+
+# 持久化的文件名字
+appendfilename "appendonly.aof"
+
+# 同步策略
+# 每次都会同步
+# appendfsync always	
+# 每秒进行一次同步
+appendfsync everysec
+# 不执行同步，交给操作系统自己同步
+# appendfsync no
+
+# 执行重写时同步数据到AOF文件，默认为no，yes表示不同步直接写入新的AOF文件
+no-appendfsync-on-rewrite no
+
+# 重写触发条件
+# 当AOF文件大于64mb而且比上一次重写的文件体积大了至少一倍，就会AOF重写
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+```
 
 # 一些参考链接
 
