@@ -42,3 +42,23 @@ descrtion: 更加方便的整合swagger。
 
 
 
+# 增强
+
+Swagger3还可以使用`knife4j`来增加Swagger的体验，这个前身是`swagger-bootstrap-ui`。
+
+官方的文档。<https://doc.xiaominfo.com/knife4j/documentation/>
+
+可以根据底层的不同来选择依赖，比如使用`OpenAPI3`结构的可使用以下版本。
+
+```xml
+<dependency>
+    <groupId>com.github.xiaoymin</groupId>
+    <artifactId>knife4j-spring-boot-starter</artifactId>
+    <!--在引用时请在maven中央仓库搜索3.X最新版本号-->
+    <version>3.0.2</version>
+</dependency>
+```
+
+使用后也是访问`doc.html`就能看到。
+
+`knife4j`还有增强的特性，可以参考<https://doc.xiaominfo.com/knife4j/documentation/enhance.html>来开启增强模式。
