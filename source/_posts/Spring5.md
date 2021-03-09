@@ -162,11 +162,7 @@ property属性，为str这个参数赋值
          </bean>
      ```
 
-{%note%}
-
-   当bean被注册，加载到该配置文件，即使没有用到这个对象，也会生成。
-
-{%endnote%}
+>  当bean被注册，加载到该配置文件，即使没有用到这个对象，也会生成。
 
 ### Set方式注入
 
@@ -344,11 +340,12 @@ public class Student {
    </bean>
    ```
 
-{% note warning %}
+<div class='tip'> <p>
 注入的时候是通过你创建的set方法注入的，所以创建类的时候要写上set方法，养成习惯get方法也写上,为了更好的测试，就重写toString方法
-{% endnote %}
+拓展方式注入
+</p></div>
 
-### 拓展方式注入
+
 
 ####  P命名空间的注入
 
@@ -370,9 +367,9 @@ public class Student {
 <bean id="adress" class="com.chen.pojo.Address" p:address="this" p:a="18"/>
 ```
 
-{% note %}
+<div class='tip'> <p>
 这种方式的注入是简单类型的注入，引用类型也可以,类似set注入，但能支持注入的类型少。
-{% endnote %}
+</p></div>
 
 #### C命名空间注入
 
@@ -395,11 +392,9 @@ public class Student {
 <bean id="adress" class="com.chen.pojo.Address" c:address="this" c:a="18"/>
 ```
 
-{% note %}
+<div class='tip'> <p>
 这种方式的是通过构造器注入的，想要注入的属性就要存在这样的有参构造器。注意因为创建对象要用到无参构造器，所以不要漏写。
-{% endnote %}
-
-
+</p></div>
 
 ## Bean的作用域（Scope）
 
@@ -428,9 +423,7 @@ public class test01 {
 }
 ```
 
-{% note success %}
-单例模式表示bean只会创建一个对象，每次get的都是同一个
-{% endnote %}
+> 单例模式表示bean只会创建一个对象，每次get的都是同一个
 
 ### 原型模式
 
@@ -457,11 +450,7 @@ public class test01 {
 }
 ```
 
-{% note success %}
-原型模式表示每次创建的bean都不是同一个对象
-{% endnote %}
-
-
+> 原型模式表示每次创建的bean都不是同一个对象
 
 ## Spring的自动装配
 
@@ -547,6 +536,10 @@ public class test01 {
 是按照User类里的Set方法寻找的，比如Score类在bean里注册的id为score，那User类里就要有setScore这个set方法，将set去掉，首字母小写，然后与id对应一致才能找的到，这是byName的自动装配。
 {% endnote %}
 
+<div class='tip warning'><p>
+    是按照User类里的Set方法寻找的，比如Score类在bean里注册的id为score，那User类里就要有setScore这个set方法，将set去掉，首字母小写，然后与id对应一致才能找的到，这是byName的自动装配。
+</p></div>
+
 ### byTypee的自动装配
 
 ```xml
@@ -583,9 +576,9 @@ public class test01 {
 }
 ```
 
-{% note warning%}
-byType是寻找类里属性类型相同的bean，所以不关id的事情了，id都可以省略。弊端就是当一个类注册了两个bean的时候，byType不知道选择哪一个就会报错。
-{% endnote %}
+<div class='tip warning'><p>
+    byType是寻找类里属性类型相同的bean，所以不关id的事情了，id都可以省略。弊端就是当一个类注册了两个bean的时候，byType不知道选择哪一个就会报错。
+</p></div>
 
 ### 用注解实现自动装配
 
@@ -645,13 +638,14 @@ public class User {
 
 > @Autowired里面有个属性是required，默认为true，表示不能为空值，可以手动关闭@Autowired(required = falser)。
 
-{% note success %}
 
-@Autowired是通过byType模式来寻找的，若是一个类有多个bean才会选择用byName来自动装配。
 
-要是多个bean的id都不符合byName的时候，就需要使用@Qualifier(value="id")来配合使用，value的值为哪个bean的id，就使用哪个bean自动装配。
+<div class='tip'><p>
+    @Autowired是通过byType模式来寻找的，若是一个类有多个bean才会选择用byName来自动装配。</br>
+	要是多个bean的id都不符合byName的时候，就需要使用@Qualifier(value="id")来配合使用，value的值为哪个bean的id，就使用哪个bean自动装配。
+</p></div>
 
-{% endnote %}
+
 
 ```xml
 <bean id="score1" class="com.chen.pojo.Score">
