@@ -226,7 +226,7 @@ synchronized分为三种使用情况。
 
 也可以不用`synchronized`来加锁，这里就来讲讲第二种方式。
 
-现在只讲一下Lock的一个`ReentrantLock`这个实现类。
+这里就只学习Lock类的`ReentrantLock`这个实现类。
 
 先探究一下这个实现类的构造方法。
 
@@ -305,6 +305,18 @@ public class Test implements Runnable{
 ```
 
 这样就可以进行简单的加锁来解决一些线程出现的问题。
+
+
+
+# synchronized和ReentrantLock区别
+
+1. synchronized是一个关键字，是JVM层面的，而ReentrantLock是一个来实现类，是API层面的。
+2. synchronized是自动加锁和释放锁的，而ReentrantLock是手动加锁的，所以也需要手动释放锁。
+3. synchronized的锁是不可中断的，除非是临界区内的代码出现异常或者是正常结束释放锁，而ReentrantLock的锁是可以中断的，可以使用`trylock`方法设置超时方法。
+4. synchronized是非公平锁，而ReentrantLock默认是非公平锁，但是可以通过构造方法设置成公平锁。
+5. synchronized的线程阻塞后是只能随机唤醒进程，而ReentrantLock通过Condition类可以精准唤醒被绑定的线程。
+
+
 
 # 生产者和消费者的问题
 

@@ -16,24 +16,41 @@ Mybaits是经常用到的持久化框架，这次用SpringBoot来整合使用Myb
 
 ```xml
   <dependencies>
-		<!--Mybatis场景启动器-->
+		<!-- Mybatis场景启动器 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.1</version>
         </dependency>
-		<!--web场景启动器-->
+		<!-- web场景启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-		<!--MySQL驱动-->
+		<!-- MySQL驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-		<!--单元测试-->
+		<!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+		<!-- log4j日志 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+		<!-- lombok -->
+         <dependency>
+             <groupId>org.projectlombok</groupId>
+             <artifactId>lombok</artifactId>
+         </dependency>
+		<!-- 单元测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -45,23 +62,6 @@ Mybaits是经常用到的持久化框架，这次用SpringBoot来整合使用Myb
                 </exclusion>
             </exclusions>
         </dependency>
-		<!--Druid-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-		<!--log4j日志-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-		<!--lombok-->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-            </dependency>
     </dependencies>
     <build>
         <resources>
@@ -93,10 +93,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor	//使用lombok偷懒
+@AllArgsConstructor
 public class User {
+    
     int ID;
+    
     String name;
+    
 }
 ```
 
@@ -112,11 +115,17 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserMapper {
+    
     List<User> selectUserList();
+    
     User selectUserByID(int ID);
+    
     int addUser(User user);
+    
     int updateUser(User user);
+    
     int deleteUser(int id);
+    
 }
 ```
 
@@ -129,6 +138,7 @@ public interface UserMapper {
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<!--绑定mapper接口，位置要写对-->
 <mapper namespace="com.yww.mapper.UserMapper">
+    
     <select id="selectUserList" resultType="User">
         SELECT * FROM user
     </select>
@@ -148,6 +158,7 @@ public interface UserMapper {
     <delete id="deleteUser" parameterType="int">
         DELETE FROM user WHERE ID=#{ID}
     </delete>
+    
 </mapper>
 ```
 
@@ -198,32 +209,39 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 public class UserController {
+    
     @Autowired
     private UserMapper userMapper;
+    
     @GetMapping("/select")
     public List<User> selectUserList(){
         List<User> list = userMapper.selectUserList();
         return list;
     }
+    
     @GetMapping("/selectbyid")
     public User selectByID(){
         User user = userMapper.selectUserByID(1);
         return user;
     }
+    
     @GetMapping("/insert")
     public int addUser(){
         User user = new User(3, "王五");
         return  userMapper.addUser(user);
     }
+    
     @GetMapping("/update")
     public int  updateUser(){
         User user = new User(3, "赵六");
         return userMapper.updateUser(user);
     }
+    
     @GetMapping("/delete")
     public int  deleteUser(){
         return userMapper.deleteUser(3);
     }
+    
 }
 ```
 
