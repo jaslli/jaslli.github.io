@@ -13,7 +13,7 @@
       
       <categories>
           
-          <category> SrpingBoot </category>
+          <category> 消息队列 </category>
           
       </categories>
       
@@ -32,7 +32,7 @@
       
       <categories>
           
-          <category> Java </category>
+          <category> 微服务 </category>
           
       </categories>
       
@@ -241,7 +241,7 @@
       
       <categories>
           
-          <category> SpringBoot </category>
+          <category> 数据库 </category>
           
       </categories>
       
