@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yww52.com/2021/04/18/%E8%83%8C%E5%8C%85%E4%B8%93%E9%A2%98/</loc>
+    <loc>https://yww52.com/2021/12/05/lambda%E4%B8%8Estream%E6%B5%81/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2020/12/11/%E8%85%BE%E8%AE%AF%E7%B2%BE%E9%80%89%E7%BB%83%E4%B9%A050%E9%A2%98/</loc>
+    <loc>https://yww52.com/2020/07/06/springMVC/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2020/11/09/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92/</loc>
+    <loc>https://yww52.com/2021/12/16/springcloud/</loc>
+    <lastmod>2023-01-04</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2019/10/31/static%E4%B8%8Efinal/</loc>
+    <lastmod>2023-01-04</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2021/01/10/synchronized/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
@@ -121,15 +129,15 @@
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2021/01/07/2020%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
+    <loc>https://yww52.com/2021/04/18/%E8%83%8C%E5%8C%85%E4%B8%93%E9%A2%98/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2022/12/31/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
+    <loc>https://yww52.com/2020/12/11/%E8%85%BE%E8%AE%AF%E7%B2%BE%E9%80%89%E7%BB%83%E4%B9%A050%E9%A2%98/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2020/06/29/AOP/</loc>
+    <loc>https://yww52.com/2020/11/09/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
@@ -257,23 +265,15 @@
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2021/12/05/lambda%E4%B8%8Estream%E6%B5%81/</loc>
+    <loc>https://yww52.com/2021/01/07/2020%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2020/07/06/springMVC/</loc>
+    <loc>https://yww52.com/2022/12/31/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2021/12/16/springcloud/</loc>
-    <lastmod>2023-01-04</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2019/10/31/static%E4%B8%8Efinal/</loc>
-    <lastmod>2023-01-04</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2021/01/10/synchronized/</loc>
+    <loc>https://yww52.com/2020/06/29/AOP/</loc>
     <lastmod>2023-01-04</lastmod>
   </url>
 </urlset> 
