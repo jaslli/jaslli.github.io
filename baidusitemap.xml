@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yww52.com/2019/11/27/%E5%A6%82%E4%BD%95%E7%BB%99%E4%BD%A0%E7%9A%84U%E7%9B%98%E6%88%96%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/</loc>
+    <loc>https://yww52.com/2021/01/10/synchronized/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2021/01/07/volatile/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/10/19/yml%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/06/27/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/06/01/%E5%85%B3%E4%BA%8Eequels%E4%B8%8E==/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2021/06/09/%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/12/03/%E5%88%9D%E8%AF%86JVM/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2021/03/18/%E5%89%91%E6%8C%87Offer/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2021/01/22/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/06/16/%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2019/11/13/%E5%8F%8D%E5%B0%84/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>
   <url>
     <loc>https://yww52.com/2020/12/06/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2019/11/27/%E5%A6%82%E4%BD%95%E7%BB%99%E4%BD%A0%E7%9A%84U%E7%9B%98%E6%88%96%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>
   <url>
@@ -78,6 +122,10 @@
   </url>
   <url>
     <loc>https://yww52.com/2020/11/09/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92/</loc>
+    <lastmod>2023-12-03</lastmod>
+  </url>
+  <url>
+    <loc>https://yww52.com/2020/06/17/Javase/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>
   <url>
@@ -189,55 +237,11 @@
     <lastmod>2023-12-03</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2019/10/31/static%E4%B8%8Efinal/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2021/01/10/synchronized/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
     <loc>https://yww52.com/2021/12/16/springcloud/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>
   <url>
-    <loc>https://yww52.com/2021/01/07/volatile/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/10/19/yml%E8%AF%AD%E6%B3%95/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/06/27/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/06/01/%E5%85%B3%E4%BA%8Eequels%E4%B8%8E==/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2021/06/09/%E5%88%86%E5%B8%83%E5%BC%8FSession%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/12/03/%E5%88%9D%E8%AF%86JVM/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2021/03/18/%E5%89%91%E6%8C%87Offer/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2021/01/22/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/06/16/%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%9B%B4%E6%8D%A2/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2019/11/13/%E5%8F%8D%E5%B0%84/</loc>
+    <loc>https://yww52.com/2019/10/31/static%E4%B8%8Efinal/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>
   <url>
@@ -282,10 +286,6 @@
   </url>
   <url>
     <loc>https://yww52.com/2021/01/01/JUC%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2023-12-03</lastmod>
-  </url>
-  <url>
-    <loc>https://yww52.com/2020/06/17/Javase/</loc>
     <lastmod>2023-12-03</lastmod>
   </url>
 </urlset> 
