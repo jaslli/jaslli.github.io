@@ -2272,6 +2272,385 @@
       </categories>
   </entry>
   <entry>
+    <title>MySQL</title>
+    <url>/posts/c24675b4/</url>
+    <content><![CDATA[<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- username 则为自己的用户名，一般为root，password为密码</span><br><span class="line">	mysql -u[username] -p[password]</span><br><span class="line">	mysql -u[username] -p</span><br><span class="line">-- 断开连接，即退出数据库操作页面</span><br><span class="line">	exit</span><br></pre></td></tr></table></figure>
+<div class="tip info"><p>MySQL的关键字是不区分大小写的，这里我全部用大写来记录。</p>
+</div>
+<h1 id="DDL数据定义语言"><a href="#DDL数据定义语言" class="headerlink" title="DDL数据定义语言"></a>DDL数据定义语言</h1><h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE [数据库名];</span><br><span class="line">CREATE DATABASE IF NOT EXISTS [数据库名];</span><br></pre></td></tr></table></figure>
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP DATABASE [数据库名];</span><br><span class="line">DROP DATABASE IF EXISTS [数据库名];</span><br></pre></td></tr></table></figure>
+<h2 id="查看数据库"><a href="#查看数据库" class="headerlink" title="查看数据库"></a>查看数据库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查看所有的数据库</span><br><span class="line">	SHOW DATABASES;</span><br><span class="line">-- 查看创建库使用的语句</span><br><span class="line">	SHOW CREATE DATABASES [库名];</span><br></pre></td></tr></table></figure>
+<h3 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 切换到指定的数据库</span><br><span class="line">	USE [数据库名];</span><br><span class="line">--  数据库名和表名如果是特殊的词，就需要用``来区分</span><br></pre></td></tr></table></figure>
+<h2 id="表中的数据类型"><a href="#表中的数据类型" class="headerlink" title="表中的数据类型"></a>表中的数据类型</h2><h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">tinyint</td>
+<td style="text-align:center">很小的一个数据</td>
+<td style="text-align:center">1个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">smallint</td>
+<td style="text-align:center">较小的一个数据</td>
+<td style="text-align:center">2个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">mediumint</td>
+<td style="text-align:center">中等大小的一个数据</td>
+<td style="text-align:center">3个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">标准大小的数据(整数常用)</td>
+<td style="text-align:center">4个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">bigint</td>
+<td style="text-align:center">较大的数据</td>
+<td style="text-align:center">8个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">单精度浮点数</td>
+<td style="text-align:center">4个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">双精度浮点数</td>
+<td style="text-align:center">8个字节</td>
+</tr>
+<tr>
+<td style="text-align:center">decimal</td>
+<td style="text-align:center">字符串形式的浮点数(用来解决浮点数精度问题)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">固定大小的字符串</td>
+<td style="text-align:center">0~255</td>
+</tr>
+<tr>
+<td style="text-align:center">varchar</td>
+<td style="text-align:center">可变的字符串，对应Java的String</td>
+<td style="text-align:center">0~65535</td>
+</tr>
+<tr>
+<td style="text-align:center">tinytext</td>
+<td style="text-align:center">微型文本</td>
+<td style="text-align:center">2^8-1</td>
+</tr>
+<tr>
+<td style="text-align:center">text</td>
+<td style="text-align:center">文本串</td>
+<td style="text-align:center">2^16-1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="时间与日期"><a href="#时间与日期" class="headerlink" title="时间与日期"></a>时间与日期</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">date</td>
+<td style="text-align:center">日期</td>
+<td style="text-align:center">YYYY-MM-DD</td>
+</tr>
+<tr>
+<td style="text-align:center">time</td>
+<td style="text-align:center">时间</td>
+<td style="text-align:center">HH:mm:ss</td>
+</tr>
+<tr>
+<td style="text-align:center">datetime</td>
+<td style="text-align:center">常用的时间格式，即date+time</td>
+<td style="text-align:center">YYYY-MM-DD HH:mm:ss</td>
+</tr>
+<tr>
+<td style="text-align:center">timestamp</td>
+<td style="text-align:center">1970.1.1到现在时间的毫秒数</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">year</td>
+<td style="text-align:center">年份表示</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tip info"><p>MM与mm分大小写是为了区分月份和分钟。<br>HH大写是为了表示是24小时制，hh为12小时制。<br>YYYY表示week-based-year,即只要本周跨年，那这周就算入下一年。<br>yyyy就表示真实年份。</p>
+</div>
+<h3 id="null"><a href="#null" class="headerlink" title="null"></a>null</h3><p>未知的数据类型，不建议参与运算。</p>
+<h2 id="字段属性"><a href="#字段属性" class="headerlink" title="字段属性"></a>字段属性</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">关键字</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">NULL</td>
+<td style="text-align:center">该数据列可以包含NULL值</td>
+</tr>
+<tr>
+<td style="text-align:center">NOT NULL</td>
+<td style="text-align:center">该数据列不允许为NULL值</td>
+</tr>
+<tr>
+<td style="text-align:center">DEFAULT</td>
+<td style="text-align:center">为数据列指定默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">PRIMARY KEY</td>
+<td style="text-align:center">设数据列为主键</td>
+</tr>
+<tr>
+<td style="text-align:center">AUTO_INCREMENT</td>
+<td style="text-align:center">设数据列为自动递增，设用于整数</td>
+</tr>
+<tr>
+<td style="text-align:center">UNSIGNED</td>
+<td style="text-align:center">设数据列为无符号</td>
+</tr>
+<tr>
+<td style="text-align:center">CHARACTER SET [name]</td>
+<td style="text-align:center">为数据列指定一个字符集</td>
+</tr>
+<tr>
+<td style="text-align:center">COMMENT</td>
+<td style="text-align:center">注释</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="表的操作"><a href="#表的操作" class="headerlink" title="表的操作"></a>表的操作</h2><h3 id="查看表"><a href="#查看表" class="headerlink" title="查看表"></a>查看表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 进入数据库后查看该数据库所有的表</span><br><span class="line">	SHOW TABLES [表名];</span><br><span class="line">-- 查看创建表使用的语句</span><br><span class="line">	SHOW CREATE TABLE [表名];</span><br></pre></td></tr></table></figure>
+<h3 id="查看表中的信息"><a href="#查看表中的信息" class="headerlink" title="查看表中的信息"></a>查看表中的信息</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查看表中的具体信息，即结构</span><br><span class="line">	DESCRIBE [表名];</span><br><span class="line">	DESC [表名];</span><br></pre></td></tr></table></figure>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	CREATE TABLE IF NOT EXISTS `[表名]`(属性)[表类型][设置字符集]</span><br><span class="line">-- 例子</span><br><span class="line">	CREATE TABLE IF NOT EXISTS `user`(</span><br><span class="line">		`id` INT(5) NOT NULL AUTO_INCREMENT COMMENT &#x27;id号&#x27;,</span><br><span class="line">        `username` VARCHAR(20) NOT NULL COMMENT &#x27;用户名&#x27;,</span><br><span class="line">        `password` VARCHAR(20) NOT NULL COMMENT &#x27;密码&#x27;,</span><br><span class="line">        `sex` VARCHAR(2) COMMENT &#x27;性别&#x27;,</span><br><span class="line">        `birthday` DATETIME DEFAULT NULL COMMENT &#x27;生日&#x27;,</span><br><span class="line">        `address` VARCHAR(100) DEFAULT NULL COMMENT &#x27;地址&#x27;,</span><br><span class="line">        `email` VARCHAR(50) DEFAULT NULL COMMENT &#x27;邮箱&#x27;,</span><br><span class="line">        PRIMARY KEY(`id`)</span><br><span class="line">    )ENGINE=INNODB DEFAULT CHARSET=utf8</span><br></pre></td></tr></table></figure>
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 修改表名</span><br><span class="line">	ALTER TABLE [旧表名] RENAME AS [新表名];</span><br><span class="line">-- 增加表的字段</span><br><span class="line">	ALTER TABLE [表名] ADD [属性];</span><br><span class="line">	ALTER TABLE user1 ADD age INT(10) DEFAULT NULL COMMENT &#x27;年龄&#x27;;</span><br><span class="line">-- 修改表的约束</span><br><span class="line">-- CHANGE可以更改列名和列类型，而MODIFY只能修改列类型</span><br><span class="line">-- CHANGE只修改列类型的时候，也要写两个相同的列名</span><br><span class="line">-- 所以只修改列类型建议用MODIFY</span><br><span class="line">	ALTER TABLE [表名] CHANGE [旧列名] [新列名] [类型];</span><br><span class="line">	ALTER TABLE [表名] MODIFY [列名] [类型];</span><br><span class="line">-- 删除表的字段</span><br><span class="line">	ALTER TABLE [表名] DROP [列名];</span><br></pre></td></tr></table></figure>
+<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP TABLE [表名];</span><br><span class="line">DROP TABLE IF EXISTS [表名];</span><br></pre></td></tr></table></figure>
+<h3 id="添加外键"><a href="#添加外键" class="headerlink" title="添加外键"></a>添加外键</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE [当前表名] ADD CONSTRAINT `FK_[列名]` FOREIGN KEY([列名]) REFERENCES [对象表名]([列名]);</span><br></pre></td></tr></table></figure>
+<h1 id="DML数据操纵语言"><a href="#DML数据操纵语言" class="headerlink" title="DML数据操纵语言"></a>DML数据操纵语言</h1><h2 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 插入一条数据</span><br><span class="line">	INSERT INTO [表名]([列名1]，[列名2]，[列名3]) VALUES([值1]，[值2]，[值3]);</span><br><span class="line">	INSERT INTO [表名] VALUES([值1]，[值2]，[值3]);</span><br><span class="line">-- 插入多条语句</span><br><span class="line">	INSERT INTO [表名]([列名1]，[列名2]，[列名3]) VALUES([值1]，[值2]，[值3]),([值1]，[值2]，[值3]);</span><br><span class="line">	INSERT INTO [表名] VALUES([值1]，[值2]，[值3]),([值1]，[值2]，[值3]);</span><br></pre></td></tr></table></figure>
+<h2 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 条件一般使用WHERE</span><br><span class="line">	UPDATE [表名] SET [列名]=[值] [条件];</span><br><span class="line">	UPDATE [表名] SET [列名1]=[值1],[列名2]=[值2] [条件];</span><br></pre></td></tr></table></figure>
+<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 删除数据</span><br><span class="line">	DELETE FORM [表名] [条件];</span><br><span class="line">-- 清空表中数据</span><br><span class="line">	TRUNCATE [表名];</span><br><span class="line">-- TRUNCATE会让自增计数器清零</span><br></pre></td></tr></table></figure>
+<h1 id="DQL数据查询语言"><a href="#DQL数据查询语言" class="headerlink" title="DQL数据查询语言"></a>DQL数据查询语言</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `user`(</span><br><span class="line">	`id` INT(5) NOT NULL AUTO_INCREMENT COMMENT &#x27;id号&#x27;,</span><br><span class="line">    `username` VARCHAR(20) NOT NULL COMMENT &#x27;名字&#x27;,</span><br><span class="line">    `password` VARCHAR(20) NOT NULL COMMENT &#x27;密码&#x27;,</span><br><span class="line">    `sex` VARCHAR(2) COMMENT &#x27;性别&#x27;,</span><br><span class="line">    `birthday` DATETIME DEFAULT NULL COMMENT &#x27;生日&#x27;,</span><br><span class="line">    `address` VARCHAR(100) DEFAULT NULL COMMENT &#x27;地址&#x27;,</span><br><span class="line">    `email` VARCHAR(50) DEFAULT NULL COMMENT &#x27;邮箱&#x27;,</span><br><span class="line">    PRIMARY KEY(`id`)</span><br><span class="line">)ENGINE=INNODB DEFAULT CHARSET=utf8</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>建个表好进行之后的例子</p>
+</blockquote>
+<h2 id="简单的查询"><a href="#简单的查询" class="headerlink" title="简单的查询"></a>简单的查询</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查询表中所有信息</span><br><span class="line">	SELECT * FROM [表名];</span><br><span class="line">	SELECT * FROM `user`;</span><br><span class="line">-- 查询表中指定信息</span><br><span class="line">	SELECT [列名1],[列名2] FROM [表名];</span><br><span class="line">	SELECT `id`,`name` FROM `user`;</span><br><span class="line">-- 给结果的字段及表器别名,AS可以省略</span><br><span class="line">	SELECT [列名1] AS [别名1],[列名2] AS [别名2] FROM [表名] AS [别名3];</span><br><span class="line">	SELECT `username` AS &#x27;用户名&#x27;,`password` AS &#x27;密码&#x27; FROM `user` AS &#x27;用户表&#x27;;</span><br><span class="line">-- 处理结果的信息，简单的字符串拼接</span><br><span class="line">	SELECT CONCAT([message],[列名]) FROM [表名];</span><br><span class="line">	SELECT CONCAT(&#x27;用户名为&#x27;,`username`) FROM `user`;</span><br></pre></td></tr></table></figure>
+<h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 去除同样的数据</span><br><span class="line">	SELECT DISTINCT `username` FROM `user`;</span><br></pre></td></tr></table></figure>
+<h2 id="一些常用连接符"><a href="#一些常用连接符" class="headerlink" title="一些常用连接符"></a>一些常用连接符</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">AND</th>
+<th style="text-align:center">&amp;&amp;</th>
+<th style="text-align:center">A AND B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">OR</td>
+<td style="text-align:center">\</td>
+<td style="text-align:center">\</td>
+<td></td>
+<td>A OR B</td>
+</tr>
+<tr>
+<td style="text-align:center">NOT</td>
+<td style="text-align:center">!</td>
+<td style="text-align:center">NOT A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- %代表任意字符,_代表一个字符</span><br><span class="line">	SELECT [列名] FROM [表名] LIKE &#x27;[通配符]&#x27;;</span><br><span class="line">-- 查询用户名第一个字陈的人</span><br><span class="line">	SELECT `username` FROM `user` LIKE &#x27;陈%&#x27; ;</span><br><span class="line">-- 查询用户名第一个字陈且名字中第三个字为明</span><br><span class="line">	SELECT `username` FROM `user` LIKE &#x27;陈_明%&#x27; ;</span><br></pre></td></tr></table></figure>
+<h2 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查询id为300的用户信息，大于小于同理</span><br><span class="line">	SELECT * FROM `user` WHERE id=300;</span><br><span class="line">-- 查询id在300到400之间的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE id&gt;=300 AND id&lt;=400;</span><br><span class="line">	SELECT * FROM `user` WHERE id BETWEEN 300 AND 400;</span><br><span class="line">-- 查询id为300，301，302的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE id=300 AND id=301 AND id=302;</span><br><span class="line">	SELECT * FROM `user` WHERE id IN (300,301,302);</span><br><span class="line">-- 查询邮箱为空的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE email=&#x27;&#x27;;</span><br><span class="line">	SELECT * FROM `user` WHERE email IS NULL;</span><br><span class="line">-- 查询邮箱不为空的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE email IS NOT NULL;</span><br></pre></td></tr></table></figure>
+<h2 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 首先假设有张部门表depart，有id和department两个属性</span><br><span class="line">-- 查询用户的id，userrname和department这三个属性,相同的属性需要通过别名来划分</span><br><span class="line">-- INNER JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s INNER JOIN depart AS d ON s.id=d.id</span><br><span class="line">-- RIGHT JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s RIGHT JOIN depart AS d ON s.id=d.id</span><br><span class="line">-- LEFT JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s LEFT JOIN depart AS d ON s.id=d.id</span><br><span class="line">-- FULL JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s FULL JOIN depart AS d ON s.id=d.id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>INNER JOIN<br>如果表中有至少一个匹配，则返回行。</li>
+<li>RIGHT JOIN<br>即使左表中没有匹配，也从右表返回所有的行。<br>假如depart有id=1000而user表中没有id=1000的数据也会查到id=1000数据，只是在user表的列数据为null。<br>不会查到user表中有而depart表中没有的数据。</li>
+<li>LEFT JOIN<br>即使右表中没有匹配，也从左表返回所有的行。<br>假如user有id=1000而depart表中没有id=1000的数据也会查到id=1000数据，只是在depart表的列数据为null。<br>不会查到depart表中有而user表中没有的数据。</li>
+<li>FULL JOIN<br>只要其中一个表中存在匹配，则返回行。</li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ASC升序,DESC降序</span><br><span class="line">	SELECT * FROM user ORDER BY id ASC</span><br><span class="line">	SELECT * FROM user ORDER BY id DESC</span><br></pre></td></tr></table></figure>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- limit n,m</span><br><span class="line">-- n代表第一个值的坐标(从0开始)，m代表一页的数据多少</span><br><span class="line">-- 查询user表中第一到第五条数据</span><br><span class="line">	SELECT * FROM user LIMIT 0,5</span><br></pre></td></tr></table></figure>
+<h2 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 按一个或多个列对结果集进行分组</span><br><span class="line">	SELECT birthday,COUNT(*) FROM user GROUP BY birthday</span><br><span class="line"># 查出每个生日的用户人数多少</span><br></pre></td></tr></table></figure>
+<h2 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># HAVING可以让筛选分组后的各组数据</span><br><span class="line">	SELECT birthday,COUNT(*) FROM user GROUP BY birthday HAVING SUM(COUNT(*)) &gt; 100</span><br><span class="line"># 查出大于100个人的生日是同一天的生日</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Markdown</title>
+    <url>/posts/6fc8eab5/</url>
+    <content><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><ul>
+<li><p>使用=和-来标记一级和二级标题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">=============</span><br><span class="line">二级标题</span><br><span class="line">-----------------</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用#来标记标题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line"><span class="comment">// 推荐这种写法</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">*斜体文本*</span><br><span class="line">_斜体文本_</span><br><span class="line">**粗体文本**</span><br><span class="line">__粗体文本__</span><br><span class="line">***粗斜体文本***</span><br><span class="line">___粗斜体文本___</span><br><span class="line"><span class="comment">//效果图如下</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong><br><strong><em>粗斜体文本</em></strong></p>
+</blockquote>
+<h2 id="特定格式"><a href="#特定格式" class="headerlink" title="特定格式"></a>特定格式</h2><ul>
+<li><p>分割线</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">***</span><br><span class="line">* * *</span><br><span class="line">*****</span><br><span class="line">- - -</span><br><span class="line">----------</span><br><span class="line"><span class="comment">//  这些方式都可以代表分隔线，符号只要大于三个，有无空格都可以，效果就像下方这条线</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<hr>
+</blockquote>
+</li>
+<li><p>删除线</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><del>删除线</del></p>
+</blockquote>
+</li>
+<li><p>下划线</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">下划线就用&lt;u&gt;标签</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>脚注</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//[^脚注]  </span></span><br><span class="line"><span class="comment">//[^脚注]:脚注的内容 </span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
+<li><p>有序列表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br><span class="line">* 第三项</span><br><span class="line">+ 第一项</span><br><span class="line">+ 第二项</span><br><span class="line">+ 第三项</span><br><span class="line">- 第一项</span><br><span class="line">- 第二项</span><br><span class="line">- 第三项</span><br><span class="line"><span class="comment">//三种方式都可以</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+</blockquote>
+</li>
+<li><p>无序列表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 第一项</span><br><span class="line"><span class="number">2.</span> 第二项</span><br><span class="line"><span class="number">3.</span> 第三项</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt; 一级区块</span></span><br><span class="line"><span class="comment">&gt;&gt; 二级区块</span></span><br><span class="line"><span class="comment">&gt;&gt;&gt; 三级区块</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一级区块</p>
+<blockquote>
+<p>二级区块</p>
+<blockquote>
+<p>三级区块</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">```java(语言，可以不写)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">```</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 就是这个框</span></span><br></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. [链接名称](链接地址)</span><br><span class="line">2. &lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><a href="http://www.baidu.com">百度</a></li>
+<li><a href="http://www.baidu.com">http://www.baidu.com</a></li>
+</ol>
+</blockquote>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">![alt 属性文本](图片地址)</span><br><span class="line">![alt 属性文本](图片地址 <span class="string">&quot;可选标题&quot;</span>)</span><br><span class="line"><span class="comment">// 就不插入了,里面的属性文本可以不写，要是会HTML就自己加</span></span><br></pre></td></tr></table></figure>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"><span class="comment">// 表头与单元格之间用---来分隔</span></span><br><span class="line">  :-----	左对齐</span><br><span class="line">  ----:		右对齐</span><br><span class="line">  :----:	居中对齐</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">左对齐</th>
+<th style="text-align:right">右对齐</th>
+<th style="text-align:center">居中对齐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><ul>
+<li><strong>流程图</strong></li>
+<li><strong>UML时序图</strong></li>
+<li><strong>甘特图</strong></li>
+</ul>
+<h2 id="其他的技巧"><a href="#其他的技巧" class="headerlink" title="其他的技巧"></a>其他的技巧</h2><ul>
+<li><p>转义</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Markdown里有很多特定符号不能直接显示，所以要想显示这些符号就要在这些符号前面加上反斜线\</span><br><span class="line">`   反引号</span><br><span class="line">*   星号</span><br><span class="line">_   下划线</span><br><span class="line">&#123;&#125;  花括号</span><br><span class="line">[]  方括号</span><br><span class="line">()  小括号</span><br><span class="line">#   井字号</span><br><span class="line">+   加号</span><br><span class="line">-   减号</span><br><span class="line">.   英文句点</span><br><span class="line">!   感叹号</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>没有反斜线的星号</strong></p>
+<p>** 正常显示星号 **</p>
+</blockquote>
+</li>
+<li><p>公式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">使用$$包裹Tex或LaTex格式的数学公式来实现</span><br><span class="line">    $$</span><br><span class="line">    	------</span><br><span class="line">    $$</span><br><span class="line"><span class="comment">// 不会公式就去学习学习</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Matlab</title>
+    <url>/posts/dc9cb9f1/</url>
+    <content><![CDATA[<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	定义变量	</span></span><br><span class="line">	syms a</span><br><span class="line"><span class="comment">%	清屏</span></span><br><span class="line">	clc</span><br><span class="line"><span class="comment">%	清空所有</span></span><br><span class="line">	clear</span><br></pre></td></tr></table></figure>
+<h4 id="矩阵的操作"><a href="#矩阵的操作" class="headerlink" title="矩阵的操作"></a>矩阵的操作</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	定义矩阵,空格或逗号分隔一行里的元素，分号是分行</span></span><br><span class="line">	a = [ ; ; ]</span><br><span class="line"><span class="comment">%	定义元素全为1的矩阵</span></span><br><span class="line">	A1 = <span class="built_in">ones</span>(<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment">%	定义元素全为0的矩阵</span></span><br><span class="line">	A2 = <span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">%	定义单位矩阵</span></span><br><span class="line">	A3 = <span class="built_in">eye</span>(<span class="number">4</span>)	</span><br><span class="line"><span class="comment">%	定义随机数的矩阵</span></span><br><span class="line">	A4 = <span class="built_in">rand</span>(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">%	定义魔方矩阵，每行每列没对角线的和相等</span></span><br><span class="line">	A5 = <span class="built_in">magic</span>(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	求A行列式的值</span></span><br><span class="line">	det(A)</span><br><span class="line"><span class="comment">%	求A矩阵的秩(r(A))</span></span><br><span class="line">	rank(A)</span><br><span class="line"><span class="comment">%	求A矩阵的迹(tr(A))</span></span><br><span class="line">	trace(A)</span><br><span class="line"><span class="comment">%	求A行列式的逆矩阵</span></span><br><span class="line">	inv(A)</span><br><span class="line"><span class="comment">%	求A的特征值与特征向量</span></span><br><span class="line">	eig(A)</span><br><span class="line"><span class="comment">%	化简矩阵A</span></span><br><span class="line">	rref(A)</span><br></pre></td></tr></table></figure>
+<h5 id="克莱姆法则求解"><a href="#克莱姆法则求解" class="headerlink" title="克莱姆法则求解"></a>克莱姆法则求解</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 克莱姆法则求解非齐次线性方程组的解</span></span><br><span class="line"><span class="comment">% 判断行列式是否为0，不为0即有唯一解</span></span><br><span class="line">	D = det(A)</span><br><span class="line"><span class="comment">%然后用结果那一列换到行列式里，得D1,D2等</span></span><br><span class="line">	x1 = D1/D 	x2 = D2/D ....</span><br><span class="line"><span class="comment">% 克莱姆法则求解齐次线性方程组的解</span></span><br><span class="line"><span class="comment">% 判断行列式是否为0，不为0即仅有零解，为0则有非零解</span></span><br></pre></td></tr></table></figure>
+<h5 id="求线性方程组得通解"><a href="#求线性方程组得通解" class="headerlink" title="求线性方程组得通解"></a>求线性方程组得通解</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%A为系数矩阵，b为结果juz</span></span><br><span class="line"><span class="comment">%先用pinv求x0</span></span><br><span class="line">	x0 = pinv(A)*b	(先format <span class="built_in">rat</span>,然后x0 = A\b)</span><br><span class="line"><span class="comment">%然后求解</span></span><br><span class="line">	z = null(A,<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="数学分析的基本运算"><a href="#数学分析的基本运算" class="headerlink" title="数学分析的基本运算"></a>数学分析的基本运算</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	复合函数</span></span><br><span class="line">	z = compose(f,g)	<span class="comment">%即Z(x)=f(g(x)) </span></span><br><span class="line"><span class="comment">%	求解反函数</span></span><br><span class="line">	gx = finverse(fx)</span><br><span class="line"><span class="comment">%	求数列与函数的极限</span></span><br><span class="line">	limit(fx ,x,<span class="number">0</span>)	<span class="comment">%表示fx这个算式在x-&gt;0的情况下的极限值</span></span><br><span class="line"><span class="comment">%	求导数与偏导数</span></span><br><span class="line">	diff(fx,x,<span class="number">1</span>)	<span class="comment">%表示求f的一阶导数</span></span><br><span class="line"><span class="comment">%	求不定积分</span></span><br><span class="line">	int(y,x)		<span class="comment">%表示y式的不定积分</span></span><br><span class="line"><span class="comment">%	求定积分</span></span><br><span class="line">	int(fx,x,<span class="number">0</span>,<span class="built_in">inf</span>)	<span class="comment">%表示fx在dx的情况下0到无穷大的定积分</span></span><br></pre></td></tr></table></figure>
+<h5 id="雅可比矩阵"><a href="#雅可比矩阵" class="headerlink" title="雅可比矩阵"></a>雅可比矩阵</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 定义函数矩阵</span></span><br><span class="line">f = [x*y*z; y; x+z];</span><br><span class="line">v = [x,y,z];	<span class="comment">%表示按dx,dy,dz的顺序求解jacobi矩阵</span></span><br><span class="line">R = jacobian(f,v)</span><br></pre></td></tr></table></figure>
+<h5 id="求解多项式的根"><a href="#求解多项式的根" class="headerlink" title="求解多项式的根"></a>求解多项式的根</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%比如多项式 x^3-6*x^2-72*x-27 = 0</span></span><br><span class="line">	p = [<span class="number">1</span> <span class="number">-6</span> <span class="number">72</span> <span class="number">-27</span>]</span><br><span class="line">	r = roots(p)</span><br></pre></td></tr></table></figure>
+<h4 id="微分方程"><a href="#微分方程" class="headerlink" title="微分方程"></a>微分方程</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	求解微分方程,fx为微分方程或方程组,cond为初始条件或边界条件，name表示变量，默认是t</span></span><br><span class="line">	Y = dsolve(<span class="string">&#x27;fx1,fx2...&#x27;</span>,<span class="string">&#x27;cond1,cond2...&#x27;</span>,<span class="string">&#x27;name&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Matlab作图"><a href="#Matlab作图" class="headerlink" title="Matlab作图"></a>Matlab作图</h4><h5 id="作图的基本的操作"><a href="#作图的基本的操作" class="headerlink" title="作图的基本的操作"></a>作图的基本的操作</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 为图像起标题</span></span><br><span class="line">	title(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">%为x轴，y轴起标题</span></span><br><span class="line">	xlabel(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">	ylabel(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">%创建一个窗口</span></span><br><span class="line">	<span class="built_in">figure</span></span><br><span class="line"><span class="comment">%继续在这个窗口画图</span></span><br><span class="line">	<span class="built_in">hold</span></span><br><span class="line"><span class="comment">%起标识</span></span><br><span class="line">	<span class="built_in">legend</span>()</span><br><span class="line"><span class="comment">%加网格线</span></span><br><span class="line">	grid on</span><br></pre></td></tr></table></figure>
+<h5 id="作图"><a href="#作图" class="headerlink" title="作图"></a>作图</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">	<span class="comment">% 画散点图 </span></span><br><span class="line">		<span class="built_in">scatter</span>(X,Y,S,C)	<span class="comment">%S是标记面积的大小，S为空则为默认大小，C为RGB值</span></span><br><span class="line"><span class="comment">%如scantter(X,Y,S，&#x27;r&#x27;,&#x27;filled&#x27;)，用红色来画散点，filled为填充标记</span></span><br><span class="line">	<span class="comment">% 二维曲线</span></span><br><span class="line">		<span class="built_in">plot</span>(x,y)</span><br><span class="line">		<span class="built_in">plot</span>(x,y1,x,y2)</span><br><span class="line">		<span class="built_in">plot</span>(x,y,linespec)	<span class="comment">%linespec为线型，标记，和颜色</span></span><br><span class="line">	<span class="comment">% rectangle函数作图</span></span><br><span class="line">		rectangle(<span class="string">&#x27;Position&#x27;</span>,[x,y,w,h])	<span class="comment">%x，y为矩形左下角坐标，w为宽,h为高</span></span><br><span class="line">		rectangle(<span class="string">&#x27;Position&#x27;</span>,[x,y,w,h],<span class="string">&#x27;Curvature&#x27;</span>,cur)</span><br><span class="line">		<span class="comment">%加入曲率，cur为标量值，曲率从0-1，故[1 1]创建一个椭圆或者园</span></span><br><span class="line">	<span class="comment">% 产生网格</span></span><br><span class="line">		<span class="built_in">meshgrid</span>(x,y)	<span class="comment">%从数组x,y产生网格</span></span><br><span class="line">	<span class="comment">% 画mesh图和surf图</span></span><br><span class="line">		mesh(x,y,z)</span><br><span class="line">		surf(x,y,z)</span><br></pre></td></tr></table></figure>
+<h5 id="动态"><a href="#动态" class="headerlink" title="动态"></a>动态</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%二维彗星图</span></span><br><span class="line">	comet(x,y,n)	<span class="comment">%n表示轨迹尾线的长度，从0到1</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Mybatis-plus</title>
     <url>/posts/fd1960c6/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>MyBatis-Plus（简称 MP）是一个 MyBatis的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。</p>
@@ -6270,23 +6649,6 @@
       </categories>
   </entry>
   <entry>
-    <title>如何给你的U盘或移动硬盘自定义图标</title>
-    <url>/posts/54d98528/</url>
-    <content><![CDATA[<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><p>首先，选好自己想要自定义的图片，将该图片转为32*32的ico文件。关于怎么转换，直接上网搜就好了。</p>
-<p>然后新建一个 <code>autorun.inf</code> 文件，并编辑里面的内容为如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[autorun]</span><br><span class="line">icon=icon.ico</span><br></pre></td></tr></table></figure>
-<p>emm,那个icon.ico就是你那个图片转化之后的ico文件，名字是可以修改的，只要<code>autorun.inf</code>的文件内容里也跟着修改就行了，然后将ico的图片和那个 <code>autorun.inf</code>文件放在移动硬或U盘的根目录下面就完工了。如果你是U盘，就拔掉在插入，如果是移动硬盘可能就要重启了。</p>
-<h1 id="关于可能出现的问题"><a href="#关于可能出现的问题" class="headerlink" title="关于可能出现的问题"></a>关于可能出现的问题</h1><p>当你新建好 <code>autorn.inf</code>这个文件后，将它移入U盘，或者直接在U盘下新建 <code>autorn.inf</code>这个文件，可能系统会提示你没有权限执行。这个问题也卡了我好久，对于这个问题你就要赋予U盘所有的权限，即你的用户需要是管理员权限，当你弄好权限后就可以将 <code>autorn.inf</code>这个文件放进U盘了。</p>
-<p>不过可能系统还会告诉你你没有权限执行，这里我也是查了好久，最后我查了一下 <code>autorn.inf</code>这个文件，发现该文件的作用是允许在双击磁盘时自动运行指定的某个文件，而且近几年出现了有利用该文件来传播木马和病毒，即木马或病毒可能会因为你的U盘来侵入你的电脑。折腾了一下，也查了一下，就知道了方法。只要你将你电脑的所有安全杀毒关掉，就可以将 <code>autorn.inf</code>这个文件放进去了。</p>
-<blockquote>
-<p>这是从某位博主上发现的操作，时代久远，已经找不到原文了</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>无类可分</category>
-      </categories>
-  </entry>
-  <entry>
     <title>GC垃圾回收机制</title>
     <url>/posts/202acec1/</url>
     <content><![CDATA[<h1 id="什么是垃圾"><a href="#什么是垃圾" class="headerlink" title="什么是垃圾"></a>什么是垃圾</h1><p>在进行垃圾回收之前，就要先判断出什么是垃圾。</p>
@@ -6574,6 +6936,23 @@
       <categories>
         <category>Java</category>
         <category>JVM</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何给你的U盘或移动硬盘自定义图标</title>
+    <url>/posts/54d98528/</url>
+    <content><![CDATA[<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><p>首先，选好自己想要自定义的图片，将该图片转为32*32的ico文件。关于怎么转换，直接上网搜就好了。</p>
+<p>然后新建一个 <code>autorun.inf</code> 文件，并编辑里面的内容为如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[autorun]</span><br><span class="line">icon=icon.ico</span><br></pre></td></tr></table></figure>
+<p>emm,那个icon.ico就是你那个图片转化之后的ico文件，名字是可以修改的，只要<code>autorun.inf</code>的文件内容里也跟着修改就行了，然后将ico的图片和那个 <code>autorun.inf</code>文件放在移动硬或U盘的根目录下面就完工了。如果你是U盘，就拔掉在插入，如果是移动硬盘可能就要重启了。</p>
+<h1 id="关于可能出现的问题"><a href="#关于可能出现的问题" class="headerlink" title="关于可能出现的问题"></a>关于可能出现的问题</h1><p>当你新建好 <code>autorn.inf</code>这个文件后，将它移入U盘，或者直接在U盘下新建 <code>autorn.inf</code>这个文件，可能系统会提示你没有权限执行。这个问题也卡了我好久，对于这个问题你就要赋予U盘所有的权限，即你的用户需要是管理员权限，当你弄好权限后就可以将 <code>autorn.inf</code>这个文件放进U盘了。</p>
+<p>不过可能系统还会告诉你你没有权限执行，这里我也是查了好久，最后我查了一下 <code>autorn.inf</code>这个文件，发现该文件的作用是允许在双击磁盘时自动运行指定的某个文件，而且近几年出现了有利用该文件来传播木马和病毒，即木马或病毒可能会因为你的U盘来侵入你的电脑。折腾了一下，也查了一下，就知道了方法。只要你将你电脑的所有安全杀毒关掉，就可以将 <code>autorn.inf</code>这个文件放进去了。</p>
+<blockquote>
+<p>这是从某位博主上发现的操作，时代久远，已经找不到原文了</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>无类可分</category>
       </categories>
   </entry>
   <entry>
@@ -7841,385 +8220,6 @@
 ]]></content>
       <categories>
         <category>虚拟化</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Markdown</title>
-    <url>/posts/6fc8eab5/</url>
-    <content><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><ul>
-<li><p>使用=和-来标记一级和二级标题</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">=============</span><br><span class="line">二级标题</span><br><span class="line">-----------------</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用#来标记标题</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line"><span class="comment">// 推荐这种写法</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">*斜体文本*</span><br><span class="line">_斜体文本_</span><br><span class="line">**粗体文本**</span><br><span class="line">__粗体文本__</span><br><span class="line">***粗斜体文本***</span><br><span class="line">___粗斜体文本___</span><br><span class="line"><span class="comment">//效果图如下</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong><br><strong><em>粗斜体文本</em></strong></p>
-</blockquote>
-<h2 id="特定格式"><a href="#特定格式" class="headerlink" title="特定格式"></a>特定格式</h2><ul>
-<li><p>分割线</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">***</span><br><span class="line">* * *</span><br><span class="line">*****</span><br><span class="line">- - -</span><br><span class="line">----------</span><br><span class="line"><span class="comment">//  这些方式都可以代表分隔线，符号只要大于三个，有无空格都可以，效果就像下方这条线</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<hr>
-</blockquote>
-</li>
-<li><p>删除线</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><del>删除线</del></p>
-</blockquote>
-</li>
-<li><p>下划线</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">下划线就用&lt;u&gt;标签</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>脚注</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//[^脚注]  </span></span><br><span class="line"><span class="comment">//[^脚注]:脚注的内容 </span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
-<li><p>有序列表</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br><span class="line">* 第三项</span><br><span class="line">+ 第一项</span><br><span class="line">+ 第二项</span><br><span class="line">+ 第三项</span><br><span class="line">- 第一项</span><br><span class="line">- 第二项</span><br><span class="line">- 第三项</span><br><span class="line"><span class="comment">//三种方式都可以</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ul>
-</blockquote>
-</li>
-<li><p>无序列表</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 第一项</span><br><span class="line"><span class="number">2.</span> 第二项</span><br><span class="line"><span class="number">3.</span> 第三项</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt; 一级区块</span></span><br><span class="line"><span class="comment">&gt;&gt; 二级区块</span></span><br><span class="line"><span class="comment">&gt;&gt;&gt; 三级区块</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>一级区块</p>
-<blockquote>
-<p>二级区块</p>
-<blockquote>
-<p>三级区块</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">```java(语言，可以不写)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">```</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 就是这个框</span></span><br></pre></td></tr></table></figure>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. [链接名称](链接地址)</span><br><span class="line">2. &lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li><a href="http://www.baidu.com">百度</a></li>
-<li><a href="http://www.baidu.com">http://www.baidu.com</a></li>
-</ol>
-</blockquote>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">![alt 属性文本](图片地址)</span><br><span class="line">![alt 属性文本](图片地址 <span class="string">&quot;可选标题&quot;</span>)</span><br><span class="line"><span class="comment">// 就不插入了,里面的属性文本可以不写，要是会HTML就自己加</span></span><br></pre></td></tr></table></figure>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"><span class="comment">// 表头与单元格之间用---来分隔</span></span><br><span class="line">  :-----	左对齐</span><br><span class="line">  ----:		右对齐</span><br><span class="line">  :----:	居中对齐</span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">左对齐</th>
-<th style="text-align:right">右对齐</th>
-<th style="text-align:center">居中对齐</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">单元格</td>
-<td style="text-align:right">单元格</td>
-<td style="text-align:center">单元格</td>
-</tr>
-<tr>
-<td style="text-align:left">单元格</td>
-<td style="text-align:right">单元格</td>
-<td style="text-align:center">单元格</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><ul>
-<li><strong>流程图</strong></li>
-<li><strong>UML时序图</strong></li>
-<li><strong>甘特图</strong></li>
-</ul>
-<h2 id="其他的技巧"><a href="#其他的技巧" class="headerlink" title="其他的技巧"></a>其他的技巧</h2><ul>
-<li><p>转义</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Markdown里有很多特定符号不能直接显示，所以要想显示这些符号就要在这些符号前面加上反斜线\</span><br><span class="line">`   反引号</span><br><span class="line">*   星号</span><br><span class="line">_   下划线</span><br><span class="line">&#123;&#125;  花括号</span><br><span class="line">[]  方括号</span><br><span class="line">()  小括号</span><br><span class="line">#   井字号</span><br><span class="line">+   加号</span><br><span class="line">-   减号</span><br><span class="line">.   英文句点</span><br><span class="line">!   感叹号</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>没有反斜线的星号</strong></p>
-<p>** 正常显示星号 **</p>
-</blockquote>
-</li>
-<li><p>公式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">使用$$包裹Tex或LaTex格式的数学公式来实现</span><br><span class="line">    $$</span><br><span class="line">    	------</span><br><span class="line">    $$</span><br><span class="line"><span class="comment">// 不会公式就去学习学习</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>MySQL</title>
-    <url>/posts/c24675b4/</url>
-    <content><![CDATA[<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- username 则为自己的用户名，一般为root，password为密码</span><br><span class="line">	mysql -u[username] -p[password]</span><br><span class="line">	mysql -u[username] -p</span><br><span class="line">-- 断开连接，即退出数据库操作页面</span><br><span class="line">	exit</span><br></pre></td></tr></table></figure>
-<div class="tip info"><p>MySQL的关键字是不区分大小写的，这里我全部用大写来记录。</p>
-</div>
-<h1 id="DDL数据定义语言"><a href="#DDL数据定义语言" class="headerlink" title="DDL数据定义语言"></a>DDL数据定义语言</h1><h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE [数据库名];</span><br><span class="line">CREATE DATABASE IF NOT EXISTS [数据库名];</span><br></pre></td></tr></table></figure>
-<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP DATABASE [数据库名];</span><br><span class="line">DROP DATABASE IF EXISTS [数据库名];</span><br></pre></td></tr></table></figure>
-<h2 id="查看数据库"><a href="#查看数据库" class="headerlink" title="查看数据库"></a>查看数据库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查看所有的数据库</span><br><span class="line">	SHOW DATABASES;</span><br><span class="line">-- 查看创建库使用的语句</span><br><span class="line">	SHOW CREATE DATABASES [库名];</span><br></pre></td></tr></table></figure>
-<h3 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 切换到指定的数据库</span><br><span class="line">	USE [数据库名];</span><br><span class="line">--  数据库名和表名如果是特殊的词，就需要用``来区分</span><br></pre></td></tr></table></figure>
-<h2 id="表中的数据类型"><a href="#表中的数据类型" class="headerlink" title="表中的数据类型"></a>表中的数据类型</h2><h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">大小</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">tinyint</td>
-<td style="text-align:center">很小的一个数据</td>
-<td style="text-align:center">1个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">smallint</td>
-<td style="text-align:center">较小的一个数据</td>
-<td style="text-align:center">2个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">mediumint</td>
-<td style="text-align:center">中等大小的一个数据</td>
-<td style="text-align:center">3个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center">标准大小的数据(整数常用)</td>
-<td style="text-align:center">4个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">bigint</td>
-<td style="text-align:center">较大的数据</td>
-<td style="text-align:center">8个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">float</td>
-<td style="text-align:center">单精度浮点数</td>
-<td style="text-align:center">4个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center">双精度浮点数</td>
-<td style="text-align:center">8个字节</td>
-</tr>
-<tr>
-<td style="text-align:center">decimal</td>
-<td style="text-align:center">字符串形式的浮点数(用来解决浮点数精度问题)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">大小</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">char</td>
-<td style="text-align:center">固定大小的字符串</td>
-<td style="text-align:center">0~255</td>
-</tr>
-<tr>
-<td style="text-align:center">varchar</td>
-<td style="text-align:center">可变的字符串，对应Java的String</td>
-<td style="text-align:center">0~65535</td>
-</tr>
-<tr>
-<td style="text-align:center">tinytext</td>
-<td style="text-align:center">微型文本</td>
-<td style="text-align:center">2^8-1</td>
-</tr>
-<tr>
-<td style="text-align:center">text</td>
-<td style="text-align:center">文本串</td>
-<td style="text-align:center">2^16-1</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="时间与日期"><a href="#时间与日期" class="headerlink" title="时间与日期"></a>时间与日期</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">格式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">date</td>
-<td style="text-align:center">日期</td>
-<td style="text-align:center">YYYY-MM-DD</td>
-</tr>
-<tr>
-<td style="text-align:center">time</td>
-<td style="text-align:center">时间</td>
-<td style="text-align:center">HH:mm:ss</td>
-</tr>
-<tr>
-<td style="text-align:center">datetime</td>
-<td style="text-align:center">常用的时间格式，即date+time</td>
-<td style="text-align:center">YYYY-MM-DD HH:mm:ss</td>
-</tr>
-<tr>
-<td style="text-align:center">timestamp</td>
-<td style="text-align:center">1970.1.1到现在时间的毫秒数</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">year</td>
-<td style="text-align:center">年份表示</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="tip info"><p>MM与mm分大小写是为了区分月份和分钟。<br>HH大写是为了表示是24小时制，hh为12小时制。<br>YYYY表示week-based-year,即只要本周跨年，那这周就算入下一年。<br>yyyy就表示真实年份。</p>
-</div>
-<h3 id="null"><a href="#null" class="headerlink" title="null"></a>null</h3><p>未知的数据类型，不建议参与运算。</p>
-<h2 id="字段属性"><a href="#字段属性" class="headerlink" title="字段属性"></a>字段属性</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">关键字</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">NULL</td>
-<td style="text-align:center">该数据列可以包含NULL值</td>
-</tr>
-<tr>
-<td style="text-align:center">NOT NULL</td>
-<td style="text-align:center">该数据列不允许为NULL值</td>
-</tr>
-<tr>
-<td style="text-align:center">DEFAULT</td>
-<td style="text-align:center">为数据列指定默认值</td>
-</tr>
-<tr>
-<td style="text-align:center">PRIMARY KEY</td>
-<td style="text-align:center">设数据列为主键</td>
-</tr>
-<tr>
-<td style="text-align:center">AUTO_INCREMENT</td>
-<td style="text-align:center">设数据列为自动递增，设用于整数</td>
-</tr>
-<tr>
-<td style="text-align:center">UNSIGNED</td>
-<td style="text-align:center">设数据列为无符号</td>
-</tr>
-<tr>
-<td style="text-align:center">CHARACTER SET [name]</td>
-<td style="text-align:center">为数据列指定一个字符集</td>
-</tr>
-<tr>
-<td style="text-align:center">COMMENT</td>
-<td style="text-align:center">注释</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="表的操作"><a href="#表的操作" class="headerlink" title="表的操作"></a>表的操作</h2><h3 id="查看表"><a href="#查看表" class="headerlink" title="查看表"></a>查看表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 进入数据库后查看该数据库所有的表</span><br><span class="line">	SHOW TABLES [表名];</span><br><span class="line">-- 查看创建表使用的语句</span><br><span class="line">	SHOW CREATE TABLE [表名];</span><br></pre></td></tr></table></figure>
-<h3 id="查看表中的信息"><a href="#查看表中的信息" class="headerlink" title="查看表中的信息"></a>查看表中的信息</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查看表中的具体信息，即结构</span><br><span class="line">	DESCRIBE [表名];</span><br><span class="line">	DESC [表名];</span><br></pre></td></tr></table></figure>
-<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	CREATE TABLE IF NOT EXISTS `[表名]`(属性)[表类型][设置字符集]</span><br><span class="line">-- 例子</span><br><span class="line">	CREATE TABLE IF NOT EXISTS `user`(</span><br><span class="line">		`id` INT(5) NOT NULL AUTO_INCREMENT COMMENT &#x27;id号&#x27;,</span><br><span class="line">        `username` VARCHAR(20) NOT NULL COMMENT &#x27;用户名&#x27;,</span><br><span class="line">        `password` VARCHAR(20) NOT NULL COMMENT &#x27;密码&#x27;,</span><br><span class="line">        `sex` VARCHAR(2) COMMENT &#x27;性别&#x27;,</span><br><span class="line">        `birthday` DATETIME DEFAULT NULL COMMENT &#x27;生日&#x27;,</span><br><span class="line">        `address` VARCHAR(100) DEFAULT NULL COMMENT &#x27;地址&#x27;,</span><br><span class="line">        `email` VARCHAR(50) DEFAULT NULL COMMENT &#x27;邮箱&#x27;,</span><br><span class="line">        PRIMARY KEY(`id`)</span><br><span class="line">    )ENGINE=INNODB DEFAULT CHARSET=utf8</span><br></pre></td></tr></table></figure>
-<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 修改表名</span><br><span class="line">	ALTER TABLE [旧表名] RENAME AS [新表名];</span><br><span class="line">-- 增加表的字段</span><br><span class="line">	ALTER TABLE [表名] ADD [属性];</span><br><span class="line">	ALTER TABLE user1 ADD age INT(10) DEFAULT NULL COMMENT &#x27;年龄&#x27;;</span><br><span class="line">-- 修改表的约束</span><br><span class="line">-- CHANGE可以更改列名和列类型，而MODIFY只能修改列类型</span><br><span class="line">-- CHANGE只修改列类型的时候，也要写两个相同的列名</span><br><span class="line">-- 所以只修改列类型建议用MODIFY</span><br><span class="line">	ALTER TABLE [表名] CHANGE [旧列名] [新列名] [类型];</span><br><span class="line">	ALTER TABLE [表名] MODIFY [列名] [类型];</span><br><span class="line">-- 删除表的字段</span><br><span class="line">	ALTER TABLE [表名] DROP [列名];</span><br></pre></td></tr></table></figure>
-<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP TABLE [表名];</span><br><span class="line">DROP TABLE IF EXISTS [表名];</span><br></pre></td></tr></table></figure>
-<h3 id="添加外键"><a href="#添加外键" class="headerlink" title="添加外键"></a>添加外键</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ALTER TABLE [当前表名] ADD CONSTRAINT `FK_[列名]` FOREIGN KEY([列名]) REFERENCES [对象表名]([列名]);</span><br></pre></td></tr></table></figure>
-<h1 id="DML数据操纵语言"><a href="#DML数据操纵语言" class="headerlink" title="DML数据操纵语言"></a>DML数据操纵语言</h1><h2 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 插入一条数据</span><br><span class="line">	INSERT INTO [表名]([列名1]，[列名2]，[列名3]) VALUES([值1]，[值2]，[值3]);</span><br><span class="line">	INSERT INTO [表名] VALUES([值1]，[值2]，[值3]);</span><br><span class="line">-- 插入多条语句</span><br><span class="line">	INSERT INTO [表名]([列名1]，[列名2]，[列名3]) VALUES([值1]，[值2]，[值3]),([值1]，[值2]，[值3]);</span><br><span class="line">	INSERT INTO [表名] VALUES([值1]，[值2]，[值3]),([值1]，[值2]，[值3]);</span><br></pre></td></tr></table></figure>
-<h2 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 条件一般使用WHERE</span><br><span class="line">	UPDATE [表名] SET [列名]=[值] [条件];</span><br><span class="line">	UPDATE [表名] SET [列名1]=[值1],[列名2]=[值2] [条件];</span><br></pre></td></tr></table></figure>
-<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 删除数据</span><br><span class="line">	DELETE FORM [表名] [条件];</span><br><span class="line">-- 清空表中数据</span><br><span class="line">	TRUNCATE [表名];</span><br><span class="line">-- TRUNCATE会让自增计数器清零</span><br></pre></td></tr></table></figure>
-<h1 id="DQL数据查询语言"><a href="#DQL数据查询语言" class="headerlink" title="DQL数据查询语言"></a>DQL数据查询语言</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `user`(</span><br><span class="line">	`id` INT(5) NOT NULL AUTO_INCREMENT COMMENT &#x27;id号&#x27;,</span><br><span class="line">    `username` VARCHAR(20) NOT NULL COMMENT &#x27;名字&#x27;,</span><br><span class="line">    `password` VARCHAR(20) NOT NULL COMMENT &#x27;密码&#x27;,</span><br><span class="line">    `sex` VARCHAR(2) COMMENT &#x27;性别&#x27;,</span><br><span class="line">    `birthday` DATETIME DEFAULT NULL COMMENT &#x27;生日&#x27;,</span><br><span class="line">    `address` VARCHAR(100) DEFAULT NULL COMMENT &#x27;地址&#x27;,</span><br><span class="line">    `email` VARCHAR(50) DEFAULT NULL COMMENT &#x27;邮箱&#x27;,</span><br><span class="line">    PRIMARY KEY(`id`)</span><br><span class="line">)ENGINE=INNODB DEFAULT CHARSET=utf8</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>建个表好进行之后的例子</p>
-</blockquote>
-<h2 id="简单的查询"><a href="#简单的查询" class="headerlink" title="简单的查询"></a>简单的查询</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查询表中所有信息</span><br><span class="line">	SELECT * FROM [表名];</span><br><span class="line">	SELECT * FROM `user`;</span><br><span class="line">-- 查询表中指定信息</span><br><span class="line">	SELECT [列名1],[列名2] FROM [表名];</span><br><span class="line">	SELECT `id`,`name` FROM `user`;</span><br><span class="line">-- 给结果的字段及表器别名,AS可以省略</span><br><span class="line">	SELECT [列名1] AS [别名1],[列名2] AS [别名2] FROM [表名] AS [别名3];</span><br><span class="line">	SELECT `username` AS &#x27;用户名&#x27;,`password` AS &#x27;密码&#x27; FROM `user` AS &#x27;用户表&#x27;;</span><br><span class="line">-- 处理结果的信息，简单的字符串拼接</span><br><span class="line">	SELECT CONCAT([message],[列名]) FROM [表名];</span><br><span class="line">	SELECT CONCAT(&#x27;用户名为&#x27;,`username`) FROM `user`;</span><br></pre></td></tr></table></figure>
-<h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 去除同样的数据</span><br><span class="line">	SELECT DISTINCT `username` FROM `user`;</span><br></pre></td></tr></table></figure>
-<h2 id="一些常用连接符"><a href="#一些常用连接符" class="headerlink" title="一些常用连接符"></a>一些常用连接符</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">AND</th>
-<th style="text-align:center">&amp;&amp;</th>
-<th style="text-align:center">A AND B</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">OR</td>
-<td style="text-align:center">\</td>
-<td style="text-align:center">\</td>
-<td></td>
-<td>A OR B</td>
-</tr>
-<tr>
-<td style="text-align:center">NOT</td>
-<td style="text-align:center">!</td>
-<td style="text-align:center">NOT A</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- %代表任意字符,_代表一个字符</span><br><span class="line">	SELECT [列名] FROM [表名] LIKE &#x27;[通配符]&#x27;;</span><br><span class="line">-- 查询用户名第一个字陈的人</span><br><span class="line">	SELECT `username` FROM `user` LIKE &#x27;陈%&#x27; ;</span><br><span class="line">-- 查询用户名第一个字陈且名字中第三个字为明</span><br><span class="line">	SELECT `username` FROM `user` LIKE &#x27;陈_明%&#x27; ;</span><br></pre></td></tr></table></figure>
-<h2 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 查询id为300的用户信息，大于小于同理</span><br><span class="line">	SELECT * FROM `user` WHERE id=300;</span><br><span class="line">-- 查询id在300到400之间的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE id&gt;=300 AND id&lt;=400;</span><br><span class="line">	SELECT * FROM `user` WHERE id BETWEEN 300 AND 400;</span><br><span class="line">-- 查询id为300，301，302的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE id=300 AND id=301 AND id=302;</span><br><span class="line">	SELECT * FROM `user` WHERE id IN (300,301,302);</span><br><span class="line">-- 查询邮箱为空的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE email=&#x27;&#x27;;</span><br><span class="line">	SELECT * FROM `user` WHERE email IS NULL;</span><br><span class="line">-- 查询邮箱不为空的用户信息</span><br><span class="line">	SELECT * FROM `user` WHERE email IS NOT NULL;</span><br></pre></td></tr></table></figure>
-<h2 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 首先假设有张部门表depart，有id和department两个属性</span><br><span class="line">-- 查询用户的id，userrname和department这三个属性,相同的属性需要通过别名来划分</span><br><span class="line">-- INNER JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s INNER JOIN depart AS d ON s.id=d.id</span><br><span class="line">-- RIGHT JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s RIGHT JOIN depart AS d ON s.id=d.id</span><br><span class="line">-- LEFT JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s LEFT JOIN depart AS d ON s.id=d.id</span><br><span class="line">-- FULL JOIN</span><br><span class="line">	SELECT s.id,username,departmen FROM student AS s FULL JOIN depart AS d ON s.id=d.id</span><br></pre></td></tr></table></figure>
-<ul>
-<li>INNER JOIN<br>如果表中有至少一个匹配，则返回行。</li>
-<li>RIGHT JOIN<br>即使左表中没有匹配，也从右表返回所有的行。<br>假如depart有id=1000而user表中没有id=1000的数据也会查到id=1000数据，只是在user表的列数据为null。<br>不会查到user表中有而depart表中没有的数据。</li>
-<li>LEFT JOIN<br>即使右表中没有匹配，也从左表返回所有的行。<br>假如user有id=1000而depart表中没有id=1000的数据也会查到id=1000数据，只是在depart表的列数据为null。<br>不会查到depart表中有而user表中没有的数据。</li>
-<li>FULL JOIN<br>只要其中一个表中存在匹配，则返回行。</li>
-</ul>
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ASC升序,DESC降序</span><br><span class="line">	SELECT * FROM user ORDER BY id ASC</span><br><span class="line">	SELECT * FROM user ORDER BY id DESC</span><br></pre></td></tr></table></figure>
-<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- limit n,m</span><br><span class="line">-- n代表第一个值的坐标(从0开始)，m代表一页的数据多少</span><br><span class="line">-- 查询user表中第一到第五条数据</span><br><span class="line">	SELECT * FROM user LIMIT 0,5</span><br></pre></td></tr></table></figure>
-<h2 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 按一个或多个列对结果集进行分组</span><br><span class="line">	SELECT birthday,COUNT(*) FROM user GROUP BY birthday</span><br><span class="line"># 查出每个生日的用户人数多少</span><br></pre></td></tr></table></figure>
-<h2 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># HAVING可以让筛选分组后的各组数据</span><br><span class="line">	SELECT birthday,COUNT(*) FROM user GROUP BY birthday HAVING SUM(COUNT(*)) &gt; 100</span><br><span class="line"># 查出大于100个人的生日是同一天的生日</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Matlab</title>
-    <url>/posts/dc9cb9f1/</url>
-    <content><![CDATA[<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	定义变量	</span></span><br><span class="line">	syms a</span><br><span class="line"><span class="comment">%	清屏</span></span><br><span class="line">	clc</span><br><span class="line"><span class="comment">%	清空所有</span></span><br><span class="line">	clear</span><br></pre></td></tr></table></figure>
-<h4 id="矩阵的操作"><a href="#矩阵的操作" class="headerlink" title="矩阵的操作"></a>矩阵的操作</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	定义矩阵,空格或逗号分隔一行里的元素，分号是分行</span></span><br><span class="line">	a = [ ; ; ]</span><br><span class="line"><span class="comment">%	定义元素全为1的矩阵</span></span><br><span class="line">	A1 = <span class="built_in">ones</span>(<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment">%	定义元素全为0的矩阵</span></span><br><span class="line">	A2 = <span class="built_in">zeros</span>(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">%	定义单位矩阵</span></span><br><span class="line">	A3 = <span class="built_in">eye</span>(<span class="number">4</span>)	</span><br><span class="line"><span class="comment">%	定义随机数的矩阵</span></span><br><span class="line">	A4 = <span class="built_in">rand</span>(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">%	定义魔方矩阵，每行每列没对角线的和相等</span></span><br><span class="line">	A5 = <span class="built_in">magic</span>(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	求A行列式的值</span></span><br><span class="line">	det(A)</span><br><span class="line"><span class="comment">%	求A矩阵的秩(r(A))</span></span><br><span class="line">	rank(A)</span><br><span class="line"><span class="comment">%	求A矩阵的迹(tr(A))</span></span><br><span class="line">	trace(A)</span><br><span class="line"><span class="comment">%	求A行列式的逆矩阵</span></span><br><span class="line">	inv(A)</span><br><span class="line"><span class="comment">%	求A的特征值与特征向量</span></span><br><span class="line">	eig(A)</span><br><span class="line"><span class="comment">%	化简矩阵A</span></span><br><span class="line">	rref(A)</span><br></pre></td></tr></table></figure>
-<h5 id="克莱姆法则求解"><a href="#克莱姆法则求解" class="headerlink" title="克莱姆法则求解"></a>克莱姆法则求解</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 克莱姆法则求解非齐次线性方程组的解</span></span><br><span class="line"><span class="comment">% 判断行列式是否为0，不为0即有唯一解</span></span><br><span class="line">	D = det(A)</span><br><span class="line"><span class="comment">%然后用结果那一列换到行列式里，得D1,D2等</span></span><br><span class="line">	x1 = D1/D 	x2 = D2/D ....</span><br><span class="line"><span class="comment">% 克莱姆法则求解齐次线性方程组的解</span></span><br><span class="line"><span class="comment">% 判断行列式是否为0，不为0即仅有零解，为0则有非零解</span></span><br></pre></td></tr></table></figure>
-<h5 id="求线性方程组得通解"><a href="#求线性方程组得通解" class="headerlink" title="求线性方程组得通解"></a>求线性方程组得通解</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%A为系数矩阵，b为结果juz</span></span><br><span class="line"><span class="comment">%先用pinv求x0</span></span><br><span class="line">	x0 = pinv(A)*b	(先format <span class="built_in">rat</span>,然后x0 = A\b)</span><br><span class="line"><span class="comment">%然后求解</span></span><br><span class="line">	z = null(A,<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="数学分析的基本运算"><a href="#数学分析的基本运算" class="headerlink" title="数学分析的基本运算"></a>数学分析的基本运算</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	复合函数</span></span><br><span class="line">	z = compose(f,g)	<span class="comment">%即Z(x)=f(g(x)) </span></span><br><span class="line"><span class="comment">%	求解反函数</span></span><br><span class="line">	gx = finverse(fx)</span><br><span class="line"><span class="comment">%	求数列与函数的极限</span></span><br><span class="line">	limit(fx ,x,<span class="number">0</span>)	<span class="comment">%表示fx这个算式在x-&gt;0的情况下的极限值</span></span><br><span class="line"><span class="comment">%	求导数与偏导数</span></span><br><span class="line">	diff(fx,x,<span class="number">1</span>)	<span class="comment">%表示求f的一阶导数</span></span><br><span class="line"><span class="comment">%	求不定积分</span></span><br><span class="line">	int(y,x)		<span class="comment">%表示y式的不定积分</span></span><br><span class="line"><span class="comment">%	求定积分</span></span><br><span class="line">	int(fx,x,<span class="number">0</span>,<span class="built_in">inf</span>)	<span class="comment">%表示fx在dx的情况下0到无穷大的定积分</span></span><br></pre></td></tr></table></figure>
-<h5 id="雅可比矩阵"><a href="#雅可比矩阵" class="headerlink" title="雅可比矩阵"></a>雅可比矩阵</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 定义函数矩阵</span></span><br><span class="line">f = [x*y*z; y; x+z];</span><br><span class="line">v = [x,y,z];	<span class="comment">%表示按dx,dy,dz的顺序求解jacobi矩阵</span></span><br><span class="line">R = jacobian(f,v)</span><br></pre></td></tr></table></figure>
-<h5 id="求解多项式的根"><a href="#求解多项式的根" class="headerlink" title="求解多项式的根"></a>求解多项式的根</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%比如多项式 x^3-6*x^2-72*x-27 = 0</span></span><br><span class="line">	p = [<span class="number">1</span> <span class="number">-6</span> <span class="number">72</span> <span class="number">-27</span>]</span><br><span class="line">	r = roots(p)</span><br></pre></td></tr></table></figure>
-<h4 id="微分方程"><a href="#微分方程" class="headerlink" title="微分方程"></a>微分方程</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	求解微分方程,fx为微分方程或方程组,cond为初始条件或边界条件，name表示变量，默认是t</span></span><br><span class="line">	Y = dsolve(<span class="string">&#x27;fx1,fx2...&#x27;</span>,<span class="string">&#x27;cond1,cond2...&#x27;</span>,<span class="string">&#x27;name&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="Matlab作图"><a href="#Matlab作图" class="headerlink" title="Matlab作图"></a>Matlab作图</h4><h5 id="作图的基本的操作"><a href="#作图的基本的操作" class="headerlink" title="作图的基本的操作"></a>作图的基本的操作</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 为图像起标题</span></span><br><span class="line">	title(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">%为x轴，y轴起标题</span></span><br><span class="line">	xlabel(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">	ylabel(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">%创建一个窗口</span></span><br><span class="line">	<span class="built_in">figure</span></span><br><span class="line"><span class="comment">%继续在这个窗口画图</span></span><br><span class="line">	<span class="built_in">hold</span></span><br><span class="line"><span class="comment">%起标识</span></span><br><span class="line">	<span class="built_in">legend</span>()</span><br><span class="line"><span class="comment">%加网格线</span></span><br><span class="line">	grid on</span><br></pre></td></tr></table></figure>
-<h5 id="作图"><a href="#作图" class="headerlink" title="作图"></a>作图</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">	<span class="comment">% 画散点图 </span></span><br><span class="line">		<span class="built_in">scatter</span>(X,Y,S,C)	<span class="comment">%S是标记面积的大小，S为空则为默认大小，C为RGB值</span></span><br><span class="line"><span class="comment">%如scantter(X,Y,S，&#x27;r&#x27;,&#x27;filled&#x27;)，用红色来画散点，filled为填充标记</span></span><br><span class="line">	<span class="comment">% 二维曲线</span></span><br><span class="line">		<span class="built_in">plot</span>(x,y)</span><br><span class="line">		<span class="built_in">plot</span>(x,y1,x,y2)</span><br><span class="line">		<span class="built_in">plot</span>(x,y,linespec)	<span class="comment">%linespec为线型，标记，和颜色</span></span><br><span class="line">	<span class="comment">% rectangle函数作图</span></span><br><span class="line">		rectangle(<span class="string">&#x27;Position&#x27;</span>,[x,y,w,h])	<span class="comment">%x，y为矩形左下角坐标，w为宽,h为高</span></span><br><span class="line">		rectangle(<span class="string">&#x27;Position&#x27;</span>,[x,y,w,h],<span class="string">&#x27;Curvature&#x27;</span>,cur)</span><br><span class="line">		<span class="comment">%加入曲率，cur为标量值，曲率从0-1，故[1 1]创建一个椭圆或者园</span></span><br><span class="line">	<span class="comment">% 产生网格</span></span><br><span class="line">		<span class="built_in">meshgrid</span>(x,y)	<span class="comment">%从数组x,y产生网格</span></span><br><span class="line">	<span class="comment">% 画mesh图和surf图</span></span><br><span class="line">		mesh(x,y,z)</span><br><span class="line">		surf(x,y,z)</span><br></pre></td></tr></table></figure>
-<h5 id="动态"><a href="#动态" class="headerlink" title="动态"></a>动态</h5><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%二维彗星图</span></span><br><span class="line">	comet(x,y,n)	<span class="comment">%n表示轨迹尾线的长度，从0到1</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>工具</category>
       </categories>
   </entry>
 </search>
