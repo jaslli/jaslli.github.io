@@ -1,0 +1,1 @@
+function loop(){var o,t,a="";for(o=0;o<10;o++)t=Math.floor(4*Math.sin(Date.now()/200+o/2))+4,a+=String.fromCharCode(9601+t);window.location.hash=a,setTimeout(loop,50)}loop();
