@@ -1,1 +1,88 @@
-.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(1):before{content:'输入QQ号会自动获取QQ头像'}.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(2):before{content:'收到回复会发往你的邮箱'}.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(3):before{content:'有个人网站的可以填自己的链接哦'}.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::after,.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::before{display:block}.el-input.el-input--small.el-input-group.el-input-group--prepend::before{display:none;position:absolute;top:-63.5px;white-space:nowrap;border-radius:10px;left:50%;transform:translate(-50%);padding:14px 18px;background:#fff;border:1px #dcc1f6 solid;color:#889f9f}.el-input.el-input--small.el-input-group.el-input-group--prepend::after{display:none;content:'';position:absolute;border:12px solid transparent;border-top-color:#9a989b;left:50%;transform:translate(-50%,-48px)}#twikoo .tk-comments .tk-nick.tk-nick-link{color:#cd9dfa}#twikoo .tk-comments .tk-comment{padding:10px;margin:10px;box-shadow:-1px 3px 8px rgba(0,0,0,.23),-1px 3px 8px rgba(0,0,0,.16);background:#f7edfd}#twikoo .tk-col .el-input__inner:focus{border-color:#cd9dfa}#twikoo .tk-col .el-textarea__inner:focus{border-color:#cd9dfa}#twikoo .tk-input .el-textarea__inner{min-height:100px!important}@forward 'element-plus/theme-chalk/src/common/var.scss' with ( $colors: ( 'primary': ( 'base': red,),),);
+/**
+    twikoo的样式优化
+    借鉴于Leonus,教程https://blog.leonus.cn/2022/inputAlert.html
+ */
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(1):before {
+    content: '输入QQ号会自动获取QQ头像';
+}
+
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(2):before {
+    content: '收到回复会发往你的邮箱';
+}
+
+.el-input.el-input--small.el-input-group.el-input-group--prepend:nth-child(3):before {
+    content: '有个人网站的可以填自己的链接哦';
+}
+
+/* 当用户点击输入框时显示 */
+.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::before,
+.el-input.el-input--small.el-input-group.el-input-group--prepend:focus-within::after {
+    display: block;
+}
+
+/* 主内容区 */
+.el-input.el-input--small.el-input-group.el-input-group--prepend::before {
+    /* 先隐藏起来 */
+    display: none;
+    /* 绝对定位 */
+    position: absolute;
+    /* 向上移动60像素 */
+    top: -63.5px;
+    /* 文字强制不换行，防止left:50%导致的文字换行 */
+    white-space: nowrap;
+    /* 圆角 */
+    border-radius: 10px;
+    /* 距离左边50% */
+    left: 50%;
+    /* 然后再向左边挪动自身的一半，即可实现居中 */
+    transform: translate(-50%);
+    /* 填充 */
+    padding: 14px 18px;
+    background: #ffffff;
+    border: 1px #dcc1f6 solid;
+    color: #889f9f;
+}
+
+/* 小角标 */
+.el-input.el-input--small.el-input-group.el-input-group--prepend::after {
+    display: none;
+    content: '';
+    position: absolute;
+    /* 内容大小（宽高）为0且边框大小不为0的情况下，每一条边（4个边）都是一个三角形，组成一个正方形。
+    我们先将所有边框透明，再给其中的一条边添加颜色就可以实现小三角图标 */
+    border: 12px solid transparent;
+    border-top-color: #9a989b;
+    left: 50%;
+    transform: translate(-50%, -48px);
+}
+
+/* 有网页链接的评论更改名称颜色 */
+#twikoo .tk-comments .tk-nick.tk-nick-link {
+    color: #CD9DFA;
+}
+#twikoo .tk-comments .tk-comment {
+    padding: 10px;
+    margin: 10px;
+    box-shadow: -1px 3px 8px rgba(0,0,0,.23), -1px 3px 8px rgba(0,0,0,.16);
+    background: #f7edfd;
+}
+#twikoo .tk-col .el-input__inner:focus {
+    border-color: #CD9DFA;
+}
+
+#twikoo .tk-col .el-textarea__inner:focus {
+    border-color: #CD9DFA;
+}
+
+#twikoo .tk-input .el-textarea__inner {
+    min-height: 100px !important;
+}
+
+/* 设置element-plus的主题色 */
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+$colors: (
+'primary': (
+'base': red,
+),
+),
+);
