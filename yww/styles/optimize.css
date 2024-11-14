@@ -161,6 +161,6 @@ img {
 }
 
 /* 文章显示最小高度 */
-.recent-post-info .content {
-    min-height: 56px;
-}
+/*.recent-post-info .content {*/
+/*    min-height: 56px;*/
+/*}*/
