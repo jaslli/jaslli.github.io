@@ -4,49 +4,6 @@
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 }
 
-/* 鼠标样式 */
-body {
-    cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
-    default;
-}
-a,
-img {
-    cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
-    default;
-}
-
-/* 滚动条 */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-::-webkit-scrollbar-track {
-    background-color: rgba(73, 177, 245, 0.2);
-    border-radius: 2em;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #CD9DFA;
-    background-image: -webkit-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.4) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.4) 50%,
-            rgba(255, 255, 255, 0.4) 75%,
-            transparent 75%,
-            transparent
-    );
-    border-radius: 2em;
-}
-::-webkit-scrollbar-corner {
-    background-color: transparent;
-}
-::-moz-selection {
-    color: #fff;
-    background-color: #CD9DFA;
-}
-
-
 /* 底部footer字体颜色和大小 */
 #footer-wrap {
     font-size: 22px !important;
@@ -148,6 +105,10 @@ img {
 }
 
 /* 可爱的打招呼 */
+#lovelygirl {
+    margin-top: 10px;
+    bottom: 20px;
+}
 #lovelygirl .item-headline {
     display: none;
 }
@@ -160,7 +121,8 @@ img {
     transform: none;
 }
 
-/* 文章显示最小高度 */
-/*.recent-post-info .content {*/
-/*    min-height: 56px;*/
-/*}*/
+/*时间轴样式*/
+.container .timeline .timeline-item.headline .timeline-item-title .item-circle > p {
+    font-size: 1.5em;
+    color: orange;
+}

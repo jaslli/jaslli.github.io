@@ -1,0 +1,1 @@
+{"Version":3,"FileReferences":{"Moc":"qc.moc3","Textures":["qc.4096/texture_00.png"],"Physics":"qc.physics3.json","DisplayInfo":"qc.cdi3.json"},"Groups":[{"Target":"Parameter","Name":"EyeBlink","Ids":["ParamEyeROpen","ParamEyeLOpen"]},{"Target":"Parameter","Name":"LipSync","Ids":[]}]}
