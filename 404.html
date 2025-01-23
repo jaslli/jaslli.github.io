@@ -242,39 +242,57 @@ btf.addGlobalFn('pjaxSend', () => {
     btf.addGlobalFn('pjaxComplete', () => newestComments.newestCommentInit(name, getComment), name)
   }
 }</script><script>window.addEventListener('load', () => {
-  const keyName = 'twikoo-newest-comments'
+  const keyName = 'artalk-newest-comments'
   const { changeContent, generateHtml, run } = window.newestComments
 
-  const getComment = ele => {
-    const runTwikoo = () => {
-      twikoo.getRecentComments({
-        envId: 'https://comment.yww52.com',
-        region: '',
-        pageSize: 6,
-        includeReply: true
-      }).then(res => {
-        const twikooArray = res.map(e => {
-          return {
-            'content': changeContent(e.comment),
-            'avatar': e.avatar,
-            'nick': e.nick,
-            'url': e.url + '#' + e.id,
-            'date': new Date(e.created).toISOString()
-          }
-        })
+  const getAvatarValue = async () => {
+    const predefinedAvatarCdn = ''
+    const predefinedAvatarDefault = ''
 
-        btf.saveToLocal.set(keyName, JSON.stringify(twikooArray), 10/(60*24))
-        generateHtml(twikooArray, ele)
-      }).catch(err => {
-        console.error(err)
-        ele.textContent= "无法获取评论，请确认相关配置是否正确"
-      })
+    const avatarDefaultFormat = e => e.startsWith('d=') ? e : `d=${e}`
+
+    if (predefinedAvatarCdn && predefinedAvatarDefault) {
+      return { avatarCdn: predefinedAvatarCdn, avatarDefault: avatarDefaultFormat(predefinedAvatarDefault) }
     }
+  
+    try {
+      const res = await fetch('https://comment.yww52.com/api/v2/conf')
+      const result = await res.json()
+      const { mirror, params, default: defaults } = result.frontend_conf.gravatar
+      const avatarCdn = predefinedAvatarCdn || mirror
+      let avatarDefault = avatarDefaultFormat(predefinedAvatarDefault || params || defaults)
+      return { avatarCdn, avatarDefault}
+    } catch (e) {
+      console.error(e)
+      return { avatarCdn: predefinedAvatarCdn, avatarDefault: avatarDefaultFormat(predefinedAvatarDefault) }
+    }
+  }
 
-    if (typeof twikoo === 'object') {
-      runTwikoo()
-    } else {
-      btf.getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+  const searchParams = new URLSearchParams({
+    'site_name': 'yww的博客',
+    'limit': '6',
+  })
+
+  const getComment = async (ele) => {
+    try {
+      const res = await fetch(`https://comment.yww52.com/api/v2/stats/latest_comments?${searchParams}`)
+      const result = await res.json()
+      const { avatarCdn, avatarDefault } = await getAvatarValue()
+      const artalk = result.data.map(e => {
+        const avatar = avatarCdn && e.email_encrypted ? `${avatarCdn}${e.email_encrypted}?${avatarDefault}` : ''
+        return {
+          'avatar': avatar,
+          'content': changeContent(e.content_marked),
+          'nick': e.nick,
+          'url': e.page_url,
+          'date': e.date,
+        }
+      })
+      btf.saveToLocal.set(keyName, JSON.stringify(artalk), 10/(60*24))
+      generateHtml(artalk, ele)
+    } catch (e) {
+      console.log(e)
+      ele.textContent= "无法获取评论，请确认相关配置是否正确"
     }
   }
 
