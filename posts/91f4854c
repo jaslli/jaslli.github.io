@@ -367,7 +367,7 @@ btf.addGlobalFn('pjaxSend', () => {
   const loadArtalk = async (el, pageKey) => {
     if (typeof Artalk === 'object') initArtalk(el, pageKey)
     else {
-      await btf.getCSS('https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.min.css')
+      await btf.getCSS('https://cdn.jsdelivr.net/npm/artalk/dist/artalk.min.css')
       await btf.getScript('https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.min.js')
       initArtalk(el, pageKey)
     }
@@ -500,7 +500,7 @@ btf.addGlobalFn('pjaxSend', () => {
   }
 
   run(keyName, getComment)
-})</script><link rel="stylesheet" href="/yww/styles/optimize.css"><link rel="stylesheet" href="/yww/styles/twikoo.css"><link rel="stylesheet" href="/yww/styles/iconfont.css"><script async data-pjax src="/yww/scripts/main.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>(() => {
+})</script><link rel="stylesheet" href="/yww/styles/optimize.css"><link rel="stylesheet" href="/yww/styles/artalk.css"><link rel="stylesheet" href="/yww/styles/iconfont.css"><script async data-pjax src="/yww/scripts/main.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>(() => {
   const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
   window.pjax = new Pjax({
