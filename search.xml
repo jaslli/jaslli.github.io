@@ -2509,128 +2509,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Markdown</title>
-    <url>/posts/6fc8eab5</url>
-    <content><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><ul>
-<li><p>使用=和-来标记一级和二级标题</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">=============</span><br><span class="line">二级标题</span><br><span class="line">-----------------</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用#来标记标题</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line"><span class="comment">// 推荐这种写法</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">*斜体文本*</span><br><span class="line">_斜体文本_</span><br><span class="line">**粗体文本**</span><br><span class="line">__粗体文本__</span><br><span class="line">***粗斜体文本***</span><br><span class="line">___粗斜体文本___</span><br><span class="line"><span class="comment">//效果图如下</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong><br><strong><em>粗斜体文本</em></strong></p>
-</blockquote>
-<h2 id="特定格式"><a href="#特定格式" class="headerlink" title="特定格式"></a>特定格式</h2><ul>
-<li><p>分割线</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">***</span><br><span class="line">* * *</span><br><span class="line">*****</span><br><span class="line">- - -</span><br><span class="line">----------</span><br><span class="line"><span class="comment">//  这些方式都可以代表分隔线，符号只要大于三个，有无空格都可以，效果就像下方这条线</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<hr>
-</blockquote>
-</li>
-<li><p>删除线</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><del>删除线</del></p>
-</blockquote>
-</li>
-<li><p>下划线</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">下划线就用&lt;u&gt;标签</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>脚注</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//[^脚注]  </span></span><br><span class="line"><span class="comment">//[^脚注]:脚注的内容 </span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
-<li><p>有序列表</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br><span class="line">* 第三项</span><br><span class="line">+ 第一项</span><br><span class="line">+ 第二项</span><br><span class="line">+ 第三项</span><br><span class="line">- 第一项</span><br><span class="line">- 第二项</span><br><span class="line">- 第三项</span><br><span class="line"><span class="comment">//三种方式都可以</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ul>
-</blockquote>
-</li>
-<li><p>无序列表</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 第一项</span><br><span class="line"><span class="number">2.</span> 第二项</span><br><span class="line"><span class="number">3.</span> 第三项</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt; 一级区块</span></span><br><span class="line"><span class="comment">&gt;&gt; 二级区块</span></span><br><span class="line"><span class="comment">&gt;&gt;&gt; 三级区块</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>一级区块</p>
-<blockquote>
-<p>二级区块</p>
-<blockquote>
-<p>三级区块</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">```java(语言，可以不写)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">```</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 就是这个框</span></span><br></pre></td></tr></table></figure>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. [链接名称](链接地址)</span><br><span class="line">2. &lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li><a href="http://www.baidu.com">百度</a></li>
-<li><a href="http://www.baidu.com">http://www.baidu.com</a></li>
-</ol>
-</blockquote>
-<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">![alt 属性文本](图片地址)</span><br><span class="line">![alt 属性文本](图片地址 <span class="string">&quot;可选标题&quot;</span>)</span><br><span class="line"><span class="comment">// 就不插入了,里面的属性文本可以不写，要是会HTML就自己加</span></span><br></pre></td></tr></table></figure>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"><span class="comment">// 表头与单元格之间用---来分隔</span></span><br><span class="line">  :-----	左对齐</span><br><span class="line">  ----:		右对齐</span><br><span class="line">  :----:	居中对齐</span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">左对齐</th>
-<th style="text-align:right">右对齐</th>
-<th style="text-align:center">居中对齐</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">单元格</td>
-<td style="text-align:right">单元格</td>
-<td style="text-align:center">单元格</td>
-</tr>
-<tr>
-<td style="text-align:left">单元格</td>
-<td style="text-align:right">单元格</td>
-<td style="text-align:center">单元格</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><ul>
-<li><strong>流程图</strong></li>
-<li><strong>UML时序图</strong></li>
-<li><strong>甘特图</strong></li>
-</ul>
-<h2 id="其他的技巧"><a href="#其他的技巧" class="headerlink" title="其他的技巧"></a>其他的技巧</h2><ul>
-<li><p>转义</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Markdown里有很多特定符号不能直接显示，所以要想显示这些符号就要在这些符号前面加上反斜线\</span><br><span class="line">`   反引号</span><br><span class="line">*   星号</span><br><span class="line">_   下划线</span><br><span class="line">&#123;&#125;  花括号</span><br><span class="line">[]  方括号</span><br><span class="line">()  小括号</span><br><span class="line">#   井字号</span><br><span class="line">+   加号</span><br><span class="line">-   减号</span><br><span class="line">.   英文句点</span><br><span class="line">!   感叹号</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>没有反斜线的星号</strong></p>
-<p>** 正常显示星号 **</p>
-</blockquote>
-</li>
-<li><p>公式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">使用$$包裹Tex或LaTex格式的数学公式来实现</span><br><span class="line">    $$</span><br><span class="line">    	------</span><br><span class="line">    $$</span><br><span class="line"><span class="comment">// 不会公式就去学习学习</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Matlab</title>
     <url>/posts/dc9cb9f1</url>
     <content><![CDATA[<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%	定义变量	</span></span><br><span class="line">	syms a</span><br><span class="line"><span class="comment">%	清屏</span></span><br><span class="line">	clc</span><br><span class="line"><span class="comment">%	清空所有</span></span><br><span class="line">	clear</span><br></pre></td></tr></table></figure>
@@ -3162,6 +3040,128 @@
 ]]></content>
       <categories>
         <category>SSM</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Markdown</title>
+    <url>/posts/6fc8eab5</url>
+    <content><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><ul>
+<li><p>使用=和-来标记一级和二级标题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">=============</span><br><span class="line">二级标题</span><br><span class="line">-----------------</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用#来标记标题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br><span class="line"><span class="comment">// 推荐这种写法</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2>   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">*斜体文本*</span><br><span class="line">_斜体文本_</span><br><span class="line">**粗体文本**</span><br><span class="line">__粗体文本__</span><br><span class="line">***粗斜体文本***</span><br><span class="line">___粗斜体文本___</span><br><span class="line"><span class="comment">//效果图如下</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong><br><strong><em>粗斜体文本</em></strong></p>
+</blockquote>
+<h2 id="特定格式"><a href="#特定格式" class="headerlink" title="特定格式"></a>特定格式</h2><ul>
+<li><p>分割线</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">***</span><br><span class="line">* * *</span><br><span class="line">*****</span><br><span class="line">- - -</span><br><span class="line">----------</span><br><span class="line"><span class="comment">//  这些方式都可以代表分隔线，符号只要大于三个，有无空格都可以，效果就像下方这条线</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<hr>
+</blockquote>
+</li>
+<li><p>删除线</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><del>删除线</del></p>
+</blockquote>
+</li>
+<li><p>下划线</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">下划线就用&lt;u&gt;标签</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>脚注</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//[^脚注]  </span></span><br><span class="line"><span class="comment">//[^脚注]:脚注的内容 </span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
+<li><p>有序列表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br><span class="line">* 第三项</span><br><span class="line">+ 第一项</span><br><span class="line">+ 第二项</span><br><span class="line">+ 第三项</span><br><span class="line">- 第一项</span><br><span class="line">- 第二项</span><br><span class="line">- 第三项</span><br><span class="line"><span class="comment">//三种方式都可以</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ul>
+</blockquote>
+</li>
+<li><p>无序列表</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 第一项</span><br><span class="line"><span class="number">2.</span> 第二项</span><br><span class="line"><span class="number">3.</span> 第三项</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>第一项</li>
+<li>第二项</li>
+<li>第三项</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt; 一级区块</span></span><br><span class="line"><span class="comment">&gt;&gt; 二级区块</span></span><br><span class="line"><span class="comment">&gt;&gt;&gt; 三级区块</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一级区块</p>
+<blockquote>
+<p>二级区块</p>
+<blockquote>
+<p>三级区块</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">```java(语言，可以不写)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">```</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 就是这个框</span></span><br></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. [链接名称](链接地址)</span><br><span class="line">2. &lt;链接地址&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li><a href="http://www.baidu.com">百度</a></li>
+<li><a href="http://www.baidu.com">http://www.baidu.com</a></li>
+</ol>
+</blockquote>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">![alt 属性文本](图片地址)</span><br><span class="line">![alt 属性文本](图片地址 <span class="string">&quot;可选标题&quot;</span>)</span><br><span class="line"><span class="comment">// 就不插入了,里面的属性文本可以不写，要是会HTML就自己加</span></span><br></pre></td></tr></table></figure>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"><span class="comment">// 表头与单元格之间用---来分隔</span></span><br><span class="line">  :-----	左对齐</span><br><span class="line">  ----:		右对齐</span><br><span class="line">  :----:	居中对齐</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">左对齐</th>
+<th style="text-align:right">右对齐</th>
+<th style="text-align:center">居中对齐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><ul>
+<li><strong>流程图</strong></li>
+<li><strong>UML时序图</strong></li>
+<li><strong>甘特图</strong></li>
+</ul>
+<h2 id="其他的技巧"><a href="#其他的技巧" class="headerlink" title="其他的技巧"></a>其他的技巧</h2><ul>
+<li><p>转义</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Markdown里有很多特定符号不能直接显示，所以要想显示这些符号就要在这些符号前面加上反斜线\</span><br><span class="line">`   反引号</span><br><span class="line">*   星号</span><br><span class="line">_   下划线</span><br><span class="line">&#123;&#125;  花括号</span><br><span class="line">[]  方括号</span><br><span class="line">()  小括号</span><br><span class="line">#   井字号</span><br><span class="line">+   加号</span><br><span class="line">-   减号</span><br><span class="line">.   英文句点</span><br><span class="line">!   感叹号</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>没有反斜线的星号</strong></p>
+<p>** 正常显示星号 **</p>
+</blockquote>
+</li>
+<li><p>公式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">使用$$包裹Tex或LaTex格式的数学公式来实现</span><br><span class="line">    $$</span><br><span class="line">    	------</span><br><span class="line">    $$</span><br><span class="line"><span class="comment">// 不会公式就去学习学习</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
       </categories>
   </entry>
   <entry>
