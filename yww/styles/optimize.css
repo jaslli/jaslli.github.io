@@ -3,21 +3,38 @@
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 }
-
 /* 底部footer字体颜色和大小 */
-#footer-wrap {
+.footer-copyright {
     font-size: 22px !important;
 }
-#footer-wrap span {
-    color: #FF7242;
-}
-#footer-wrap a {
-    color: #00c4b6;
-}
 .copyright {
+    color: #FF7242 !important;
+}
+.framework-info span {
     color: #FF7242;
 }
-
+.framework-info a {
+    color: #00c4b6 !important;
+}
+.framework-info a:hover {
+    color: #CD9DFA !important;
+}
+.footer_custom_text {
+    font-size: 22px !important;
+    color: #FF7242;
+}
+.footer_custom_text a{
+    color: #00c4b6 !important;
+}
+.footer_custom_text a:hover {
+    color: #CD9DFA !important;
+}
+#yww-beian span{
+    color: #00c4b6 !important;
+}
+#yww-beian span:hover {
+    color: #CD9DFA !important;
+}
 /* 版权链接去掉下划线 */
 .layout_post .post-copyright .post-copyright-info a {
     text-decoration: none;
