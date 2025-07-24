@@ -3,6 +3,7 @@
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 }
+
 /* 底部footer字体颜色和大小 */
 .footer-copyright {
     font-size: 22px !important;
@@ -35,9 +36,18 @@
 #yww-beian span:hover {
     color: #CD9DFA !important;
 }
-/* 版权链接去掉下划线 */
-.layout_post .post-copyright .post-copyright-info a {
-    text-decoration: none;
+
+/* 顶部图片显示方式 */
+#page-header {
+    background-position: center 30%;
+}
+
+#page-header:not(.not-top-img):before {
+    background-color: transparent;
+}
+
+#page-header #site-title {
+    color: #CD9DFA;
 }
 
 /* 打字效果渐变 */
@@ -75,7 +85,7 @@
     }
 }
 #subtitle {
-    background: linear-gradient(-45deg, #ee7752, #ce3e75, #23a6d5, #23d5ab);
+    background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
     background-size: 400% 400%;
     -webkit-animation: Gradient 10s ease infinite;
     -moz-animation: Gradient 10s ease infinite;
@@ -95,6 +105,9 @@
 }
 
 /* 修改标题 */
+.site-name {
+    color: #CD9DFA;
+}
 #site-info h1{
     display: none
 }

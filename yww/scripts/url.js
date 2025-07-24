@@ -1,5 +1,5 @@
 function loop() {
-    var i, n, s = '';
+    let i, n, s = '';
 
     for (i = 0; i < 10; i++) {
         n = Math.floor(Math.sin((Date.now()/200) + (i/2)) * 4) + 4;
