@@ -1,1 +1,0 @@
-{"Version":3,"FileReferences":{"Moc":"116.moc3","Textures":["116.4096/texture_00.png","116.4096/texture_01.png"],"Physics":"116.physics3.json"},"Groups":[{"Target":"Parameter","Name":"LipSync","Ids":[]},{"Target":"Parameter","Name":"EyeBlink","Ids":[]}]}

@@ -42,10 +42,6 @@
     background-position: center 30%;
 }
 
-#page-header:not(.not-top-img):before {
-    background-color: transparent;
-}
-
 #page-header #site-title {
     color: #CD9DFA;
 }
