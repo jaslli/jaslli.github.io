@@ -5657,33 +5657,6 @@
       </categories>
   </entry>
   <entry>
-    <title>static与final</title>
-    <url>/posts/92a59ea9</url>
-    <content><![CDATA[<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ul>
-<li><p>static修饰的变量为类的变量，属于类，即所有的该类的实例化对象共同使用该static变量</p>
-</li>
-<li><p>static方法中不能访问非static成员</p>
-<blockquote>
-<p>这个很容易理解，每个类都只有一份static的资源，还没类还没实例化就有了该static方法，但没有实例化的成员即非静态成员，所以静态方法是不能访问非static成员的</p>
-</blockquote>
-</li>
-<li><p>static的变量和方法或者块都是属于类的，普通变量和方法是属于对象的。</p>
-</li>
-</ul>
-<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><ul>
-<li>用final修饰类，表明中这个类是不能不继承的，类中的变量可以是非final的变量，但所有的方法都会被隐式地指定为final方法</li>
-<li><p>使用final修饰方法原因有两个。一，把方法锁定，防止任何继承类重写该方法。二，提高效率。在早期的Java实现版本会将final方法转为内嵌调用，但如果方法过于庞大，可能看不到内嵌的优化效果，新的Java版本已经   不需要final方法来优化</p>
-</li>
-<li><p>final不能修饰构造方法</p>
-</li>
-<li>final修饰变量，即表示该变量被定义为一个常量，该常量被初始化赋值之后就不能修改</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
     <title>synchronized</title>
     <url>/posts/edea11bc</url>
     <content><![CDATA[<h1 id="应用方式"><a href="#应用方式" class="headerlink" title="应用方式"></a>应用方式</h1><p>首先要知道synchronized实现同步的基础为Java中每一个对象都可以作为锁，synchronized一般的使用方法有以下三个。</p>
@@ -5819,6 +5792,33 @@
       <categories>
         <category>Java</category>
         <category>JUC</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>static与final</title>
+    <url>/posts/92a59ea9</url>
+    <content><![CDATA[<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ul>
+<li><p>static修饰的变量为类的变量，属于类，即所有的该类的实例化对象共同使用该static变量</p>
+</li>
+<li><p>static方法中不能访问非static成员</p>
+<blockquote>
+<p>这个很容易理解，每个类都只有一份static的资源，还没类还没实例化就有了该static方法，但没有实例化的成员即非静态成员，所以静态方法是不能访问非static成员的</p>
+</blockquote>
+</li>
+<li><p>static的变量和方法或者块都是属于类的，普通变量和方法是属于对象的。</p>
+</li>
+</ul>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><ul>
+<li>用final修饰类，表明中这个类是不能不继承的，类中的变量可以是非final的变量，但所有的方法都会被隐式地指定为final方法</li>
+<li><p>使用final修饰方法原因有两个。一，把方法锁定，防止任何继承类重写该方法。二，提高效率。在早期的Java实现版本会将final方法转为内嵌调用，但如果方法过于庞大，可能看不到内嵌的优化效果，新的Java版本已经   不需要final方法来优化</p>
+</li>
+<li><p>final不能修饰构造方法</p>
+</li>
+<li>final修饰变量，即表示该变量被定义为一个常量，该常量被初始化赋值之后就不能修改</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
       </categories>
   </entry>
   <entry>

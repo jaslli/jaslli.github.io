@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>yww</title>
+    <icon>https://yww52.com/icon.png</icon>
+    <subtitle>debug myself</subtitle>
+    <link href="https://yww52.com/atom.xml" rel="self"/>
+    
+    <link href="https://yww52.com/"/>
+    <updated>2023-12-02T16:00:00.000Z</updated>
+    <id>https://yww52.com/</id>
+    
+    <author>
+        <name>yww</name>
+        
+    </author>
+    
+    <generator uri="https://hexo.io/">Hexo</generator>
+    
+    <entry>
+        <title>Java图片处理</title>
+        <link href="https://yww52.com/posts/91f4854c"/>
+        <id>https://yww52.com/posts/91f4854c</id>
+        <published>2023-04-17T16:00:00.000Z</published>
+        <updated>2023-12-02T16:00:00.000Z</updated>
+        
+        
+        <summary type="html">最近经常接触Java的图片处理，所以特地来记录一下。</summary>
+        
+        
+        
+        <category term="Java" scheme="https://yww52.com/categories/Java/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>开发环境配置</title>
+        <link href="https://yww52.com/posts/58d09dd7"/>
+        <id>https://yww52.com/posts/58d09dd7</id>
+        <published>2023-04-10T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.620Z</updated>
+        
+        
+        <summary type="html">一些服务器软件的安装</summary>
+        
+        
+        
+        <category term="无类可分" scheme="https://yww52.com/categories/%E6%97%A0%E7%B1%BB%E5%8F%AF%E5%88%86/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>MybatisPlus常用方法</title>
+        <link href="https://yww52.com/posts/4e5ad84e"/>
+        <id>https://yww52.com/posts/4e5ad84e</id>
+        <published>2023-02-01T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.617Z</updated>
+        
+        
+        <summary type="html">一些MybatisPlus常见的使用方法。</summary>
+        
+        
+        
+        <category term="无类可分" scheme="https://yww52.com/categories/%E6%97%A0%E7%B1%BB%E5%8F%AF%E5%88%86/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>2022年度总结</title>
+        <link href="https://yww52.com/posts/622a5765"/>
+        <id>https://yww52.com/posts/622a5765</id>
+        <published>2022-12-31T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.615Z</updated>
+        
+        
+        <summary type="html">2022年度总结</summary>
+        
+        
+        
+        <category term="无类可分" scheme="https://yww52.com/categories/%E6%97%A0%E7%B1%BB%E5%8F%AF%E5%88%86/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>SpringBoot部署启动</title>
+        <link href="https://yww52.com/posts/e31003e0"/>
+        <id>https://yww52.com/posts/e31003e0</id>
+        <published>2022-09-27T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.618Z</updated>
+        
+        
+        
+        
+        
+        
+        <summary type="html">&lt;h1 id=&quot;前述&quot;&gt;&lt;a href=&quot;#前述&quot; class=&quot;headerlink&quot; title=&quot;前述&quot;&gt;&lt;/a&gt;前述&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;记录一下比较常用的服务部署方式。
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;简单粗暴的脚本&quot;&gt;&lt;a</summary>
+        
+        
+        
+        
+        
+        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>RabbitMQ</title>
+        <link href="https://yww52.com/posts/b543ced0"/>
+        <id>https://yww52.com/posts/b543ced0</id>
+        <published>2021-12-25T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.617Z</updated>
+        
+        
+        <summary type="html">RabbitMQ的学习笔记。</summary>
+        
+        
+        
+        <category term="消息队列" scheme="https://yww52.com/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>SpringCloud</title>
+        <link href="https://yww52.com/posts/96a41905"/>
+        <id>https://yww52.com/posts/96a41905</id>
+        <published>2021-12-16T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.619Z</updated>
+        
+        
+        <summary type="html">SpringCloud的学习笔记。</summary>
+        
+        
+        
+        <category term="微服务" scheme="https://yww52.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>lambda表达式与Stream流</title>
+        <link href="https://yww52.com/posts/8a8aa27b"/>
+        <id>https://yww52.com/posts/8a8aa27b</id>
+        <published>2021-12-05T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.618Z</updated>
+        
+        
+        <summary type="html">Java8的新特性，优化代码。</summary>
+        
+        
+        
+        <category term="Java" scheme="https://yww52.com/categories/Java/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>异常处理</title>
+        <link href="https://yww52.com/posts/28877bf"/>
+        <id>https://yww52.com/posts/28877bf</id>
+        <published>2021-10-09T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.620Z</updated>
+        
+        
+        <summary type="html">常用的全局异常处理。</summary>
+        
+        
+        
+        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>分布式session的解决方案</title>
+        <link href="https://yww52.com/posts/86ff1dad"/>
+        <id>https://yww52.com/posts/86ff1dad</id>
+        <published>2021-06-09T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.619Z</updated>
+        
+        
+        <summary type="html">Session主要的目的是会话控制，但是在分布式环境下，Session就会出现一些问题，接下来就来探讨一下会出现的问题以及解决方案。</summary>
+        
+        
+        
+        <category term="微服务" scheme="https://yww52.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>MySQL必知必会</title>
+        <link href="https://yww52.com/posts/df083c4d"/>
+        <id>https://yww52.com/posts/df083c4d</id>
+        <published>2021-06-03T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.617Z</updated>
+        
+        
+        <summary type="html">阅读MySQL必知必会的笔记，并记录一下书中的SQL语句，用于加深一下印象。</summary>
+        
+        
+        
+        <category term="读书笔记" scheme="https://yww52.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>漫画算法</title>
+        <link href="https://yww52.com/posts/998d504"/>
+        <id>https://yww52.com/posts/998d504</id>
+        <published>2021-06-02T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.621Z</updated>
+        
+        
+        <summary type="html">记录书中面试算法题的解法，主要是书中思路。</summary>
+        
+        
+        
+        <category term="读书笔记" scheme="https://yww52.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>码出高效Java开发手册</title>
+        <link href="https://yww52.com/posts/b93b977e"/>
+        <id>https://yww52.com/posts/b93b977e</id>
+        <published>2021-05-29T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.616Z</updated>
+        
+        
+        <summary type="html">记录码出高效Java开发手册的读书笔记，主要是书中一些我觉得很有收获的观点，所以大多是原书内容，小部分是自己的总结。</summary>
+        
+        
+        
+        <category term="读书笔记" scheme="https://yww52.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>结果类封装</title>
+        <link href="https://yww52.com/posts/a3d4b987"/>
+        <id>https://yww52.com/posts/a3d4b987</id>
+        <published>2021-05-21T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.621Z</updated>
+        
+        
+        <summary type="html">记录一下项目中常用的返回信息的封装类。</summary>
+        
+        
+        
+        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>背包专题</title>
+        <link href="https://yww52.com/posts/4f2ce235"/>
+        <id>https://yww52.com/posts/4f2ce235</id>
+        <published>2021-04-18T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.621Z</updated>
+        
+        
+        <summary type="html">记录一下学习背包问题时的思路和解法</summary>
+        
+        
+        
+        <category term="数据结构与算法" scheme="https://yww52.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>整合Redis</title>
+        <link href="https://yww52.com/posts/3cd0c9b6"/>
+        <id>https://yww52.com/posts/3cd0c9b6</id>
+        <published>2021-04-01T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.620Z</updated>
+        
+        
+        <summary type="html">SpringBoot整合Redis的Demo</summary>
+        
+        
+        
+        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>剑指Offer</title>
+        <link href="https://yww52.com/posts/dd921d98"/>
+        <id>https://yww52.com/posts/dd921d98</id>
+        <published>2021-03-18T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.619Z</updated>
+        
+        
+        <summary type="html">剑指Offer上面的题目，记录一下解题的过程</summary>
+        
+        
+        
+        <category term="数据结构与算法" scheme="https://yww52.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>Redis</title>
+        <link href="https://yww52.com/posts/bae4ff13"/>
+        <id>https://yww52.com/posts/bae4ff13</id>
+        <published>2021-02-14T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.617Z</updated>
+        
+        
+        <summary type="html">学习Redis的笔记</summary>
+        
+        
+        
+        <category term="数据库" scheme="https://yww52.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>常用的工具类</title>
+        <link href="https://yww52.com/posts/b0ab3ebd"/>
+        <id>https://yww52.com/posts/b0ab3ebd</id>
+        <published>2021-02-02T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.620Z</updated>
+        
+        
+        <summary type="html">记录一下开发中经常使用的工具类。</summary>
+        
+        
+        
+        <category term="Java" scheme="https://yww52.com/categories/Java/"/>
+        
+        
+    </entry>
+    
+    <entry>
+        <title>Shiro</title>
+        <link href="https://yww52.com/posts/c0010af8"/>
+        <id>https://yww52.com/posts/c0010af8</id>
+        <published>2021-01-24T16:00:00.000Z</published>
+        <updated>2025-07-25T02:58:57.618Z</updated>
+        
+        
+        <summary type="html">Apache Shiro（发音为“ shee-roh”，日语为“ castle”）是一种功能强大且易于使用的Java安全框架，它执行身份验证，授权，加密和会话管理，可用于保护任何应用程序的安全-从命令行应用程序，移动应用程序到最大的Web和企业应用程序。</summary>
+        
+        
+        
+        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        
+        
+    </entry>
+    
+</feed>
