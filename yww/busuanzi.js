@@ -2,7 +2,7 @@
     // 统计项名称列明
     const STATISTICS = ["site_pv", "page_pv", "site_uv", "page_uv"];
     // 定义API地址，请自行修改
-    const API_URL = "http://127.0.0.1:10010/api";
+    const API_URL = "https://blog.yww52.com/busuanzi/api";
     // localStorage中存储身份标识的key
     const LOCALSTORAGE_KEY = "bsz-id";
     // busuanzi的元素容器和元素值前缀
@@ -42,12 +42,12 @@
                 STATISTICS.forEach(item => {
                     // 查找对应统计项的页面元素
                     let element = document.getElementById(ITEM_VALUE + item);
-                    if (element != null) {
+                    if (element) {
                         element.innerHTML = data[item];
                     }
                     // 查找统计容器元素，使其显形，去除隐藏
                     let container = document.getElementById(ITEM_CONTAINER + item);
-                    if (container != null) {
+                    if (container) {
                         container.style.display = "inline";
                     }
                 });

@@ -7,11 +7,11 @@ if (typeof ywwTitle === 'undefined') {
     let ywwtitleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.innerHTML = '<link rel="icon" href="images/favicon.ico.png"/>';
+            document.innerHTML = '<link rel="icon"/>';
             document.title = 'aya 崩溃啦';
             clearTimeout(ywwtitleTime);
         } else {
-            document.innerHTML = '<link rel="icon" href="images/favicon.ico.png"/>';
+            document.innerHTML = '<link rel="icon"/>';
             document.title = 'ya 又好了';
             ywwtitleTime = setTimeout(function() {
                 document.title = ywwTitle;
