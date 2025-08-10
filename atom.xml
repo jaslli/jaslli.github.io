@@ -6,7 +6,7 @@
     <link href="https://yww52.com/atom.xml" rel="self"/>
     
     <link href="https://yww52.com/"/>
-    <updated>2023-12-02T16:00:00.000Z</updated>
+    <updated>2025-08-10T09:38:39.089Z</updated>
     <id>https://yww52.com/</id>
     
     <author>
@@ -15,6 +15,29 @@
     </author>
     
     <generator uri="https://hexo.io/">Hexo</generator>
+    
+    <entry>
+        <title>自建busuanzi网站计数服务</title>
+        <link href="https://yww52.com/posts/5315dfbb/"/>
+        <id>https://yww52.com/posts/5315dfbb/</id>
+        <published>2025-08-09T16:00:00.000Z</published>
+        <updated>2025-08-10T09:38:39.089Z</updated>
+        
+        
+        
+        
+        
+        
+        <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt; &lt;a href=&quot;https://busuanzi.ibruce.info/&quot;&gt;不蒜子(busuanzi)&lt;/a&gt;</summary>
+        
+        
+        
+        
+        
+        <category term="服务搭建" scheme="https://yww52.com/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+        
+        
+    </entry>
     
     <entry>
         <title>Java图片处理</title>
@@ -38,7 +61,7 @@
         <link href="https://yww52.com/posts/58d09dd7/"/>
         <id>https://yww52.com/posts/58d09dd7/</id>
         <published>2023-04-10T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.378Z</updated>
+        <updated>2025-08-10T09:38:39.090Z</updated>
         
         
         <summary type="html">一些服务器软件的安装</summary>
@@ -55,7 +78,7 @@
         <link href="https://yww52.com/posts/4e5ad84e/"/>
         <id>https://yww52.com/posts/4e5ad84e/</id>
         <published>2023-02-01T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.375Z</updated>
+        <updated>2025-08-10T09:38:39.087Z</updated>
         
         
         <summary type="html">一些MybatisPlus常见的使用方法。</summary>
@@ -72,7 +95,7 @@
         <link href="https://yww52.com/posts/622a5765/"/>
         <id>https://yww52.com/posts/622a5765/</id>
         <published>2022-12-31T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.373Z</updated>
+        <updated>2025-08-10T09:38:39.085Z</updated>
         
         
         <summary type="html">2022年度总结</summary>
@@ -89,7 +112,7 @@
         <link href="https://yww52.com/posts/e31003e0/"/>
         <id>https://yww52.com/posts/e31003e0/</id>
         <published>2022-09-27T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.376Z</updated>
+        <updated>2025-08-10T09:38:39.088Z</updated>
         
         
         
@@ -113,7 +136,7 @@
         <link href="https://yww52.com/posts/b543ced0/"/>
         <id>https://yww52.com/posts/b543ced0/</id>
         <published>2021-12-25T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.375Z</updated>
+        <updated>2025-08-10T09:38:39.088Z</updated>
         
         
         <summary type="html">RabbitMQ的学习笔记。</summary>
@@ -130,7 +153,7 @@
         <link href="https://yww52.com/posts/96a41905/"/>
         <id>https://yww52.com/posts/96a41905/</id>
         <published>2021-12-16T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.377Z</updated>
+        <updated>2025-08-10T09:38:39.089Z</updated>
         
         
         <summary type="html">SpringCloud的学习笔记。</summary>
@@ -147,7 +170,7 @@
         <link href="https://yww52.com/posts/8a8aa27b/"/>
         <id>https://yww52.com/posts/8a8aa27b/</id>
         <published>2021-12-05T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.376Z</updated>
+        <updated>2025-08-10T09:38:39.089Z</updated>
         
         
         <summary type="html">Java8的新特性，优化代码。</summary>
@@ -164,7 +187,7 @@
         <link href="https://yww52.com/posts/28877bf/"/>
         <id>https://yww52.com/posts/28877bf/</id>
         <published>2021-10-09T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.378Z</updated>
+        <updated>2025-08-10T09:38:39.091Z</updated>
         
         
         <summary type="html">常用的全局异常处理。</summary>
@@ -181,7 +204,7 @@
         <link href="https://yww52.com/posts/86ff1dad/"/>
         <id>https://yww52.com/posts/86ff1dad/</id>
         <published>2021-06-09T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.377Z</updated>
+        <updated>2025-08-10T09:38:39.090Z</updated>
         
         
         <summary type="html">Session主要的目的是会话控制，但是在分布式环境下，Session就会出现一些问题，接下来就来探讨一下会出现的问题以及解决方案。</summary>
@@ -198,7 +221,7 @@
         <link href="https://yww52.com/posts/df083c4d/"/>
         <id>https://yww52.com/posts/df083c4d/</id>
         <published>2021-06-03T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.375Z</updated>
+        <updated>2025-08-10T09:38:39.087Z</updated>
         
         
         <summary type="html">阅读MySQL必知必会的笔记，并记录一下书中的SQL语句，用于加深一下印象。</summary>
@@ -215,7 +238,7 @@
         <link href="https://yww52.com/posts/998d504/"/>
         <id>https://yww52.com/posts/998d504/</id>
         <published>2021-06-02T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.379Z</updated>
+        <updated>2025-08-10T09:38:39.091Z</updated>
         
         
         <summary type="html">记录书中面试算法题的解法，主要是书中思路。</summary>
@@ -232,7 +255,7 @@
         <link href="https://yww52.com/posts/b93b977e/"/>
         <id>https://yww52.com/posts/b93b977e/</id>
         <published>2021-05-29T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.374Z</updated>
+        <updated>2025-08-10T09:38:39.087Z</updated>
         
         
         <summary type="html">记录码出高效Java开发手册的读书笔记，主要是书中一些我觉得很有收获的观点，所以大多是原书内容，小部分是自己的总结。</summary>
@@ -249,7 +272,7 @@
         <link href="https://yww52.com/posts/a3d4b987/"/>
         <id>https://yww52.com/posts/a3d4b987/</id>
         <published>2021-05-21T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.379Z</updated>
+        <updated>2025-08-10T09:38:39.092Z</updated>
         
         
         <summary type="html">记录一下项目中常用的返回信息的封装类。</summary>
@@ -266,7 +289,7 @@
         <link href="https://yww52.com/posts/4f2ce235/"/>
         <id>https://yww52.com/posts/4f2ce235/</id>
         <published>2021-04-18T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.379Z</updated>
+        <updated>2025-08-10T09:38:39.092Z</updated>
         
         
         <summary type="html">记录一下学习背包问题时的思路和解法</summary>
@@ -283,7 +306,7 @@
         <link href="https://yww52.com/posts/3cd0c9b6/"/>
         <id>https://yww52.com/posts/3cd0c9b6/</id>
         <published>2021-04-01T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.378Z</updated>
+        <updated>2025-08-10T09:38:39.091Z</updated>
         
         
         <summary type="html">SpringBoot整合Redis的Demo</summary>
@@ -300,7 +323,7 @@
         <link href="https://yww52.com/posts/dd921d98/"/>
         <id>https://yww52.com/posts/dd921d98/</id>
         <published>2021-03-18T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.377Z</updated>
+        <updated>2025-08-10T09:38:39.090Z</updated>
         
         
         <summary type="html">剑指Offer上面的题目，记录一下解题的过程</summary>
@@ -317,7 +340,7 @@
         <link href="https://yww52.com/posts/bae4ff13/"/>
         <id>https://yww52.com/posts/bae4ff13/</id>
         <published>2021-02-14T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.375Z</updated>
+        <updated>2025-08-10T09:38:39.088Z</updated>
         
         
         <summary type="html">学习Redis的笔记</summary>
@@ -334,7 +357,7 @@
         <link href="https://yww52.com/posts/b0ab3ebd/"/>
         <id>https://yww52.com/posts/b0ab3ebd/</id>
         <published>2021-02-02T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.378Z</updated>
+        <updated>2025-08-10T09:38:39.090Z</updated>
         
         
         <summary type="html">记录一下开发中经常使用的工具类。</summary>
@@ -342,23 +365,6 @@
         
         
         <category term="Java" scheme="https://yww52.com/categories/Java/"/>
-        
-        
-    </entry>
-    
-    <entry>
-        <title>Shiro</title>
-        <link href="https://yww52.com/posts/c0010af8/"/>
-        <id>https://yww52.com/posts/c0010af8/</id>
-        <published>2021-01-24T16:00:00.000Z</published>
-        <updated>2025-08-07T13:40:33.375Z</updated>
-        
-        
-        <summary type="html">Apache Shiro（发音为“ shee-roh”，日语为“ castle”）是一种功能强大且易于使用的Java安全框架，它执行身份验证，授权，加密和会话管理，可用于保护任何应用程序的安全-从命令行应用程序，移动应用程序到最大的Web和企业应用程序。</summary>
-        
-        
-        
-        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
         
         
     </entry>
