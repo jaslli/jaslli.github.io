@@ -4766,9 +4766,57 @@
 <li><strong>site_uv</strong>（站点每日独立访客数）：从<code>referer</code>请求头获取站点Host地址。若请求不包含Cookie，则生成新Cookie并添加至当日站点访客集合，同时返回Cookie并将UV数据递增。若请求已携带Cookie，则不进行任何增长操作</li>
 <li><strong>page_uv</strong>（页面每日独立访客数）：使用<code>referer</code>请求头信息作为页面标识。若请求不包含Cookie，则生成新Cookie并添加至当日页面访客集合，同时返回Cookie并将UV数据递增。若请求已携带Cookie，则不进行任何增长操作</li>
 </ol>
-<h1 id="服务实现"><a href="#服务实现" class="headerlink" title="服务实现"></a>服务实现</h1><p>服务分析当中已经写的很明白了，这个服务其实就是一个核心的请求接口，具体实现的逻辑和代码我就不一一贴出来了，我已经上传到我的<code>Github</code>上面了，感兴趣可以自行去观看，附带一下仓库地址。</p>
+<h1 id="服务实现"><a href="#服务实现" class="headerlink" title="服务实现"></a>服务实现</h1><h2 id="接口实现"><a href="#接口实现" class="headerlink" title="接口实现"></a>接口实现</h2><p>这里我先展示所有使用到的Redis的键和类型，方便后续查找修改。</p>
+<p><code>host</code>表示站点地址，<code>url</code>表示资源地址，<code>date</code>表示日期。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据名称</th>
+<th style="text-align:center">Redis键名</th>
+<th style="text-align:center">Redis类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">site_pv（站点浏览量）</td>
+<td style="text-align:center">pv:{host}</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">page_pv（页面浏览量）</td>
+<td style="text-align:center">pv:page:{url}</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">site_uv（站点每日独立访客数）</td>
+<td style="text-align:center">uv:{host}</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">每日站点访客数（缓存7天）</td>
+<td style="text-align:center">uvtime:{date}:{host}</td>
+<td style="text-align:center">set</td>
+</tr>
+<tr>
+<td style="text-align:center">page_uv（页面每日独立访客数）</td>
+<td style="text-align:center">uv:page:{url}</td>
+<td style="text-align:center">string</td>
+</tr>
+<tr>
+<td style="text-align:center">每日页面访客数（缓存7天）</td>
+<td style="text-align:center">uvtime:page:{date}:{url}</td>
+<td style="text-align:center">set</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>使用string和set这两种数据结构完全足够了，大部分博客不是什么高流量的网站，string结构的数据很好用而且也很准确，完全没必要使用hyperloglog，特别是数据量少的情况。</p>
+</blockquote>
+<p>关于具体的实现，服务分析当中已经写的很明白了，这个服务其实就是一个核心的请求接口，逻辑和代码我就不一一贴出来了，我已经上传到Github`上面了，感兴趣可以自行研究，附带一下仓库地址。</p>
 <p><a href="https://github.com/jaslli/busuanzi">https://github.com/jaslli/busuanzi</a></p>
-<p>服务代码除了适配原有的busuanzi的<code>JSONP</code>请求外，还自行进行了一些优化。以下是我进行优化的方向：</p>
+<h2 id="优化部分"><a href="#优化部分" class="headerlink" title="优化部分"></a>优化部分</h2><p>服务代码除了适配原有的busuanzi的<code>JSONP</code>请求外，还自行进行了一些优化。以下是我进行优化的方向：</p>
 <ol>
 <li>因为后端是自己编写的服务，所以不需要前端使用JSONP的方式进行跨域处理，所以直接使用<code>fetch</code>的GET请求即可。</li>
 <li>原版busuanzi是使用了cookie进行用户管理，我改为了使用浏览器<code>localStorage</code>进行存储管理用户信息，这样数据更加可以精准。</li>
@@ -4797,7 +4845,8 @@
 <li>然后根据每个页面的URL去请求原有的busuanzi接口</li>
 <li>将得到的数据设置到服务的Redis当中即可</li>
 </ol>
-<p>后续我在完善优化一下这里的代码。</p>
+<p>Java代码如下。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">FileUtil.writeBytes(file.getBytes(), filePath);</span><br><span class="line">List&lt;String&gt; links = SitemapUtil.parseSitemapXml(filePath);</span><br><span class="line">links.forEach(link -&gt; &#123;</span><br><span class="line"><span class="type">String</span> <span class="variable">api</span> <span class="operator">=</span> <span class="string">&quot;https://busuanzi.ibruce.info/busuanzi&quot;</span>;</span><br><span class="line"><span class="meta">@Cleanup</span></span><br><span class="line"><span class="type">HttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> HttpUtil.createGet(api)</span><br><span class="line">        .header(<span class="string">&quot;Referer&quot;</span>, link)</span><br><span class="line">        .form(<span class="string">&quot;jsonpCallback&quot;</span>, <span class="string">&quot;BusuanziCallback_921338913213&quot;</span>)</span><br><span class="line">        .execute();</span><br><span class="line"><span class="type">String</span> <span class="variable">body</span> <span class="operator">=</span> response.body();</span><br><span class="line"><span class="type">String</span> <span class="variable">host</span> <span class="operator">=</span> URLUtil.getHost(link);</span><br><span class="line"><span class="comment">// 截取script脚本中的数据</span></span><br><span class="line"><span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSON.parseObject(body.substring(body.indexOf(<span class="string">&#x27;&#123;&#x27;</span>, <span class="number">4</span>), body.indexOf(<span class="string">&#x27;&#125;&#x27;</span>) + <span class="number">1</span>));</span><br><span class="line">redisCache.add(<span class="string">&quot;pv:&quot;</span> + host, jsonObject.getString(<span class="string">&quot;site_pv&quot;</span>));</span><br><span class="line">redisCache.add(<span class="string">&quot;pv:page:&quot;</span> + link, jsonObject.getString(<span class="string">&quot;page_pv&quot;</span>));</span><br><span class="line">redisCache.add(<span class="string">&quot;uv:&quot;</span> + host, jsonObject.getString(<span class="string">&quot;site_uv&quot;</span>));</span><br><span class="line"><span class="comment">// 避免出现限流等情况，缓一缓</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Thread.sleep(<span class="number">200</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">&#125;</span><br><span class="line">log.info(<span class="string">&quot;成功初始化url【&#123;&#125;】的数据&quot;</span>, link);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>服务搭建</category>
