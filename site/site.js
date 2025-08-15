@@ -1,11 +1,17 @@
-// 确保只在/site页面执行
-if (window.location.pathname === '/site/' || window.location.pathname === '/site/index.html') {
-    if (!window._siteContentLoaded) {
-        document.addEventListener('DOMContentLoaded', function() {
-            void loadGithubCommits();
-        });
-        window._siteContentLoaded = true;
+// 初始化站点日志页面
+function initSitePage() {
+    // 检查当前页面是否是/site页面（通过检查是否存在github-commits元素）
+    if (document.getElementById('github-commits')) {
+        void loadGithubCommits();
     }
+}
+
+// 页面首次加载时初始化
+document.addEventListener('DOMContentLoaded', initSitePage);
+
+// pjax完成后重新初始化
+if (typeof window.btf !== 'undefined' && typeof window.btf.addGlobalFn !== 'undefined') {
+    window.btf.addGlobalFn('pjaxComplete', initSitePage, 'sitePageInit');
 }
 
 async function loadGithubCommits() {
@@ -18,9 +24,7 @@ async function loadGithubCommits() {
 
     try {
         // github的API
-        const owner = 'jaslli'; // GitHub用户名
-        const repo = 'jaslli.github.io'; // 仓库名
-        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=3`;
+        const apiUrl = `https://blog.yww52.com/yww/github/api/getCommits/4`;
 
         const response = await fetch(apiUrl);
 
@@ -56,7 +60,7 @@ function renderCommits(commits, container) {
     }
 
     let html = '';
-    commits.forEach(commit => {
+    commits.forEach((commit, index) => {
         const date = new Date(commit.commit.author.date);
         const formattedDate = date.toLocaleString('zh-CN', {
             year: 'numeric',
@@ -68,8 +72,9 @@ function renderCommits(commits, container) {
 
         const message = commit.commit.message.split('\n')[0]; // 只显示第一行
 
+        // 为每个提交项添加延迟动画
         html += `
-            <div class="commit-item">
+            <div class="commit-item" style="animation-delay: ${index * 0.1}s">
                 <div class="commit-content">
                     <div class="commit-message">${escapeHtml(message)}</div>
                     <div class="commit-meta">
@@ -97,5 +102,5 @@ function escapeHtml(text) {
         '"': '&quot;',
         "'": '&#039;'
     };
-    return text.replace(/[&<>"]/g, function(m) { return map[m]; });
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
