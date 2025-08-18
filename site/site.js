@@ -1,17 +1,6 @@
-// 初始化站点日志页面
-function initSitePage() {
-    // 检查当前页面是否是/site页面（通过检查是否存在github-commits元素）
-    if (document.getElementById('github-commits')) {
-        void loadGithubCommits();
-    }
-}
-
-// 页面首次加载时初始化
-document.addEventListener('DOMContentLoaded', initSitePage);
-
-// pjax完成后重新初始化
-if (typeof window.btf !== 'undefined' && typeof window.btf.addGlobalFn !== 'undefined') {
-    window.btf.addGlobalFn('pjaxComplete', initSitePage, 'sitePageInit');
+// 检查当前页面是否是/site页面（通过检查是否存在github-commits元素）
+if (document.getElementById('github-commits')) {
+    void loadGithubCommits();
 }
 
 async function loadGithubCommits() {
