@@ -1,370 +1,772 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/"
+      xmlns:media="http://search.yahoo.com/mrss/"
+      xmlns:dc="http://purl.org/dc/elements/1.1/">
     <title>yww</title>
     <icon>https://yww52.com/icon.png</icon>
     <subtitle>debug myself</subtitle>
-    <link href="https://yww52.com/atom.xml" rel="self"/>
+    <dc:description>debug myself</dc:description>
     
-    <link href="https://yww52.com/"/>
-    <updated>2025-08-18T10:05:24.263Z</updated>
+    <!-- Feed 链接信息 -->
+    <link href="https://yww52.com/atom.xml" rel="self" type="application/atom+xml"/>
+    
+    <link href="https://yww52.com/" type="text/html"/>
+    
+    <!-- 更新时间和标识 -->
+    <updated>2025-08-18T12:49:32.617Z</updated>
     <id>https://yww52.com/</id>
+    
+    <!-- 作者信息增强 -->
     
     <author>
         <name>yww</name>
         
+        <uri>https://yww52.com/</uri>
     </author>
     
-    <generator uri="https://hexo.io/">Hexo</generator>
+    
+    <!-- 生成器信息 -->
+    <generator uri="https://hexo.io/" version="">Hexo Enhanced RSS</generator>
+    
+    <!-- Feed 元信息 -->
+    <rights>Copyright © 2025 yww</rights>
+    <dc:language>zh-CN</dc:language>
     
     <entry>
-        <title>自建busuanzi网站计数服务</title>
-        <link href="https://yww52.com/posts/5315dfbb/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[自建busuanzi网站计数服务]]></title>
+        <link href="https://yww52.com/posts/5315dfbb/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/5315dfbb/</id>
+        
+        <!-- 时间信息 -->
         <published>2025-08-09T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.263Z</updated>
+        <updated>2025-08-18T12:49:32.617Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
         
         
         
         
         
+        <summary type="html"><![CDATA[&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt; &lt;a href=&quot;https://busuanzi.ibruce.info/&quot;&gt;不蒜子(busuanzi)&lt;/a&gt; 是一个广受欢迎的免费网页计数服务，能够轻松实现网站的页面浏览量(PV)和独立访客数(UV)统计。许多基于Hexo的网站都在使用busuanzi来实现访问统计功能，我的博客当前使用的主题是&lt;code&gt;Butterfly&lt;/code&gt;，这个主题也是通过集成busuanzi计数器来实现网页计数。&lt;/p&gt;
+&lt;p&gt;然而，随着使用人数的不断增多，这个由作者为爱发电的免费服务开始出现稳定性问题，访问速度也变得起伏不定。&lt;/p&gt;
+&lt;p&gt;因此，我决定自己开发一个服务来代替busuanzi，为我的网站提供稳定的计数服务。&lt;/p&gt;
+&lt;h1 id=&quot;技术栈选择&quot;&gt;&lt;a href=&quot;#技术栈选择&quot; class=&quot;headerlink&quot;...]]></summary>
         
-        <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt; &lt;a href=&quot;https://busuanzi.ibruce.info/&quot;&gt;不蒜子(busuanzi)&lt;/a&gt;</summary>
         
         
         
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2025/8/2025-8-10top_img.jpg" type="image" medium="image">
+            <media:title>自建busuanzi网站计数服务</media:title>
+            <media:description>自建busuanzi网站计数服务 - 封面图</media:description>
+        </media:content>
         
-        <category term="服务搭建" scheme="https://yww52.com/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+
+        <!-- 永久链接 -->
+        
+        <dc:identifier>5315dfbb</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>Java图片处理</title>
-        <link href="https://yww52.com/posts/91f4854c/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[Java图片处理]]></title>
+        <link href="https://yww52.com/posts/91f4854c/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/91f4854c/</id>
+        
+        <!-- 时间信息 -->
         <published>2023-04-17T16:00:00.000Z</published>
         <updated>2023-12-02T16:00:00.000Z</updated>
         
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
         
-        <summary type="html">最近经常接触Java的图片处理，所以特地来记录一下。</summary>
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[最近经常接触Java的图片处理，所以特地来记录一下。]]></summary>
         
         
+        <!-- 文章封面图 -->
         
-        <category term="Java" scheme="https://yww52.com/categories/Java/"/>
+        <media:content url="https://img.yww52.com/2023/4/2023-4-18top_img.jpg" type="image" medium="image">
+            <media:title>Java图片处理</media:title>
+            <media:description>Java图片处理 - 封面图</media:description>
+        </media:content>
+        
+
+        <!-- 永久链接 -->
+        
+        <dc:identifier>91f4854c</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>开发环境配置</title>
-        <link href="https://yww52.com/posts/58d09dd7/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[开发环境配置]]></title>
+        <link href="https://yww52.com/posts/58d09dd7/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/58d09dd7/</id>
+        
+        <!-- 时间信息 -->
         <published>2023-04-10T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.265Z</updated>
+        <updated>2025-08-18T12:49:32.619Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[一些服务器软件的安装]]></summary>
         
         
-        <summary type="html">一些服务器软件的安装</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2023/4/2023-4-11top_img.jpg" type="image" medium="image">
+            <media:title>开发环境配置</media:title>
+            <media:description>开发环境配置 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="无类可分" scheme="https://yww52.com/categories/%E6%97%A0%E7%B1%BB%E5%8F%AF%E5%88%86/"/>
+        <dc:identifier>58d09dd7</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>MybatisPlus常用方法</title>
-        <link href="https://yww52.com/posts/4e5ad84e/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[MybatisPlus常用方法]]></title>
+        <link href="https://yww52.com/posts/4e5ad84e/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/4e5ad84e/</id>
+        
+        <!-- 时间信息 -->
         <published>2023-02-01T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.262Z</updated>
+        <updated>2025-08-18T12:49:32.615Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[一些MybatisPlus常见的使用方法。]]></summary>
         
         
-        <summary type="html">一些MybatisPlus常见的使用方法。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2023/2/2023-2-2top_img.jpg" type="image" medium="image">
+            <media:title>MybatisPlus常用方法</media:title>
+            <media:description>MybatisPlus常用方法 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="无类可分" scheme="https://yww52.com/categories/%E6%97%A0%E7%B1%BB%E5%8F%AF%E5%88%86/"/>
+        <dc:identifier>4e5ad84e</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>2022年度总结</title>
-        <link href="https://yww52.com/posts/622a5765/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[2022年度总结]]></title>
+        <link href="https://yww52.com/posts/622a5765/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/622a5765/</id>
+        
+        <!-- 时间信息 -->
         <published>2022-12-31T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.260Z</updated>
+        <updated>2025-08-18T12:49:32.614Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[2022年度总结]]></summary>
         
         
-        <summary type="html">2022年度总结</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2023/1/2023-1-1/top_img.jpg" type="image" medium="image">
+            <media:title>2022年度总结</media:title>
+            <media:description>2022年度总结 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="无类可分" scheme="https://yww52.com/categories/%E6%97%A0%E7%B1%BB%E5%8F%AF%E5%88%86/"/>
+        <dc:identifier>622a5765</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>SpringBoot部署启动</title>
-        <link href="https://yww52.com/posts/e31003e0/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[SpringBoot部署启动]]></title>
+        <link href="https://yww52.com/posts/e31003e0/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/e31003e0/</id>
+        
+        <!-- 时间信息 -->
         <published>2022-09-27T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.263Z</updated>
+        <updated>2025-08-18T12:49:32.617Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
         
         
         
         
         
-        
-        <summary type="html">&lt;h1 id=&quot;前述&quot;&gt;&lt;a href=&quot;#前述&quot; class=&quot;headerlink&quot; title=&quot;前述&quot;&gt;&lt;/a&gt;前述&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;记录一下比较常用的服务部署方式。
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;简单粗暴的脚本&quot;&gt;&lt;a</summary>
-        
-        
-        
+        <summary type="html"><![CDATA[&lt;h1 id=&quot;前述&quot;&gt;&lt;a href=&quot;#前述&quot; class=&quot;headerlink&quot; title=&quot;前述&quot;&gt;&lt;/a&gt;前述&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;记录一下比较常用的服务部署方式。
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;简单粗暴的脚本&quot;&gt;&lt;a href=&quot;#简单粗暴的脚本&quot; class=&quot;headerlink&quot; title=&quot;简单粗暴的脚本&quot;&gt;&lt;/a&gt;简单粗暴的脚本&lt;/h1&gt;&lt;p&gt;这种是本地启动的方式，所以需要自行配置服务器的Java环境。&lt;/p&gt;
+&lt;p&gt;这个是最简单粗暴的方式了，直接使用&lt;code&gt;java -jar&lt;/code&gt;命令，修改服务名和运行jar包的位置就可以使用了。&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span...]]></summary>
         
         
-        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        
+        
+        <!-- 文章封面图 -->
+        
+        <media:content url="https://img.yww52.com/2022/09/2022-9-28top_img.jpg" type="image" medium="image">
+            <media:title>SpringBoot部署启动</media:title>
+            <media:description>SpringBoot部署启动 - 封面图</media:description>
+        </media:content>
+        
+
+        <!-- 永久链接 -->
+        
+        <dc:identifier>e31003e0</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>RabbitMQ</title>
-        <link href="https://yww52.com/posts/b543ced0/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[RabbitMQ]]></title>
+        <link href="https://yww52.com/posts/b543ced0/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/b543ced0/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-12-25T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.262Z</updated>
+        <updated>2025-08-18T12:49:32.616Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[RabbitMQ的学习笔记。]]></summary>
         
         
-        <summary type="html">RabbitMQ的学习笔记。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/12/2021-12-26top_img.jpg" type="image" medium="image">
+            <media:title>RabbitMQ</media:title>
+            <media:description>RabbitMQ - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="消息队列" scheme="https://yww52.com/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
+        <dc:identifier>b543ced0</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>SpringCloud</title>
-        <link href="https://yww52.com/posts/96a41905/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[SpringCloud]]></title>
+        <link href="https://yww52.com/posts/96a41905/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/96a41905/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-12-16T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.264Z</updated>
+        <updated>2025-08-18T12:49:32.617Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[SpringCloud的学习笔记。]]></summary>
         
         
-        <summary type="html">SpringCloud的学习笔记。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/12/2021-12-17top_img.jpg" type="image" medium="image">
+            <media:title>SpringCloud</media:title>
+            <media:description>SpringCloud - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="微服务" scheme="https://yww52.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+        <dc:identifier>96a41905</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>lambda表达式与Stream流</title>
-        <link href="https://yww52.com/posts/8a8aa27b/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[lambda表达式与Stream流]]></title>
+        <link href="https://yww52.com/posts/8a8aa27b/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/8a8aa27b/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-12-05T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.263Z</updated>
+        <updated>2025-08-18T12:49:32.617Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[Java8的新特性，优化代码。]]></summary>
         
         
-        <summary type="html">Java8的新特性，优化代码。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/12/2021-12-6top_img.jpg" type="image" medium="image">
+            <media:title>lambda表达式与Stream流</media:title>
+            <media:description>lambda表达式与Stream流 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="Java" scheme="https://yww52.com/categories/Java/"/>
+        <dc:identifier>8a8aa27b</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>异常处理</title>
-        <link href="https://yww52.com/posts/28877bf/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[异常处理]]></title>
+        <link href="https://yww52.com/posts/28877bf/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/28877bf/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-10-09T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.265Z</updated>
+        <updated>2025-08-18T12:49:32.619Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[常用的全局异常处理。]]></summary>
         
         
-        <summary type="html">常用的全局异常处理。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/10/2021-10-10top_img.jpg" type="image" medium="image">
+            <media:title>异常处理</media:title>
+            <media:description>异常处理 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        <dc:identifier>28877bf</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>分布式session的解决方案</title>
-        <link href="https://yww52.com/posts/86ff1dad/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[分布式session的解决方案]]></title>
+        <link href="https://yww52.com/posts/86ff1dad/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/86ff1dad/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-06-09T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.264Z</updated>
+        <updated>2025-08-18T12:49:32.618Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[Session主要的目的是会话控制，但是在分布式环境下，Session就会出现一些问题，接下来就来探讨一下会出现的问题以及解决方案。]]></summary>
         
         
-        <summary type="html">Session主要的目的是会话控制，但是在分布式环境下，Session就会出现一些问题，接下来就来探讨一下会出现的问题以及解决方案。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/6/2021-6-10/top_img.jpg" type="image" medium="image">
+            <media:title>分布式session的解决方案</media:title>
+            <media:description>分布式session的解决方案 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="微服务" scheme="https://yww52.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+        <dc:identifier>86ff1dad</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>MySQL必知必会</title>
-        <link href="https://yww52.com/posts/df083c4d/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[MySQL必知必会]]></title>
+        <link href="https://yww52.com/posts/df083c4d/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/df083c4d/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-06-03T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.262Z</updated>
+        <updated>2025-08-18T12:49:32.616Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[阅读MySQL必知必会的笔记，并记录一下书中的SQL语句，用于加深一下印象。]]></summary>
         
         
-        <summary type="html">阅读MySQL必知必会的笔记，并记录一下书中的SQL语句，用于加深一下印象。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/6/2021-6-4top_img.jpg" type="image" medium="image">
+            <media:title>MySQL必知必会</media:title>
+            <media:description>MySQL必知必会 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="读书笔记" scheme="https://yww52.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+        <dc:identifier>df083c4d</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>漫画算法</title>
-        <link href="https://yww52.com/posts/998d504/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[漫画算法]]></title>
+        <link href="https://yww52.com/posts/998d504/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/998d504/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-06-02T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.266Z</updated>
+        <updated>2025-08-18T12:49:32.619Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[记录书中面试算法题的解法，主要是书中思路。]]></summary>
         
         
-        <summary type="html">记录书中面试算法题的解法，主要是书中思路。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/6/2021-6-3top_img.jpg" type="image" medium="image">
+            <media:title>漫画算法</media:title>
+            <media:description>漫画算法 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="读书笔记" scheme="https://yww52.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+        <dc:identifier>998d504</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>码出高效Java开发手册</title>
-        <link href="https://yww52.com/posts/b93b977e/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[码出高效Java开发手册]]></title>
+        <link href="https://yww52.com/posts/b93b977e/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/b93b977e/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-05-29T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.261Z</updated>
+        <updated>2025-08-18T12:49:32.615Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[记录码出高效Java开发手册的读书笔记，主要是书中一些我觉得很有收获的观点，所以大多是原书内容，小部分是自己的总结。]]></summary>
         
         
-        <summary type="html">记录码出高效Java开发手册的读书笔记，主要是书中一些我觉得很有收获的观点，所以大多是原书内容，小部分是自己的总结。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/5/2021-5-30top_img.jpg" type="image" medium="image">
+            <media:title>码出高效Java开发手册</media:title>
+            <media:description>码出高效Java开发手册 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="读书笔记" scheme="https://yww52.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+        <dc:identifier>b93b977e</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>结果类封装</title>
-        <link href="https://yww52.com/posts/a3d4b987/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[结果类封装]]></title>
+        <link href="https://yww52.com/posts/a3d4b987/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/a3d4b987/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-05-21T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.266Z</updated>
+        <updated>2025-08-18T12:49:32.620Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[记录一下项目中常用的返回信息的封装类。]]></summary>
         
         
-        <summary type="html">记录一下项目中常用的返回信息的封装类。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/5/2021-5-22top_img.jpg" type="image" medium="image">
+            <media:title>结果类封装</media:title>
+            <media:description>结果类封装 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        <dc:identifier>a3d4b987</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>背包专题</title>
-        <link href="https://yww52.com/posts/4f2ce235/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[背包专题]]></title>
+        <link href="https://yww52.com/posts/4f2ce235/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/4f2ce235/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-04-18T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.266Z</updated>
+        <updated>2025-08-18T12:49:32.620Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[记录一下学习背包问题时的思路和解法]]></summary>
         
         
-        <summary type="html">记录一下学习背包问题时的思路和解法</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/4/2021-4-19top_img.jpg" type="image" medium="image">
+            <media:title>背包专题</media:title>
+            <media:description>背包专题 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="数据结构与算法" scheme="https://yww52.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+        <dc:identifier>4f2ce235</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>整合Redis</title>
-        <link href="https://yww52.com/posts/3cd0c9b6/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[整合Redis]]></title>
+        <link href="https://yww52.com/posts/3cd0c9b6/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/3cd0c9b6/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-04-01T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.265Z</updated>
+        <updated>2025-08-18T12:49:32.619Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[SpringBoot整合Redis的Demo]]></summary>
         
         
-        <summary type="html">SpringBoot整合Redis的Demo</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/4/2021-4-2top_img.jpg" type="image" medium="image">
+            <media:title>整合Redis</media:title>
+            <media:description>整合Redis - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="SpringBoot" scheme="https://yww52.com/categories/SpringBoot/"/>
+        <dc:identifier>3cd0c9b6</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>剑指Offer</title>
-        <link href="https://yww52.com/posts/dd921d98/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[剑指Offer]]></title>
+        <link href="https://yww52.com/posts/dd921d98/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/dd921d98/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-03-18T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.264Z</updated>
+        <updated>2025-08-18T12:49:32.618Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[剑指Offer上面的题目，记录一下解题的过程]]></summary>
         
         
-        <summary type="html">剑指Offer上面的题目，记录一下解题的过程</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/3/2021-3-19top_img.jpg" type="image" medium="image">
+            <media:title>剑指Offer</media:title>
+            <media:description>剑指Offer - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="数据结构与算法" scheme="https://yww52.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+        <dc:identifier>dd921d98</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>Redis</title>
-        <link href="https://yww52.com/posts/bae4ff13/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[Redis]]></title>
+        <link href="https://yww52.com/posts/bae4ff13/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/bae4ff13/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-02-14T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.262Z</updated>
+        <updated>2025-08-18T12:49:32.616Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[学习Redis的笔记]]></summary>
         
         
-        <summary type="html">学习Redis的笔记</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/2/2021-2-15/top_img.jpg" type="image" medium="image">
+            <media:title>Redis</media:title>
+            <media:description>Redis - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="数据库" scheme="https://yww52.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+        <dc:identifier>bae4ff13</dc:identifier>
         
         
     </entry>
     
     <entry>
-        <title>常用的工具类</title>
-        <link href="https://yww52.com/posts/b0ab3ebd/"/>
+        <!-- 基本信息 -->
+        <title type="html"><![CDATA[常用的工具类]]></title>
+        <link href="https://yww52.com/posts/b0ab3ebd/" rel="alternate" type="text/html"/>
         <id>https://yww52.com/posts/b0ab3ebd/</id>
+        
+        <!-- 时间信息 -->
         <published>2021-02-02T16:00:00.000Z</published>
-        <updated>2025-08-18T10:05:24.265Z</updated>
+        <updated>2025-08-18T12:49:32.619Z</updated>
+        
+        <!-- 作者信息 -->
+        <author>
+            <name>yww</name>
+            
+        </author>
+        
+        <!-- 文章摘要 -->
+        
+        <summary type="html"><![CDATA[记录一下开发中经常使用的工具类。]]></summary>
         
         
-        <summary type="html">记录一下开发中经常使用的工具类。</summary>
+        <!-- 文章封面图 -->
         
+        <media:content url="https://img.yww52.com/2021/2/2021-2-3top_img.jpg" type="image" medium="image">
+            <media:title>常用的工具类</media:title>
+            <media:description>常用的工具类 - 封面图</media:description>
+        </media:content>
         
+
+        <!-- 永久链接 -->
         
-        <category term="Java" scheme="https://yww52.com/categories/Java/"/>
+        <dc:identifier>b0ab3ebd</dc:identifier>
         
         
     </entry>

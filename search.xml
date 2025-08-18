@@ -5311,6 +5311,33 @@
       </categories>
   </entry>
   <entry>
+    <title>static与final</title>
+    <url>/posts/92a59ea9/</url>
+    <content><![CDATA[<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ul>
+<li><p>static修饰的变量为类的变量，属于类，即所有的该类的实例化对象共同使用该static变量</p>
+</li>
+<li><p>static方法中不能访问非static成员</p>
+<blockquote>
+<p>这个很容易理解，每个类都只有一份static的资源，还没类还没实例化就有了该static方法，但没有实例化的成员即非静态成员，所以静态方法是不能访问非static成员的</p>
+</blockquote>
+</li>
+<li><p>static的变量和方法或者块都是属于类的，普通变量和方法是属于对象的。</p>
+</li>
+</ul>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><ul>
+<li>用final修饰类，表明中这个类是不能不继承的，类中的变量可以是非final的变量，但所有的方法都会被隐式地指定为final方法</li>
+<li><p>使用final修饰方法原因有两个。一，把方法锁定，防止任何继承类重写该方法。二，提高效率。在早期的Java实现版本会将final方法转为内嵌调用，但如果方法过于庞大，可能看不到内嵌的优化效果，新的Java版本已经   不需要final方法来优化</p>
+</li>
+<li><p>final不能修饰构造方法</p>
+</li>
+<li>final修饰变量，即表示该变量被定义为一个常量，该常量被初始化赋值之后就不能修改</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>SpringCloud</title>
     <url>/posts/96a41905/</url>
     <content><![CDATA[<h1 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h1><h2 id="Eureka（停更）"><a href="#Eureka（停更）" class="headerlink" title="Eureka（停更）"></a>Eureka（停更）</h2><p>Eureka是Netflix开发的一个服务发现框架，SpringCloud将它集成在其子项目<code>spring-cloud-netflix</code>中，主要的功能是<code>服务注册</code>和<code>服务发现</code>。</p>
@@ -5790,33 +5817,6 @@
 ]]></content>
       <categories>
         <category>微服务</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>static与final</title>
-    <url>/posts/92a59ea9/</url>
-    <content><![CDATA[<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ul>
-<li><p>static修饰的变量为类的变量，属于类，即所有的该类的实例化对象共同使用该static变量</p>
-</li>
-<li><p>static方法中不能访问非static成员</p>
-<blockquote>
-<p>这个很容易理解，每个类都只有一份static的资源，还没类还没实例化就有了该static方法，但没有实例化的成员即非静态成员，所以静态方法是不能访问非static成员的</p>
-</blockquote>
-</li>
-<li><p>static的变量和方法或者块都是属于类的，普通变量和方法是属于对象的。</p>
-</li>
-</ul>
-<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><ul>
-<li>用final修饰类，表明中这个类是不能不继承的，类中的变量可以是非final的变量，但所有的方法都会被隐式地指定为final方法</li>
-<li><p>使用final修饰方法原因有两个。一，把方法锁定，防止任何继承类重写该方法。二，提高效率。在早期的Java实现版本会将final方法转为内嵌调用，但如果方法过于庞大，可能看不到内嵌的优化效果，新的Java版本已经   不需要final方法来优化</p>
-</li>
-<li><p>final不能修饰构造方法</p>
-</li>
-<li>final修饰变量，即表示该变量被定义为一个常量，该常量被初始化赋值之后就不能修改</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
       </categories>
   </entry>
   <entry>
@@ -7977,41 +7977,6 @@
       </categories>
   </entry>
   <entry>
-    <title>简单的Web基础</title>
-    <url>/posts/afc5caff/</url>
-    <content><![CDATA[<h2 id="web应用"><a href="#web应用" class="headerlink" title="web应用"></a>web应用</h2><p>web应用程序是一个可以提供浏览器访问的程序，一个web服务器应该是由多部份组成的，前端页面，webService功能，和Java程序，等等</p>
-<h2 id="静态web"><a href="#静态web" class="headerlink" title="静态web"></a>静态web</h2><p>​        静态网站是最初的建站方式，浏览者所看到的每个页面是建站者上传到服务器上的一个 html （ htm ）文件，这种网站每增加、删除、修改一个页面，都必须重新对服务器的文件进行一次下载上传。网页内容一经发布到网站服务器上，无论是否有用户访问，每个静态网页的内容都是保存在网站服务器上的，也就是说，静态网页是实实在在保存在服务器上的文件，每个网页都是一个独立的文件</p>
-<p><img src="https://img.yww52.com/2020/6/2020-6-4/img1.png" alt="静态web"></p>
-<h2 id="动态web"><a href="#动态web" class="headerlink" title="动态web"></a>动态web</h2><p>​        动态web有点类似静态web，但不是那种有图片动，轮播图的那些伪动态，它的资源数据不是一成不变的，就比如是淘宝，不同的人会有不同的推荐<br>​        <img src="https://img.yww52.com/2020/6/2020-6-4/img2.png" alt="动态web"></p>
-<h2 id="web服务器"><a href="#web服务器" class="headerlink" title="web服务器"></a>web服务器</h2><p>​        web服务器用来处理用户的请求，然后返回响应。有LLS,Tomcat服务器，我们主要学的就是Tomcat服务器。现在来了解一下Tomcat服务器。</p>
-<h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><p>​            Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由于有了Sun 的参与和支持，最新的Servlet 和JSP 规范总是能在Tomcat 中得到体现。因为Tomcat 技术先进、性能稳定，而且免费，因而深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。</p>
-<p>​            Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。对于一个初学者来说，可以这样认为，当在一台机器上配置好Apache 服务器，可利用它响应HTML（标准通用标记语言下的一个应用）页面的访问请求。实际上Tomcat是Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行tomcat 时，它实际上作为一个与Apache 独立的进程单独运行的。</p>
-<p>​            Apache 为HTML页面服务，而Tomcat 实际上运行JSP 页面和Servlet。另外，Tomcat和IIS等Web服务器一样，具有处理HTML页面的功能，另外它还是一个Servlet和JSP容器，独立的Servlet容器是Tomcat的默认模式。不过，Tomcat处理静态HTML的能力不如Apache服务器。</p>
-<p>​            这是百度对Tomcat的描述，其实在现在看来，我们淘汰了JSP这项技术，但Tomcat依旧是十分主流的web服务器。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-4/img3.png" alt=""></p>
-<p>​        这就Tomcat所有的文件，大致都可以了解一下，<strong>bin为一些脚本文件，比如启动和关闭的脚本文件，conf为配置文件，lib是一些所需的依赖jar包，logs为日志，webapps用来存放网站</strong>。</p>
-<ul>
-<li><p>可以配置启动的端口号</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--conf/server.xml--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> </span></span><br><span class="line"><span class="tag">               <span class="attr">URIEncoding</span>=<span class="string">&quot;UTF-8&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--默认是为8080端口，可以修改--&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以配置主机名</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--conf/server.xml--&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这里可以改主机名，但要去hosts文件里加个映射才能生效，也可以改存放网站的位置--&gt;</span></span><br></pre></td></tr></table></figure>
-<p>为什么要改hosts文件，这就涉及到网站是如何进行访问。</p>
-<ol>
-<li><p>首先客户端输入域名发起请求</p>
-</li>
-<li><p>客户端先会对本机的hosts进行检查，检查是否有这个域名的映射，要是有就会返回这个域名对应的ip地址，然后就可以直接访问相关的web程序，要是没有检查到就会去DNS服务器上寻早该域名对应的ip(这也就是所理解的dns解析域名)，找到就返回ip，找不到就访问不了</p>
-</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>javaweb</category>
-      </categories>
-  </entry>
-  <entry>
     <title>前后端分离demo</title>
     <url>/posts/ee7e4b9/</url>
     <content><![CDATA[<h1 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h1><p>当下前后端分离的趋势很明显，的确这也是很有必要的。前后端分离让前端专注于前端，后端专注于后端，而不是哪一方都要学习前后端。学习过JSP的都知道，前后端之前都是套模板，这会让项目很繁琐，而且也提高了项目的耦合性，不利于二次开发，所以现在来通过一个简单的demo来简单的体验一下前后端分离。</p>
@@ -8093,6 +8058,41 @@
 ]]></content>
       <categories>
         <category>SpringBoot</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>简单的Web基础</title>
+    <url>/posts/afc5caff/</url>
+    <content><![CDATA[<h2 id="web应用"><a href="#web应用" class="headerlink" title="web应用"></a>web应用</h2><p>web应用程序是一个可以提供浏览器访问的程序，一个web服务器应该是由多部份组成的，前端页面，webService功能，和Java程序，等等</p>
+<h2 id="静态web"><a href="#静态web" class="headerlink" title="静态web"></a>静态web</h2><p>​        静态网站是最初的建站方式，浏览者所看到的每个页面是建站者上传到服务器上的一个 html （ htm ）文件，这种网站每增加、删除、修改一个页面，都必须重新对服务器的文件进行一次下载上传。网页内容一经发布到网站服务器上，无论是否有用户访问，每个静态网页的内容都是保存在网站服务器上的，也就是说，静态网页是实实在在保存在服务器上的文件，每个网页都是一个独立的文件</p>
+<p><img src="https://img.yww52.com/2020/6/2020-6-4/img1.png" alt="静态web"></p>
+<h2 id="动态web"><a href="#动态web" class="headerlink" title="动态web"></a>动态web</h2><p>​        动态web有点类似静态web，但不是那种有图片动，轮播图的那些伪动态，它的资源数据不是一成不变的，就比如是淘宝，不同的人会有不同的推荐<br>​        <img src="https://img.yww52.com/2020/6/2020-6-4/img2.png" alt="动态web"></p>
+<h2 id="web服务器"><a href="#web服务器" class="headerlink" title="web服务器"></a>web服务器</h2><p>​        web服务器用来处理用户的请求，然后返回响应。有LLS,Tomcat服务器，我们主要学的就是Tomcat服务器。现在来了解一下Tomcat服务器。</p>
+<h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><p>​            Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由于有了Sun 的参与和支持，最新的Servlet 和JSP 规范总是能在Tomcat 中得到体现。因为Tomcat 技术先进、性能稳定，而且免费，因而深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。</p>
+<p>​            Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。对于一个初学者来说，可以这样认为，当在一台机器上配置好Apache 服务器，可利用它响应HTML（标准通用标记语言下的一个应用）页面的访问请求。实际上Tomcat是Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行tomcat 时，它实际上作为一个与Apache 独立的进程单独运行的。</p>
+<p>​            Apache 为HTML页面服务，而Tomcat 实际上运行JSP 页面和Servlet。另外，Tomcat和IIS等Web服务器一样，具有处理HTML页面的功能，另外它还是一个Servlet和JSP容器，独立的Servlet容器是Tomcat的默认模式。不过，Tomcat处理静态HTML的能力不如Apache服务器。</p>
+<p>​            这是百度对Tomcat的描述，其实在现在看来，我们淘汰了JSP这项技术，但Tomcat依旧是十分主流的web服务器。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/jaslli/HexoFile1@v1.5/2020/6/2020-6-4/img3.png" alt=""></p>
+<p>​        这就Tomcat所有的文件，大致都可以了解一下，<strong>bin为一些脚本文件，比如启动和关闭的脚本文件，conf为配置文件，lib是一些所需的依赖jar包，logs为日志，webapps用来存放网站</strong>。</p>
+<ul>
+<li><p>可以配置启动的端口号</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--conf/server.xml--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> </span></span><br><span class="line"><span class="tag">               <span class="attr">URIEncoding</span>=<span class="string">&quot;UTF-8&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--默认是为8080端口，可以修改--&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以配置主机名</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--conf/server.xml--&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">&quot;localhost&quot;</span>  <span class="attr">appBase</span>=<span class="string">&quot;webapps&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">unpackWARs</span>=<span class="string">&quot;true&quot;</span> <span class="attr">autoDeploy</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这里可以改主机名，但要去hosts文件里加个映射才能生效，也可以改存放网站的位置--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>为什么要改hosts文件，这就涉及到网站是如何进行访问。</p>
+<ol>
+<li><p>首先客户端输入域名发起请求</p>
+</li>
+<li><p>客户端先会对本机的hosts进行检查，检查是否有这个域名的映射，要是有就会返回这个域名对应的ip地址，然后就可以直接访问相关的web程序，要是没有检查到就会去DNS服务器上寻早该域名对应的ip(这也就是所理解的dns解析域名)，找到就返回ip，找不到就访问不了</p>
+</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>javaweb</category>
       </categories>
   </entry>
   <entry>
